@@ -1,0 +1,25 @@
+{
+  "name": "melodys-adventures",
+  "private": true,
+  "version": "0.8.0",
+  "description": "Melody's Adventures - a family-friendly 2D platform game starring Melody the dog.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "tiled:project": "tsx tools/levels/tiled.ts project"
+  },
+  "dependencies": {
+    "phaser": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}

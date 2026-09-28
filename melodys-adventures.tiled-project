@@ -1,0 +1,314 @@
+{
+  "automappingRulesFile": "",
+  "commands": [],
+  "compatibilityVersion": 1100,
+  "extensionsPath": "extensions",
+  "folders": [
+    "src/levels/maps"
+  ],
+  "properties": [],
+  "propertyTypes": [
+    {
+      "id": 1,
+      "name": "ScentType",
+      "type": "enum",
+      "storageType": "string",
+      "values": [
+        "squirrel",
+        "sausage",
+        "cat"
+      ],
+      "valuesAsFlags": false
+    },
+    {
+      "id": 2,
+      "name": "PoiMarker",
+      "type": "enum",
+      "storageType": "string",
+      "values": [
+        "pawPrints",
+        "none"
+      ],
+      "valuesAsFlags": false
+    },
+    {
+      "id": 3,
+      "name": "ground",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff7a4e2d",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "oneWay",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "platform",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffc28e56",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "oneWay",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "sausage",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffe0453a",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "superSausage",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffff9d2e",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "sniffTreat",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff9b6bd6",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "squirrelToy",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff9a5a2e",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "heavyCrate",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff4a4f57",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 10,
+      "name": "woodenBarrier",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffb07a42",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 11,
+      "name": "fence",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffd8d0bc",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 12,
+      "name": "sign",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffe9c690",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "scentTrail",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffb98cff",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "scentType",
+          "type": "string",
+          "propertyType": "ScentType",
+          "value": "squirrel"
+        },
+        {
+          "name": "targetId",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "visibleNormally",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "visibleWithSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "active",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "pointOfInterest",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff6fd3ff",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "marker",
+          "type": "string",
+          "propertyType": "PoiMarker",
+          "value": "pawPrints"
+        },
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "spawn",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff2ecc71",
+      "drawFill": true,
+      "members": []
+    }
+  ]
+}

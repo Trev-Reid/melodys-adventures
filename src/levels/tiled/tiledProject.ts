@@ -1,0 +1,60 @@
+/**
+ * Builds the Tiled project file (melodys-adventures.tiled-project). It tells
+ * Tiled about our object Classes - their colours and properties with sensible
+ * defaults - so when you set an object's Class to "sausage" or "scentTrail"
+ * Tiled shows the right fields to fill in.
+ *
+ * Regenerate after adding a collectible/obstacle/scent type:  npm run tiled:project
+ */
+import { CLASS, CLASS_COLORS, COLLECTIBLE_CLASSES, DEFAULTS, OBSTACLE_CLASSES, PLATFORM_CLASSES, POI_MARKERS, SCENT_CLASSES } from './levelSchema';
+
+type Member = { name: string; type: string; value: string | number | boolean; propertyType?: string };
+
+export function tiledProject(): object {
+  let id = 1;
+  const argb = (hex: string) => `#ff${hex.replace('#', '')}`;
+  const cls = (name: string, members: Member[] = []) => ({
+    id: id++,
+    name,
+    type: 'class',
+    useAs: ['object'],
+    color: argb(CLASS_COLORS[name] ?? '#a0a0a4'),
+    drawFill: true,
+    members,
+  });
+  const hidden: Member[] = [
+    { name: 'hidden', type: 'bool', value: DEFAULTS.hidden },
+    { name: 'requiresSuperSniff', type: 'bool', value: DEFAULTS.requiresSuperSniff },
+    { name: 'revealRadius', type: 'int', value: DEFAULTS.revealRadius },
+  ];
+
+  return {
+    automappingRulesFile: '',
+    commands: [],
+    compatibilityVersion: 1100,
+    extensionsPath: 'extensions',
+    folders: ['src/levels/maps'],
+    properties: [],
+    propertyTypes: [
+      { id: id++, name: 'ScentType', type: 'enum', storageType: 'string', values: SCENT_CLASSES, valuesAsFlags: false },
+      { id: id++, name: 'PoiMarker', type: 'enum', storageType: 'string', values: POI_MARKERS, valuesAsFlags: false },
+      ...PLATFORM_CLASSES.map((c) => cls(c, [{ name: 'oneWay', type: 'bool', value: DEFAULTS.oneWay }])),
+      ...COLLECTIBLE_CLASSES.map((c) => cls(c, hidden)),
+      ...OBSTACLE_CLASSES.map((c) => cls(c)),
+      cls(CLASS.sign, [{ name: 'text', type: 'string', value: '' }]),
+      cls(CLASS.scentTrail, [
+        { name: 'scentType', type: 'string', propertyType: 'ScentType', value: SCENT_CLASSES[0] },
+        { name: 'targetId', type: 'string', value: '' },
+        { name: 'visibleNormally', type: 'bool', value: DEFAULTS.visibleNormally },
+        { name: 'visibleWithSuperSniff', type: 'bool', value: DEFAULTS.visibleWithSuperSniff },
+        { name: 'active', type: 'bool', value: DEFAULTS.active },
+      ]),
+      cls(CLASS.pointOfInterest, [
+        { name: 'text', type: 'string', value: '' },
+        { name: 'marker', type: 'string', propertyType: 'PoiMarker', value: DEFAULTS.marker },
+        ...hidden,
+      ]),
+      cls(CLASS.spawn),
+    ],
+  };
+}

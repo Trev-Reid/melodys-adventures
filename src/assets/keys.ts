@@ -1,0 +1,21 @@
+/** Central list of texture keys so nothing relies on magic strings. */
+export const TEXTURES = {
+  melody: 'melody',
+  melodyBuff: 'melody-buff',
+  groundTile: 'tile-ground',
+  grassTop: 'tile-grass-top',
+  platformTile: 'tile-platform',
+  sausage: 'item-sausage',
+  superSausage: 'item-super-sausage',
+  glow: 'fx-glow',
+  sniffTreat: 'item-sniff-treat',
+  squirrelToy: 'item-squirrel-toy',
+  scentSquirrel: 'scent-squirrel',
+  scentSausage: 'scent-sausage',
+  scentCat: 'scent-cat',
+  pawPrints: 'poi-paw-prints',
+  debris: 'fx-debris',
+  confetti: 'fx-confetti',
+  hill: 'bg-hill',
+  cloud: 'bg-cloud',
+} as const;

@@ -1,0 +1,17 @@
+# Dependencies and build output (recreated by npm install / npm run build)
+node_modules
+dist
+
+# Logs, OS and editor clutter
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+
+# Tiled's per-user session file (window layout, open tabs)
+*.tiled-session
+
+# Screenshots and previews Claude sends back
+Claude outputs/
