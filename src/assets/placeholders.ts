@@ -145,6 +145,23 @@ export function ensureObstacleTexture(scene: Phaser.Scene, kind: ObstacleKind, t
     g.fillStyle(0x3c3c40);
     for (const y of [30, h - 36]) for (let x = 4; x < w; x += 11) g.fillRect(x, y, 2, 2);
     g.lineStyle(2, 0x5a3a1c).strokeRect(1, 1, w - 2, h - 2);
+  } else if (type.look === 'cracked' || type.look === 'stone') {
+    // Brick-ish blocks: sandy and cracked (any bark), or solid grey stone (SUPER BARK).
+    const cracked = type.look === 'cracked';
+    g.fillStyle(cracked ? 0x8a6238 : 0x55585e).fillRect(0, 0, w, h);
+    g.fillStyle(cracked ? 0xd2a46a : 0x9aa0a8).fillRect(3, 3, w - 6, h - 6);
+    g.fillStyle(cracked ? 0xe6c18c : 0xb9bec5).fillRect(3, 3, w - 6, 5).fillRect(3, 3, 5, h - 6);
+    g.fillStyle(cracked ? 0xb07f47 : 0x7c828a).fillRect(3, h - 8, w - 6, 5).fillRect(w - 8, 3, 5, h - 6);
+    if (cracked) {
+      g.lineStyle(2, 0x5a3a1c, 1);
+      g.beginPath().moveTo(w * 0.3, 3).lineTo(w * 0.45, h * 0.35).lineTo(w * 0.32, h * 0.55).lineTo(w * 0.5, h - 4).strokePath();
+      g.beginPath().moveTo(w * 0.45, h * 0.35).lineTo(w * 0.75, h * 0.45).lineTo(w - 4, h * 0.3).strokePath();
+    } else {
+      // Rivet-like studs so it reads as "heavy stone".
+      g.fillStyle(0x5d6269);
+      for (const [x, y] of [[10, 10], [w - 13, 10], [10, h - 13], [w - 13, h - 13]]) g.fillRect(x, y, 3, 3);
+      g.lineStyle(2, 0x6b7078).strokeRect(12, 12, w - 24, h - 24);
+    }
   } else {
     // White garden fence post.
     g.fillStyle(0xf1ead8).fillRect(0, 8, w, h - 8);

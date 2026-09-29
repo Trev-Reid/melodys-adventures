@@ -59,6 +59,11 @@ export interface BarkConfig {
   super: { range: number; coneDegrees: number };
   /** How long the bark pose shows. */
   poseSeconds: number;
+  /**
+   * BARK BOOST: barking in mid-air pops her upwards, once per jump.
+   * Upward speed (px/s) it gives; for comparison her jump is 620.
+   */
+  boost: { speed: number; superSpeed: number };
 }
 
 export const MELODY_BARK: BarkConfig = {
@@ -66,4 +71,5 @@ export const MELODY_BARK: BarkConfig = {
   normal: { range: 170, coneDegrees: 40 },
   super: { range: 420, coneDegrees: 50 },
   poseSeconds: 0.3,
+  boost: { speed: 560, superSpeed: 720 },
 };

@@ -3,16 +3,24 @@
 A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
-Current build: one test level ("Melody's Playground") with 25 sausages to
+Current build: one test level ("Melody's Playground") with 29 sausages to
 collect against the clock, a pixel-art Melody (drawn from photos of her) who
 can walk, run, sprint and jump and naps when left alone, a Super Sausage
 power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
 Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
-and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things, a HUD,
+and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things,
+Bark Boost (bark in mid-air) and Bark Break (bark blocks to bits), a HUD,
 simple sound effects, and a debug overlay.
 
 ## Changelog
 
+- **0.10** Daniel's ideas: BARK BOOST and BARK BREAK. Bark in mid-air and
+  Melody pops upwards (once per jump; higher with Super Bark), so she can reach
+  ledges a jump can't. Bark at blocks to smash them: cracked sandy blocks
+  crumble at any bark, grey stone blocks need a Super Bark. A bark breaks every
+  block the sound reaches, so standing back breaks more. New zone at the end of
+  the Playground: a boost ledge, Daniel's cracked wall, a stone wall with a
+  biscuit before it, and a sausage only a super boost can reach.
 - **0.9** SUPER BARK. Melody can bark any time (B). A Super Bark Biscuit
   gives 15 seconds of a huge bark: blue sound waves, a screen shake, and
   things in front of her react. The new Bark Zone (after the Sniff Zone) has
@@ -95,7 +103,7 @@ Other commands:
 | Move           | ← → or A D            |
 | Jump           | Space, ↑ or W. Hold for a higher jump, tap for a small hop |
 | Sprint         | Hold Shift (or X) while moving |
-| Bark           | B                     |
+| Bark           | B (in mid-air: BARK BOOST) |
 | Respawn / play again | R               |
 | Mute sounds    | M                     |
 | Toggle debug   | F3 or \` (backtick)   |
@@ -107,6 +115,12 @@ things. Which trail leads to Squirrel? That's for you to work out.
 **Super Bark:** eat the blue Super Bark Biscuit (by the "Press B to bark!"
 sign). For 15 seconds her bark is huge: face the tree, the leaves or the cat
 and press B.
+
+**Bark Boost:** jump, then press B near the top of the jump for an extra
+pop upwards. Once per jump. With Super Bark it's even bigger.
+
+**Bark Break:** bark at cracked blocks to smash them. Stone blocks need a
+Super Bark. Step back a little to break more of a wall at once.
 
 **Super Strength:** eat a glowing Super Sausage. For 15 seconds Melody can
 shove heavy crates (just push against them) and break barriers (take a
@@ -164,7 +178,7 @@ has a **Class** that says exactly what it is, and properties for the details:
 | Layer | Draw with | Classes | Properties |
 | --- | --- | --- | --- |
 | `platforms` | Rectangle | `ground` (solid dirt), `platform` (wooden) | `oneWay`: jump up through it |
-| `obstacles` | Rectangle (top-left corner counts; size comes from the type) | `heavyCrate`, `woodenBarrier`, `fence` | |
+| `obstacles` | Rectangle (top-left corner counts; size comes from the type) | `heavyCrate`, `woodenBarrier`, `fence`, `crackedBlock` (any bark breaks it), `stoneBlock` (Super Bark breaks it) | |
 | `collectibles` | Point (centre of the item) | `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it). Name = id |
 | `barkTargets` | Point (where it stands, on the ground) | `ballInTree`, `leafPile`, `cat` | `reveals` (name of the hidden thing it uncovers), `requiresSuperBark`, `height` (tree). Name = id |
 | `signs` | Point (bottom of the post) | `sign` | `text` |
@@ -238,6 +252,11 @@ functions in `gameplay/scent/scentRules.ts`.
 in range and in front of her, is it loud enough) are pure functions in
 `gameplay/bark/barkRules.ts`.
 
+**Bark Boost** strength is `boost` in `MELODY_BARK` (`speed`, `superSpeed`;
+her jump is 620). **Bark Break**: any obstacle type with
+`barkBreakable: { requiresSuperBark }` in `config/obstacles.ts` can be barked to
+bits; `tooWeakText` is what she says when a bark isn't loud enough.
+
 **Real sounds.** Put audio files in `src/assets/audio/` named after the sound
 (`bark.mp3`, `meow.mp3`, `collect.wav`...) and they replace the synthesized
 ones. `bark` is also used, deeper and louder, for the Super Bark.
@@ -284,7 +303,7 @@ src/
     abilities.ts             Ability tuning (sprint, bark, napping)
     audio.ts  camera.ts  controls.ts  display.ts  debug.ts
     powerUps.ts              Power-ups/status effects, capabilities, combos
-    obstacles.ts             Obstacle types (crate, barrier, fence)
+    obstacles.ts             Obstacle types (crate, barrier, fence, bark blocks)
     scents.ts                Scent types + how trails are drawn
     barkTargets.ts           Things that react to barks
   core/audio/Sfx.ts          Synthesized sound effects (swap for real sounds later)

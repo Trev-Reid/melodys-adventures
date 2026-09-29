@@ -2,13 +2,13 @@
  * Obstacle types - all data. Levels place obstacles by type name; the
  * behaviour comes from these settings, so new puzzles are mostly new entries.
  */
-export type ObstacleKind = 'heavyCrate' | 'woodenBarrier' | 'fence';
+export type ObstacleKind = 'heavyCrate' | 'woodenBarrier' | 'fence' | 'crackedBlock' | 'stoneBlock';
 
 export interface ObstacleType {
   width: number;
   height: number;
   /** Placeholder look until real art exists. */
-  look: 'crate' | 'planks' | 'fence';
+  look: 'crate' | 'planks' | 'fence' | 'cracked' | 'stone';
   /** Needs the 'strength' capability (SUPER_STRENGTH) to push or break. */
   requiresStrength: boolean;
   /** Can be shoved along the ground. pushForce = how fast (px/s) she can shove it. */
@@ -20,7 +20,12 @@ export interface ObstacleType {
     /** She must hit it at least this fast (px/s) - so it takes a run-up or a jump. */
     minImpactSpeed: number;
   };
-  /** What she "says" when she isn't strong enough. */
+  /**
+   * BARK BREAK: a bark aimed at it smashes it. requiresSuperBark = only a
+   * SUPER BARK is loud enough. (Barks break every block the sound reaches.)
+   */
+  barkBreakable?: { requiresSuperBark: boolean };
+  /** What she "says" when she isn't strong enough (or barking isn't loud enough). */
   tooWeakText: string;
 }
 
@@ -48,6 +53,22 @@ export const OBSTACLE_TYPES: Record<ObstacleKind, ObstacleType> = {
     requiresStrength: true,
     breakable: { hitsToBreak: 1, minImpactSpeed: 160 },
     tooWeakText: 'Too tough!',
+  },
+  crackedBlock: {
+    width: 48,
+    height: 48,
+    look: 'cracked',
+    requiresStrength: false,
+    barkBreakable: { requiresSuperBark: false },
+    tooWeakText: 'Try barking at it! (B)',
+  },
+  stoneBlock: {
+    width: 48,
+    height: 48,
+    look: 'stone',
+    requiresStrength: false,
+    barkBreakable: { requiresSuperBark: true },
+    tooWeakText: 'Too tough! Needs a SUPER BARK!',
   },
 };
 

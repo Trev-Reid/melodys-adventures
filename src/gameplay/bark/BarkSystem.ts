@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import type { BarkAbility, BarkEvent } from '@/characters/abilities/bark/BarkAbility';
 import type { BarkTarget } from '@/entities/bark/BarkTarget';
 import type { Collectible } from '@/entities/collectibles/Collectible';
+import type { Obstacle } from '@/entities/obstacles/Obstacle';
+import { sfx } from '@/core/audio/Sfx';
 import type { Detectable } from '@/gameplay/scent/Detectable';
 import { barkOutcome, barkReaches } from './barkRules';
 import { MELODY_BARK } from '@/config/abilities';
@@ -20,6 +22,8 @@ export class BarkSystem {
     /** Hidden things a target can reveal, by name. */
     private readonly revealables: Map<string, Detectable>,
     private readonly say: (text: string, color?: string) => void,
+    /** Blocks a bark can smash (BARK BREAK). */
+    private readonly blocks: Obstacle[] = [],
   ) {
     bark.onBark((e) => this.onBark(e));
   }
@@ -31,7 +35,33 @@ export class BarkSystem {
 
   private onBark(e: BarkEvent): void {
     this.drawWave(e);
-    let tooQuiet: BarkTarget | undefined;
+    if (e.boosted) this.drawBoost(e);
+    let tooQuiet: { spec: { tooQuietText: string } } | undefined;
+    const superReach = { ...e, ...MELODY_BARK.super };
+
+    // BARK BREAK: smash every block the sound reaches.
+    let smashed = 0;
+    for (const block of this.blocks) {
+      if (block.broken) continue;
+      const requires = block.spec.barkBreakable!.requiresSuperBark;
+      const centre = { x: block.x, y: block.y };
+      if (barkReaches(e, centre)) {
+        if (barkOutcome(requires, e.isSuper) === 'react') {
+          block.smash(e.facing);
+          smashed++;
+        } else {
+          block.shudder();
+          tooQuiet = { spec: { tooQuietText: block.spec.tooWeakText } };
+        }
+      } else if (!e.isSuper && requires && barkReaches(superReach, centre)) {
+        tooQuiet = { spec: { tooQuietText: block.spec.tooWeakText } };
+      }
+    }
+    if (smashed > 0) {
+      sfx.play('crumble');
+      this.scene.cameras.main.shake(120, 0.005);
+      this.say(smashed > 2 ? 'KA-BOOM!' : 'CRUMBLE!', '#ffcf6b');
+    }
 
     for (const target of this.targets) {
       if (target.done) continue;
@@ -39,7 +69,6 @@ export class BarkSystem {
       if (!barkReaches(e, target.aim)) {
         // An ordinary woof that a Super Bark *would* have reached still gets a
         // hint, so players learn what the biscuit is for.
-        const superReach = { ...e, ...MELODY_BARK.super };
         if (!e.isSuper && requires && barkReaches(superReach, target.aim)) {
           target.tooQuiet();
           tooQuiet = target;
@@ -68,6 +97,26 @@ export class BarkSystem {
     if (!item || item.revealed) return;
     if (at && 'setHome' in item) (item as Collectible).setHome(at.x, at.y);
     item.reveal();
+  }
+
+  /** BARK BOOST: a puff of sound rings blasting down from her feet. */
+  private drawBoost(e: BarkEvent): void {
+    const color = e.isSuper ? 0x4fc3f7 : 0xffffff;
+    for (let i = 0; i < 3; i++) {
+      const g = this.scene.add.graphics({ x: e.feetX, y: e.feetY }).setDepth(35);
+      g.lineStyle(3, color, 0.9).strokeEllipse(0, 0, 44, 12);
+      this.scene.tweens.add({
+        targets: g,
+        y: e.feetY + 30 + i * 12,
+        scaleX: 2.2,
+        scaleY: 1.6,
+        alpha: 0,
+        duration: 380,
+        delay: i * 70,
+        ease: 'Quad.easeOut',
+        onComplete: () => g.destroy(),
+      });
+    }
   }
 
   /** Placeholder "sound wave": arcs spreading out in front of her. */

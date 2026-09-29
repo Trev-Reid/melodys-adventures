@@ -123,6 +123,14 @@ export class PlatformerMovement {
     return { vx, vy, gravityY, jumped, landed };
   }
 
+  /**
+   * Something else launched her (e.g. BARK BOOST): stop treating this as a
+   * held jump, so letting go of jump doesn't cut the launch short.
+   */
+  endJump(): void {
+    this.isJumping = false;
+  }
+
   /** Forget timers, e.g. after respawning. */
   reset(): void {
     Object.assign(this.modifiers, neutralModifiers());

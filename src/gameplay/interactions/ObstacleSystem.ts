@@ -27,6 +27,8 @@ const HINT_COOLDOWN_MS = 1500;
 export class ObstacleSystem {
   private readonly pushables: Obstacle[];
   private readonly breakables: Obstacle[];
+  /** Solid things she can't push or smash by running into them (e.g. bark blocks). */
+  private readonly solidOnly: Obstacle[];
   private strainedThisFrame?: Obstacle;
   private strainSeconds = 0;
   private pushing?: Obstacle;
@@ -42,12 +44,15 @@ export class ObstacleSystem {
   ) {
     this.pushables = obstacles.filter((o) => o.isPushable);
     this.breakables = obstacles.filter((o) => o.isBreakable);
+    this.solidOnly = obstacles.filter((o) => !o.isPushable && !o.isBreakable);
     const physics = scene.physics;
 
     // Heavy things rest on the level and on each other.
     physics.add.collider(this.pushables, solids);
     physics.add.collider(this.pushables, this.pushables);
     physics.add.collider(this.pushables, this.breakables);
+    physics.add.collider(this.pushables, this.solidOnly);
+    physics.add.collider(player, this.solidOnly, undefined, (_p, o) => this.processSolid(o as Obstacle), this);
 
     physics.add.collider(player, this.pushables, undefined, (_p, o) => this.processPush(o as Obstacle), this);
     physics.add.collider(
@@ -111,6 +116,17 @@ export class ObstacleSystem {
     } else {
       this.strainedThisFrame = crate;
     }
+    return true;
+  }
+
+  // --- Solid blocks -----------------------------------------------------------
+
+  /** Pressing into a bark block: remind her how to get through. */
+  private processSolid(block: Obstacle): boolean {
+    if (block.broken) return false;
+    const dir = Math.sign(block.x - this.player.x) || 1;
+    const beside = this.player.body.bottom > (block.body as Phaser.Physics.Arcade.StaticBody).top + 6;
+    if (beside && this.hooks.moveX() * dir > 0) this.strainedThisFrame = block;
     return true;
   }
 

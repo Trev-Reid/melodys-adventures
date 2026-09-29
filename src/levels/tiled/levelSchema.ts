@@ -67,6 +67,8 @@ export const CLASS_COLORS: Record<string, string> = {
   heavyCrate: '#4a4f57',
   woodenBarrier: '#b07a42',
   fence: '#d8d0bc',
+  crackedBlock: '#d2a46a',
+  stoneBlock: '#8a9098',
   sign: '#e9c690',
   scentTrail: '#b98cff',
   pointOfInterest: '#6fd3ff',

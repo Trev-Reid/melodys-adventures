@@ -1,6 +1,6 @@
 import { AUDIO } from '@/config/audio';
 
-export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal' | 'bark' | 'superBark' | 'meow' | 'rustle';
+export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal' | 'bark' | 'superBark' | 'meow' | 'rustle' | 'boost' | 'crumble';
 
 /**
  * Tiny synthesized sound effects (Web Audio beeps), so we have audio feedback
@@ -64,6 +64,14 @@ class Sfx {
         case 'superBark':
           this.woof(0.8, 1);
           this.woof(0.8, 0.6, 0.16);
+          break;
+        case 'boost':
+          this.tone({ from: 300, to: 1100, duration: 0.22, type: 'triangle', volume: AUDIO.jumpVolume });
+          this.noise(0.18, 0.25, 0, 900);
+          break;
+        case 'crumble':
+          this.noise(0.35, 0.6, 0, 200);
+          this.tone({ from: 160, to: 50, duration: 0.25, type: 'square', volume: AUDIO.collectVolume * 0.35 });
           break;
         case 'meow':
           this.tone({ from: 700, to: 1100, duration: 0.18, type: 'triangle', volume: AUDIO.collectVolume * 0.5 });

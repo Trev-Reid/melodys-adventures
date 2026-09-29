@@ -309,6 +309,28 @@
     },
     {
       "id": 15,
+      "name": "crackedBlock",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffd2a46a",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 16,
+      "name": "stoneBlock",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff8a9098",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 17,
       "name": "sign",
       "type": "class",
       "useAs": [
@@ -325,7 +347,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": 18,
       "name": "scentTrail",
       "type": "class",
       "useAs": [
@@ -363,7 +385,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": 19,
       "name": "pointOfInterest",
       "type": "class",
       "useAs": [
@@ -407,7 +429,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 20,
       "name": "ballInTree",
       "type": "class",
       "useAs": [
@@ -434,7 +456,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 21,
       "name": "leafPile",
       "type": "class",
       "useAs": [
@@ -456,7 +478,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 22,
       "name": "cat",
       "type": "class",
       "useAs": [
@@ -478,7 +500,7 @@
       ]
     },
     {
-      "id": 21,
+      "id": 23,
       "name": "spawn",
       "type": "class",
       "useAs": [

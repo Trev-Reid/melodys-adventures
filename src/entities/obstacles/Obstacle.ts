@@ -53,6 +53,18 @@ export class Obstacle extends Phaser.GameObjects.Image {
     return !!this.spec.breakable;
   }
 
+  /** BARK BREAK: can a bark smash it? */
+  get isBarkBreakable(): boolean {
+    return !!this.spec.barkBreakable;
+  }
+
+  /** Not loud enough: a little shudder. */
+  shudder(): void {
+    const x0 = this.x;
+    this.scene.tweens.killTweensOf(this);
+    this.scene.tweens.add({ targets: this, x: x0 + 3, duration: 35, yoyo: true, repeat: 3, onComplete: () => this.setX(x0) });
+  }
+
   /** A hit that didn't break it yet: crack and wobble. */
   crack(): void {
     if (!this.cracks) this.cracks = this.scene.add.graphics().setDepth(this.depth + 1);
@@ -78,8 +90,13 @@ export class Obstacle extends Phaser.GameObjects.Image {
   smash(direction: number): void {
     if (this.broken) return;
     this.broken = true;
+    this.scene.tweens.killTweensOf(this);
     const b = this.getBounds();
-    const colors = this.spec.look === 'fence' ? [0xf1ead8, 0xcfc4a8] : [0xb07a42, 0x8a5a2b, 0xd7a468];
+    const colors =
+      this.spec.look === 'fence' ? [0xf1ead8, 0xcfc4a8]
+      : this.spec.look === 'cracked' ? [0xd2a46a, 0xb07f47, 0x8a6238]
+      : this.spec.look === 'stone' ? [0x9aa0a8, 0x7c828a, 0xb9bec5]
+      : [0xb07a42, 0x8a5a2b, 0xd7a468];
     const emitter = this.scene.add.particles(0, 0, TEXTURES.debris, {
       x: { min: b.left, max: b.right },
       y: { min: b.top, max: b.bottom },

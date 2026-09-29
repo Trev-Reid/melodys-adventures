@@ -21,6 +21,20 @@ export function barkReaches(bark: BarkShape, target: { x: number; y: number }): 
   return angle <= bark.coneDegrees;
 }
 
+/**
+ * BARK BOOST: the upward speed after barking in mid-air, or null if a boost
+ * wouldn't help (she's already rising faster) - then it isn't used up.
+ * Negative = upwards.
+ */
+export function barkBoostVelocity(vy: number, boostSpeed: number): number | null {
+  return vy > -boostSpeed ? -boostSpeed : null;
+}
+
+/** Highest she can rise (px) from a launch speed, ignoring air time. */
+export function riseHeight(speed: number, gravity: number): number {
+  return (speed * speed) / (2 * gravity);
+}
+
 export type BarkOutcome = 'react' | 'tooQuiet';
 
 export function barkOutcome(requiresSuperBark: boolean, isSuper: boolean): BarkOutcome {

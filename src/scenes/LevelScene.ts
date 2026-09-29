@@ -75,12 +75,13 @@ export class LevelScene extends Phaser.Scene {
       ...this.level.pointsOfInterest,
     ]);
 
-    // Barking at things: balls in trees, leaf piles, cats in the way.
+    // Barking at things: balls in trees, leaf piles, cats in the way, bark blocks.
     if (this.player instanceof Melody) {
       const byName = new Map<string, Detectable>();
       for (const c of this.level.collectibles) if (c.id) byName.set(c.id, c);
       for (const p of this.level.pointsOfInterest) byName.set(p.id, p);
-      const barks = new BarkSystem(this, this.player.bark, this.level.barkTargets, byName, (t, c) => this.say(t, c));
+      const barkBlocks = this.level.obstacles.filter((o) => o.isBarkBreakable);
+      const barks = new BarkSystem(this, this.player.bark, this.level.barkTargets, byName, (t, c) => this.say(t, c), barkBlocks);
       this.physics.add.collider(this.player, barks.blockers);
     }
 

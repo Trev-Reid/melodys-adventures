@@ -19,7 +19,8 @@ export type RestState = 'awake' | 'sitting' | 'sleeping' | 'busy';
 /**
  * Melody - the star of the show. A white-and-tan lurcher with a black collar.
  *
- * Abilities so far: sprint (her incredible speed), and naps when left alone.
+ * Abilities so far: sprint (her incredible speed), bark (with BARK BOOST in
+ * mid-air), and naps when left alone.
  * Still to come: sniffing, sausage power-ups, getting scared, the squirrel toy.
  */
 export class Melody extends Character {
@@ -59,6 +60,7 @@ export class Melody extends Character {
     this.bark = this.addAbility(new BarkAbility({ ...MELODY_BARK }));
     this.bark.onBark((e) => {
       sfx.play(e.isSuper ? 'superBark' : 'bark');
+      if (e.boosted) sfx.play('boost');
       this.barkPoseTimer = this.bark.config.poseSeconds;
     });
     this.playAnim('idle');
