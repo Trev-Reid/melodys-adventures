@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import { Character } from '../Character';
 import { MELODY_MOVEMENT } from '@/config/movement';
-import { MELODY_REST, MELODY_SPRINT } from '@/config/abilities';
+import { MELODY_BARK, MELODY_REST, MELODY_SPRINT } from '@/config/abilities';
+import { BarkAbility } from '../abilities/bark/BarkAbility';
 import { TEXTURES } from '@/assets/keys';
 import { SprintAbility } from '../abilities/sprint/SprintAbility';
 import type { CharacterIntent } from '../abilities/Ability';
@@ -23,6 +24,9 @@ export type RestState = 'awake' | 'sitting' | 'sleeping' | 'busy';
  */
 export class Melody extends Character {
   readonly sprint: SprintAbility;
+  readonly bark: BarkAbility;
+  /** While > 0 she's showing her bark pose (doesn't stop her moving). */
+  private barkPoseTimer = 0;
   anim: MelodyAnim = 'idle';
   rest: RestState = 'awake';
   /** Set when the level is complete - she celebrates instead of idling. */
@@ -52,6 +56,11 @@ export class Melody extends Character {
     });
     this.setDepth(10);
     this.sprint = this.addAbility(new SprintAbility(scene, { ...MELODY_SPRINT }));
+    this.bark = this.addAbility(new BarkAbility({ ...MELODY_BARK }));
+    this.bark.onBark((e) => {
+      sfx.play(e.isSuper ? 'superBark' : 'bark');
+      this.barkPoseTimer = this.bark.config.poseSeconds;
+    });
     this.playAnim('idle');
     this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, (anim: Phaser.Animations.Animation) => {
       const next = this.nextAnim;
@@ -82,7 +91,7 @@ export class Melody extends Character {
   }
 
   override applyIntent(intent: CharacterIntent, dtSeconds: number): void {
-    const wantsToAct = intent.moveX !== 0 || intent.jumpPressed || intent.sprintHeld;
+    const wantsToAct = intent.moveX !== 0 || intent.jumpPressed || intent.sprintHeld || intent.barkPressed;
 
     if (this.rest === 'sleeping' && wantsToAct) {
       this.perform('wake', this.restCfg.wakeUpSeconds);
@@ -111,6 +120,14 @@ export class Melody extends Character {
       maxSpeed: this.movement.config.maxSpeed,
       secondsSinceLanding: this.secondsSinceLanding,
     });
+
+    // Barking: show the bark pose briefly on top of whatever she's doing.
+    this.barkPoseTimer = Math.max(0, this.barkPoseTimer - dtSeconds);
+    if (this.barkPoseTimer > 0) {
+      this.stillSeconds = 0;
+      this.playAnim('bark');
+      return;
+    }
 
     // Resting: stand still long enough and she sits, then naps.
     if (loco === 'idle' && !this.happy) this.stillSeconds += dtSeconds;

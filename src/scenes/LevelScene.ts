@@ -16,6 +16,8 @@ import { buildLevel, type BuiltLevel } from '@/levels/LevelBuilder';
 import { ObstacleSystem } from '@/gameplay/interactions/ObstacleSystem';
 import { EFFECTS } from '@/config/powerUps';
 import { SniffSystem } from '@/gameplay/scent/SniffSystem';
+import { BarkSystem } from '@/gameplay/bark/BarkSystem';
+import type { Detectable } from '@/gameplay/scent/Detectable';
 import { DISPLAY } from '@/config/display';
 import type { DebugScene, DebugSceneData } from './DebugScene';
 import type { HudScene, HudSceneData } from './HudScene';
@@ -72,6 +74,15 @@ export class LevelScene extends Phaser.Scene {
       ...this.level.collectibles,
       ...this.level.pointsOfInterest,
     ]);
+
+    // Barking at things: balls in trees, leaf piles, cats in the way.
+    if (this.player instanceof Melody) {
+      const byName = new Map<string, Detectable>();
+      for (const c of this.level.collectibles) if (c.id) byName.set(c.id, c);
+      for (const p of this.level.pointsOfInterest) byName.set(p.id, p);
+      const barks = new BarkSystem(this, this.player.bark, this.level.barkTargets, byName, (t, c) => this.say(t, c));
+      this.physics.add.collider(this.player, barks.blockers);
+    }
 
     // Subdues the world (tiles, obstacles, signs) but not items, Melody or scents.
     this.worldTint = this.add
@@ -137,6 +148,7 @@ export class LevelScene extends Phaser.Scene {
       jumpPressed: input.justPressed('jump'),
       jumpHeld: input.isDown('jump'),
       sprintHeld: input.isDown('sprint'),
+      barkPressed: input.justPressed('bark'),
     };
     this.player.applyIntent(intent, dt);
     this.announceCombos();

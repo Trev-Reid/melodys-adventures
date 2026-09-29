@@ -10,6 +10,7 @@ import { Collectible } from '@/entities/collectibles/Collectible';
 import { Obstacle } from '@/entities/obstacles/Obstacle';
 import { ScentTrail } from '@/entities/scent/ScentTrail';
 import { PointOfInterest } from '@/entities/scent/PointOfInterest';
+import { BarkTarget } from '@/entities/bark/BarkTarget';
 
 export interface BuiltLevel {
   definition: LevelDefinition;
@@ -19,6 +20,7 @@ export interface BuiltLevel {
   obstacles: Obstacle[];
   scentTrails: ScentTrail[];
   pointsOfInterest: PointOfInterest[];
+  barkTargets: BarkTarget[];
 }
 
 /** Turns a LevelDefinition into Phaser objects inside a scene. */
@@ -41,7 +43,9 @@ export function buildLevel(scene: Phaser.Scene, level: LevelDefinition): BuiltLe
   const scentTrails = (level.scentTrails ?? []).map((def) => new ScentTrail(scene, def));
   const pointsOfInterest = (level.pointsOfInterest ?? []).map((def) => new PointOfInterest(scene, def));
 
-  return { definition: level, solids, collectibles, obstacles, scentTrails, pointsOfInterest };
+  const barkTargets = (level.barkTargets ?? []).map((def) => new BarkTarget(scene, def));
+
+  return { definition: level, solids, collectibles, obstacles, scentTrails, pointsOfInterest, barkTargets };
 }
 
 function addPlatform(scene: Phaser.Scene, p: PlatformDefinition): Phaser.GameObjects.TileSprite {

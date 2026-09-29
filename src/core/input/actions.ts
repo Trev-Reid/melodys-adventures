@@ -10,7 +10,7 @@
  *   2. bind it in config/controls.ts (and later the gamepad bindings),
  *   3. read it via InputManager.justPressed('sniff') etc.
  */
-export const BUTTON_ACTIONS = ['jump', 'sprint', 'toggleDebug', 'restart', 'mute'] as const;
+export const BUTTON_ACTIONS = ['jump', 'sprint', 'bark', 'toggleDebug', 'restart', 'mute'] as const;
 export type ButtonAction = (typeof BUTTON_ACTIONS)[number];
 
 /** Instantaneous state reported by one input source. */

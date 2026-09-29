@@ -59,4 +59,20 @@ export const COLLECTIBLE_TYPES: Record<CollectibleKind, CollectibleType> = {
     sound: 'celebrate',
     celebrate: { text: 'You found Squirrel!', anim: 'happy', seconds: 1.6 },
   },
+  barkBiscuit: {
+    texture: TEXTURES.barkBiscuit,
+    plural: 'bark biscuits',
+    countsTowardGoal: false,
+    sound: 'powerup',
+    effect: 'SUPER_BARK',
+    respawnSeconds: 10,
+    glow: 0x4fc3f7,
+  },
+  ball: {
+    texture: TEXTURES.ball,
+    plural: 'balls',
+    countsTowardGoal: false,
+    sound: 'celebrate',
+    celebrate: { text: 'Got your ball!', anim: 'happy', seconds: 1.2 },
+  },
 };

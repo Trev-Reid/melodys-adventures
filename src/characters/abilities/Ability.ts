@@ -9,6 +9,7 @@ import type { Character } from '../Character';
  */
 export interface CharacterIntent extends MovementIntent {
   sprintHeld: boolean;
+  barkPressed: boolean;
 }
 
 export const IDLE_INTENT: CharacterIntent = {
@@ -16,6 +17,7 @@ export const IDLE_INTENT: CharacterIntent = {
   jumpPressed: false,
   jumpHeld: false,
   sprintHeld: false,
+  barkPressed: false,
 };
 
 /**

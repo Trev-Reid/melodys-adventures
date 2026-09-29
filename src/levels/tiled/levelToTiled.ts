@@ -26,6 +26,7 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
     const out: TiledProperty[] = [{ name: 'hidden', type: 'bool', value: true }];
     if (h.requiresSuperSniff !== undefined) out.push({ name: 'requiresSuperSniff', type: 'bool', value: h.requiresSuperSniff });
     if (h.revealRadius !== undefined) out.push({ name: 'revealRadius', type: 'int', value: h.revealRadius });
+    if (h.revealedBy !== undefined) out.push({ name: 'revealedBy', type: 'string', propertytype: 'RevealedBy', value: h.revealedBy });
     return out;
   };
   const withProps = (o: TiledObject, p: TiledProperty[]) => (p.length ? { ...o, properties: p } : o);
@@ -96,6 +97,16 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
           ...hiddenProps(poi.hidden),
         ]),
       ),
+    ),
+    layer(
+      LAYERS.barkTargets,
+      (level.barkTargets ?? []).map((t) => {
+        const p: TiledProperty[] = [];
+        if (t.reveals) p.push({ name: 'reveals', type: 'string', value: t.reveals });
+        if (t.requiresSuperBark !== undefined) p.push({ name: 'requiresSuperBark', type: 'bool', value: t.requiresSuperBark });
+        if (t.height !== undefined) p.push({ name: 'height', type: 'int', value: t.height });
+        return withProps(obj({ type: t.kind, name: t.id ?? '', x: t.x, y: t.y, point: true }), p);
+      }),
     ),
     layer(LAYERS.markers, [obj({ type: CLASS.spawn, name: 'spawn', x: level.spawn.x, y: level.spawn.y, point: true })]),
   ];

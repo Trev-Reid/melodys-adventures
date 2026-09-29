@@ -18,6 +18,10 @@ export function createPlaceholderTextures(scene: Phaser.Scene): void {
   squirrelToy(scene);
   scentIcons(scene);
   pawPrints(scene);
+  barkBiscuit(scene);
+  ball(scene);
+  cat(scene);
+  leaf(scene);
   glow(scene);
   debris(scene);
   confetti(scene);
@@ -221,5 +225,58 @@ function pawPrints(scene: Phaser.Scene): void {
   };
   paw(8, 12); paw(22, 6); paw(36, 12); paw(50, 6);
   g.generateTexture(TEXTURES.pawPrints, 58, 20);
+  g.destroy();
+}
+
+function barkBiscuit(scene: Phaser.Scene): void {
+  // Round biscuit with a blue "sound wave" on it.
+  const g = scene.make.graphics({}, false);
+  g.fillStyle(0x8a5a2b).fillCircle(14, 14, 13);
+  g.fillStyle(0xd9a45b).fillCircle(14, 14, 11);
+  g.lineStyle(2, 0x2b8fd6).beginPath().arc(9, 14, 4, -0.9, 0.9).strokePath();
+  g.beginPath().arc(9, 14, 8, -0.8, 0.8).strokePath();
+  g.fillStyle(0x2b8fd6).fillCircle(8, 14, 2);
+  g.generateTexture(TEXTURES.barkBiscuit, 28, 28);
+  g.destroy();
+}
+
+function ball(scene: Phaser.Scene): void {
+  // Melody's tennis ball.
+  const g = scene.make.graphics({}, false);
+  g.fillStyle(0x6b8e1f).fillCircle(11, 11, 11);
+  g.fillStyle(0xd4ec3a).fillCircle(11, 11, 9.5);
+  g.lineStyle(2, 0xffffff).beginPath().arc(2, 11, 8, -1.1, 1.1).strokePath();
+  g.beginPath().arc(20, 11, 8, Math.PI - 1.1, Math.PI + 1.1).strokePath();
+  g.generateTexture(TEXTURES.ball, 22, 22);
+  g.destroy();
+}
+
+function cat(scene: Phaser.Scene): void {
+  // The neighbour's ginger cat, sitting side-on (facing left).
+  const g = scene.make.graphics({}, false);
+  const fur = 0xe08a3c;
+  const dark = 0x9c5418;
+  g.fillStyle(dark).fillEllipse(44, 34, 10, 26); // tail curled up behind
+  g.fillStyle(fur).fillEllipse(44, 34, 6, 22);
+  g.fillStyle(dark).fillEllipse(30, 34, 30, 30); // body
+  g.fillStyle(fur).fillEllipse(30, 34, 26, 26);
+  g.fillStyle(dark).fillRect(18, 38, 20, 10);
+  g.fillStyle(fur).fillRect(20, 38, 17, 9);
+  g.fillStyle(0xf6d9b8).fillEllipse(22, 38, 10, 14); // chest
+  g.fillStyle(dark).fillCircle(16, 16, 11); // head
+  g.fillStyle(fur).fillCircle(16, 16, 9.5);
+  g.fillStyle(dark).fillTriangle(8, 10, 9, 1, 15, 7).fillTriangle(18, 7, 23, 1, 24, 10);
+  g.fillStyle(0x2d7a2d).fillEllipse(11, 15, 4, 5).fillEllipse(19, 15, 4, 5); // green eyes
+  g.fillStyle(0x111111).fillRect(10.5, 13, 1.2, 4).fillRect(18.5, 13, 1.2, 4);
+  g.fillStyle(0xd46a7a).fillTriangle(14, 20, 18, 20, 16, 22);
+  g.fillStyle(dark).fillRect(24, 26, 3, 8).fillRect(32, 24, 3, 9); // stripes
+  g.generateTexture(TEXTURES.cat, 52, 48);
+  g.destroy();
+}
+
+function leaf(scene: Phaser.Scene): void {
+  const g = scene.make.graphics({}, false);
+  g.fillStyle(0xffffff).fillEllipse(5, 3, 10, 5);
+  g.generateTexture(TEXTURES.leaf, 10, 6);
   g.destroy();
 }

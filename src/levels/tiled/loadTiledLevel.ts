@@ -1,4 +1,5 @@
 import type {
+  BarkTargetDefinition,
   CollectibleDefinition,
   CollectibleKind,
   DetectableSpec,
@@ -11,8 +12,10 @@ import type {
 } from '../LevelDefinition';
 import type { ObstacleKind } from '@/config/obstacles';
 import type { ScentType } from '@/config/scents';
+import type { BarkTargetKind } from '@/config/barkTargets';
 import type { TiledMap, TiledObject, TiledObjectLayer, TiledProperty } from './tiledFormat';
 import {
+  BARK_TARGET_CLASSES,
   CLASS,
   COLLECTIBLE_CLASSES,
   DEFAULTS,
@@ -20,6 +23,7 @@ import {
   OBSTACLE_CLASSES,
   PLATFORM_CLASSES,
   POI_MARKERS,
+  REVEALED_BY,
   SCENT_CLASSES,
 } from './levelSchema';
 
@@ -72,6 +76,11 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     if (!p.bool('hidden', DEFAULTS.hidden)) return undefined;
     const spec: DetectableSpec = { requiresSuperSniff: p.bool('requiresSuperSniff', DEFAULTS.requiresSuperSniff) };
     if (p.has('revealRadius')) spec.revealRadius = p.number('revealRadius', DEFAULTS.revealRadius);
+    if (p.has('revealedBy')) {
+      const by = p.string('revealedBy', DEFAULTS.revealedBy);
+      if ((REVEALED_BY as readonly string[]).includes(by)) spec.revealedBy = by as DetectableSpec['revealedBy'];
+      else problems.push(`revealedBy "${by}" isn't valid. Use one of: ${REVEALED_BY.join(', ')}.`);
+    }
     return spec;
   };
 
@@ -167,6 +176,21 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     scentTrails.push(trail);
   }
 
+  // --- Bark targets (point = its base on the ground) -----------------------------
+  const barkTargets: BarkTargetDefinition[] = [];
+  for (const o of objects(LAYERS.barkTargets)) {
+    const kind = expectClass<BarkTargetKind>(LAYERS.barkTargets, o, BARK_TARGET_CLASSES);
+    if (!kind) continue;
+    const p = props(o.properties);
+    const t: BarkTargetDefinition = { kind, x: o.x, y: o.y };
+    if (o.name) t.id = o.name;
+    const reveals = p.string('reveals', '');
+    if (reveals) t.reveals = reveals;
+    if (p.has('requiresSuperBark')) t.requiresSuperBark = p.bool('requiresSuperBark', true);
+    if (p.has('height')) t.height = p.number('height', DEFAULTS.treeHeight);
+    barkTargets.push(t);
+  }
+
   // --- Spawn -------------------------------------------------------------------
   const spawns = objects(LAYERS.markers).filter((o) => classOf(o) === CLASS.spawn || o.name === CLASS.spawn);
   if (spawns.length !== 1) {
@@ -176,13 +200,24 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
 
   // --- Cross-checks --------------------------------------------------------------
   const ids = new Map<string, number>();
-  for (const id of [...collectibles.map((c) => c.id), ...pointsOfInterest.map((p) => p.id), ...scentTrails.map((t) => t.id)]) {
+  for (const id of [
+    ...collectibles.map((c) => c.id),
+    ...pointsOfInterest.map((p) => p.id),
+    ...scentTrails.map((t) => t.id),
+    ...barkTargets.map((t) => t.id),
+  ]) {
     if (id) ids.set(id, (ids.get(id) ?? 0) + 1);
   }
   for (const [id, count] of ids) if (count > 1) problems.push(`The name "${id}" is used ${count} times - names must be unique.`);
   for (const t of scentTrails) {
     if (t.targetId && !ids.has(t.targetId)) {
       problems.push(`Scent trail "${t.id}" leads to "${t.targetId}", but nothing has that name.`);
+    }
+  }
+
+  for (const t of barkTargets) {
+    if (t.reveals && !ids.has(t.reveals)) {
+      problems.push(`Bark target ${t.kind} at (${t.x}, ${t.y}) reveals "${t.reveals}", but nothing has that name.`);
     }
   }
 
@@ -202,6 +237,7 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     obstacles,
     scentTrails,
     pointsOfInterest,
+    barkTargets,
   };
   return level;
 }

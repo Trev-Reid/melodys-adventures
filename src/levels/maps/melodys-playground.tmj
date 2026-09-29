@@ -9,8 +9,8 @@
  "height": 135,
  "tilewidth": 8,
  "tileheight": 8,
- "nextlayerid": 8,
- "nextobjectid": 77,
+ "nextlayerid": 9,
+ "nextobjectid": 86,
  "backgroundcolor": "#87ceeb",
  "layers": [
   {
@@ -394,6 +394,17 @@
      "visible": true,
      "x": 5000,
      "y": 640
+    },
+    {
+     "id": 31,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 3280,
+     "y": 830
     }
    ],
    "color": "#7a4e2d"
@@ -409,7 +420,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 31,
+     "id": 32,
      "name": "",
      "type": "heavyCrate",
      "width": 110,
@@ -420,7 +431,7 @@
      "y": 906
     },
     {
-     "id": 32,
+     "id": 33,
      "name": "",
      "type": "woodenBarrier",
      "width": 44,
@@ -431,7 +442,7 @@
      "y": 816
     },
     {
-     "id": 33,
+     "id": 34,
      "name": "",
      "type": "fence",
      "width": 28,
@@ -442,7 +453,7 @@
      "y": 866
     },
     {
-     "id": 34,
+     "id": 35,
      "name": "",
      "type": "fence",
      "width": 28,
@@ -453,7 +464,7 @@
      "y": 866
     },
     {
-     "id": 35,
+     "id": 36,
      "name": "",
      "type": "fence",
      "width": 28,
@@ -477,7 +488,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 36,
+     "id": 37,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -496,7 +507,7 @@
      ]
     },
     {
-     "id": 37,
+     "id": 38,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -515,7 +526,7 @@
      ]
     },
     {
-     "id": 38,
+     "id": 39,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -534,7 +545,7 @@
      ]
     },
     {
-     "id": 39,
+     "id": 40,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -553,7 +564,7 @@
      ]
     },
     {
-     "id": 40,
+     "id": 41,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -572,7 +583,7 @@
      ]
     },
     {
-     "id": 41,
+     "id": 42,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -591,7 +602,7 @@
      ]
     },
     {
-     "id": 42,
+     "id": 43,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -610,7 +621,7 @@
      ]
     },
     {
-     "id": 43,
+     "id": 44,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -629,7 +640,7 @@
      ]
     },
     {
-     "id": 44,
+     "id": 45,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -644,6 +655,25 @@
        "name": "text",
        "type": "string",
        "value": "YOU SMASHED IT!"
+      }
+     ]
+    },
+    {
+     "id": 46,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2560,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "SUPER BARK BISCUIT\nPress B to bark!"
       }
      ]
     }
@@ -661,7 +691,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 45,
+     "id": 47,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -673,7 +703,7 @@
      "point": true
     },
     {
-     "id": 46,
+     "id": 48,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -685,7 +715,7 @@
      "point": true
     },
     {
-     "id": 47,
+     "id": 49,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -697,7 +727,7 @@
      "point": true
     },
     {
-     "id": 48,
+     "id": 50,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -709,7 +739,7 @@
      "point": true
     },
     {
-     "id": 49,
+     "id": 51,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -721,7 +751,7 @@
      "point": true
     },
     {
-     "id": 50,
+     "id": 52,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -733,7 +763,7 @@
      "point": true
     },
     {
-     "id": 51,
+     "id": 53,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -745,7 +775,7 @@
      "point": true
     },
     {
-     "id": 52,
+     "id": 54,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -757,7 +787,7 @@
      "point": true
     },
     {
-     "id": 53,
+     "id": 55,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -769,7 +799,7 @@
      "point": true
     },
     {
-     "id": 54,
+     "id": 56,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -781,7 +811,7 @@
      "point": true
     },
     {
-     "id": 55,
+     "id": 57,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -793,7 +823,7 @@
      "point": true
     },
     {
-     "id": 56,
+     "id": 58,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -805,7 +835,7 @@
      "point": true
     },
     {
-     "id": 57,
+     "id": 59,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -817,7 +847,7 @@
      "point": true
     },
     {
-     "id": 58,
+     "id": 60,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -829,7 +859,7 @@
      "point": true
     },
     {
-     "id": 59,
+     "id": 61,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -841,7 +871,7 @@
      "point": true
     },
     {
-     "id": 60,
+     "id": 62,
      "name": "",
      "type": "sniffTreat",
      "width": 0,
@@ -853,7 +883,7 @@
      "point": true
     },
     {
-     "id": 61,
+     "id": 63,
      "name": "squirrel",
      "type": "squirrelToy",
      "width": 0,
@@ -877,7 +907,7 @@
      ]
     },
     {
-     "id": 62,
+     "id": 64,
      "name": "hidden-sausage",
      "type": "sausage",
      "width": 0,
@@ -901,7 +931,7 @@
      ]
     },
     {
-     "id": 63,
+     "id": 65,
      "name": "",
      "type": "superSausage",
      "width": 0,
@@ -913,7 +943,7 @@
      "point": true
     },
     {
-     "id": 64,
+     "id": 66,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -925,7 +955,7 @@
      "point": true
     },
     {
-     "id": 65,
+     "id": 67,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -937,7 +967,7 @@
      "point": true
     },
     {
-     "id": 66,
+     "id": 68,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -949,7 +979,7 @@
      "point": true
     },
     {
-     "id": 67,
+     "id": 69,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -961,7 +991,7 @@
      "point": true
     },
     {
-     "id": 68,
+     "id": 70,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -973,7 +1003,7 @@
      "point": true
     },
     {
-     "id": 69,
+     "id": 71,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -985,7 +1015,7 @@
      "point": true
     },
     {
-     "id": 70,
+     "id": 72,
      "name": "",
      "type": "superSausage",
      "width": 0,
@@ -997,7 +1027,7 @@
      "point": true
     },
     {
-     "id": 71,
+     "id": 73,
      "name": "",
      "type": "sausage",
      "width": 0,
@@ -1006,6 +1036,80 @@
      "visible": true,
      "x": 6000,
      "y": 985,
+     "point": true
+    },
+    {
+     "id": 74,
+     "name": "",
+     "type": "barkBiscuit",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2690,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 75,
+     "name": "melody-ball",
+     "type": "ball",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2870,
+     "y": 1004,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
+    },
+    {
+     "id": 76,
+     "name": "leaf-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3000,
+     "y": 992,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
+    },
+    {
+     "id": 77,
+     "name": "cat-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3320,
+     "y": 806,
      "point": true
     }
    ],
@@ -1022,7 +1126,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 72,
+     "id": 78,
      "name": "squirrel-trail",
      "type": "scentTrail",
      "width": 0,
@@ -1084,7 +1188,7 @@
      ]
     },
     {
-     "id": 73,
+     "id": 79,
      "name": "sausage-trail",
      "type": "scentTrail",
      "width": 0,
@@ -1134,7 +1238,7 @@
      ]
     },
     {
-     "id": 74,
+     "id": 80,
      "name": "cat-trail",
      "type": "scentTrail",
      "width": 0,
@@ -1201,7 +1305,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 75,
+     "id": 81,
      "name": "cat-dead-end",
      "type": "pointOfInterest",
      "width": 0,
@@ -1245,6 +1349,74 @@
   },
   {
    "id": 7,
+   "name": "barkTargets",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 82,
+     "name": "ball-tree",
+     "type": "ballInTree",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2840,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "melody-ball"
+      },
+      {
+       "name": "height",
+       "type": "int",
+       "value": 200
+      }
+     ]
+    },
+    {
+     "id": 83,
+     "name": "leaf-pile",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3000,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "leaf-sausage"
+      }
+     ]
+    },
+    {
+     "id": 84,
+     "name": "ledge-cat",
+     "type": "cat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3310,
+     "y": 830,
+     "point": true
+    }
+   ],
+   "color": "#3f8f3a"
+  },
+  {
+   "id": 8,
    "name": "markers",
    "type": "objectgroup",
    "draworder": "topdown",
@@ -1254,7 +1426,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 76,
+     "id": 85,
      "name": "spawn",
      "type": "spawn",
      "width": 0,

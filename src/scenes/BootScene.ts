@@ -4,6 +4,15 @@ import { createPlaceholderTextures } from '@/assets/placeholders';
 import { MELODY_SHEET, createMelodyAnimations } from '@/characters/melody/melodyAnimations';
 import { DEFAULT_LEVEL_KEY, getLevel } from '@/levels';
 import { DISPLAY } from '@/config/display';
+import { AUDIO } from '@/config/audio';
+import { sfx, type SoundName } from '@/core/audio/Sfx';
+
+/** Any recorded sounds in src/assets/audio (e.g. bark.mp3) - see the README there. */
+const SOUND_FILES = import.meta.glob<string>('../assets/audio/*.{mp3,ogg,wav,m4a}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
 import type { LevelSceneData } from './LevelScene';
 
 /**
@@ -16,6 +25,10 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    for (const [path, url] of Object.entries(SOUND_FILES)) {
+      const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
+      this.load.audio(`sample-${name}`, url);
+    }
     for (const { texture, path } of MELODY_SHEET.skins) {
       this.load.spritesheet(texture, path, {
         frameWidth: MELODY_SHEET.frameWidth,
@@ -31,6 +44,7 @@ export class BootScene extends Phaser.Scene {
       this.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
     createMelodyAnimations(this);
+    this.registerRecordedSounds();
     createPlaceholderTextures(this);
     // http://localhost:5173/?gallery shows every animation instead of the game.
     if (new URLSearchParams(window.location.search).has('gallery')) {
@@ -49,6 +63,20 @@ export class BootScene extends Phaser.Scene {
     }
     const data: LevelSceneData = { levelKey };
     this.scene.start(SCENES.level, data);
+  }
+
+  /** Recorded sounds replace the synthesized ones of the same name. */
+  private registerRecordedSounds(): void {
+    for (const path of Object.keys(SOUND_FILES)) {
+      const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '') as SoundName;
+      const key = `sample-${name}`;
+      if (!this.cache.audio.exists(key)) continue;
+      sfx.useSample(name, () => this.sound.play(key, { volume: AUDIO.volume * 2 }));
+      if (name === 'bark') {
+        // SUPER BARK: the same bark, louder and deeper.
+        sfx.useSample('superBark', () => this.sound.play(key, { volume: Math.min(1, AUDIO.volume * 3), rate: 0.8 }));
+      }
+    }
   }
 
   /** A level that won't load shows what's wrong instead of a blank screen. */

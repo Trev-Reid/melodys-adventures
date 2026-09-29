@@ -39,6 +39,16 @@ export class Collectible extends Phaser.GameObjects.Image implements Detectable 
     }
   }
 
+  /** Move where it lives (e.g. where a knocked-down ball landed). */
+  setHome(x: number, y: number): void {
+    this.home.x = x;
+    this.home.y = y;
+    this.scene.tweens.killTweensOf(this);
+    this.setPosition(x, y);
+    this.glow?.setPosition(x, y);
+    this.startBobbing();
+  }
+
   /** Found by sniffing: pop into view with a highlight. Stays found. */
   reveal(): void {
     if (this.revealed || this.collected) return;

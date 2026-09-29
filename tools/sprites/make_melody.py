@@ -117,7 +117,7 @@ def P(**kw):
         hrot=0.0,            # head tilt in degrees (+ = nose up)
         ear='back',          # back | up | flat
         eye='open',          # open | closed | wide
-        mouth='closed',      # closed | open | tongue
+        mouth='closed',      # closed | open | tongue | bark
         fn=STAND_F, ff=None, hn=STAND_H, hf=None,
         tail=TAIL_REST,
         tongue_len=0.0,
@@ -326,6 +326,11 @@ def render(p, build='normal') -> Image.Image:
     cv.poly('ear', Hd(ears[p['ear']]))
 
     # Mouth.
+    if p['mouth'] == 'bark':
+        # Big open-mouthed WOOF: lower jaw drops, mouth wide open.
+        cv.poly('head', Hd([(1.0, 2.6), (6.4, 3.0), (6.2, 5.2), (1.6, 4.6)]))
+        cv.poly('mouth', Hd([(2.4, 1.8), (7.0, 1.2), (6.2, 4.4), (2.8, 3.8)]))
+        cv.poly('tongue', Hd([(3.4, 3.6), (5.4, 3.6), (5.2, 4.4), (3.6, 4.3)]))
     if p['mouth'] in ('open', 'tongue'):
         cv.poly('mouth', Hd([(2.6, 2.0), (6.6, 1.8), (6.0, 3.3), (3.0, 3.4)]))
     if p['mouth'] == 'tongue':
@@ -593,6 +598,16 @@ ANIMATIONS = {
     'sleep': (2, -1, [
         P(**LIE_BASE),
         P(**{**LIE_BASE, 'dy': 9.5, 'head': (1.5, 11.2)}),
+    ]),
+    'bark': (14, 0, [
+        # Wind-up: head pulls back a little.
+        P(dy=0.4, head=(-0.6, 0.6), hrot=-4, ear='back', tail=TAIL_WAG_B,
+          fn=(0.25, 0.15, 1.4), ff=(0.05, 0.0, 1.35)),
+        # WOOF!
+        P(dy=-0.3, pitch=-3, head=(1.4, -0.4), hrot=10, ear='flat', mouth='bark', eye='wide', tail=TAIL_WAG_A,
+          fn=(0.35, 0.25, 1.45), ff=(0.15, 0.1, 1.4)),
+        P(dy=0.0, head=(0.8, 0.0), hrot=6, ear='back', mouth='open', tail=TAIL_WAG_B,
+          fn=(0.3, 0.2, 1.4), ff=(0.1, 0.05, 1.35)),
     ]),
     'wake': (6, 0, [
         P(**{**LIE_BASE, 'eye': 'open', 'ear': 'back'}),

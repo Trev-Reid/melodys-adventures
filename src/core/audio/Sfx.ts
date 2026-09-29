@@ -1,6 +1,6 @@
 import { AUDIO } from '@/config/audio';
 
-export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal';
+export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal' | 'bark' | 'superBark' | 'meow' | 'rustle';
 
 /**
  * Tiny synthesized sound effects (Web Audio beeps), so we have audio feedback
@@ -9,10 +9,22 @@ export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdow
  */
 class Sfx {
   private ctx?: AudioContext;
+  private readonly samples = new Map<SoundName, () => void>();
+
+  /** Use a recorded sound for this name instead of the synthesized one. */
+  useSample(name: SoundName, play: () => void): void {
+    this.samples.set(name, play);
+  }
   muted = !AUDIO.enabled;
 
   play(name: SoundName): void {
     if (this.muted) return;
+    // A real recording (e.g. Melody's actual bark) wins over the synthesized one.
+    const sample = this.samples.get(name);
+    if (sample) {
+      sample();
+      return;
+    }
     try {
       switch (name) {
         case 'jump':
@@ -46,6 +58,20 @@ class Sfx {
         case 'bonk':
           this.tone({ from: 220, to: 70, duration: 0.18, type: 'square', volume: AUDIO.collectVolume * 0.6 });
           break;
+        case 'bark':
+          this.woof(1, 0.55);
+          break;
+        case 'superBark':
+          this.woof(0.8, 1);
+          this.woof(0.8, 0.6, 0.16);
+          break;
+        case 'meow':
+          this.tone({ from: 700, to: 1100, duration: 0.18, type: 'triangle', volume: AUDIO.collectVolume * 0.5 });
+          this.tone({ from: 1100, to: 600, duration: 0.3, type: 'triangle', volume: AUDIO.collectVolume * 0.5, delay: 0.18 });
+          break;
+        case 'rustle':
+          [0, 0.05, 0.11, 0.18].forEach((d) => this.noise(0.12, AUDIO.collectVolume * 0.35, d, 1800));
+          break;
         case 'sniff':
           // Three quick sniffs.
           [0, 0.16, 0.32].forEach((d) => this.noise(0.09, AUDIO.collectVolume * 0.35, d, 2400));
@@ -78,6 +104,13 @@ class Sfx {
     // Browsers start audio suspended until the player presses something.
     if (this.ctx.state === 'suspended') void this.ctx.resume();
     return this.ctx;
+  }
+
+  /** A dog-ish "woof": a falling growl plus a burst of breath. */
+  private woof(pitch: number, volume: number, delay = 0): void {
+    this.tone({ from: 420 * pitch, to: 170 * pitch, duration: 0.16, type: 'sawtooth', volume: AUDIO.collectVolume * 0.45 * volume, delay });
+    this.tone({ from: 260 * pitch, to: 120 * pitch, duration: 0.18, type: 'square', volume: AUDIO.collectVolume * 0.25 * volume, delay });
+    this.noise(0.08, AUDIO.collectVolume * 0.3 * volume, delay, 900);
   }
 
   /** A burst of white noise (crashes, smashes). */

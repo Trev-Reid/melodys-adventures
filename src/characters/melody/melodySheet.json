@@ -155,11 +155,20 @@
       "frameRate": 2,
       "repeat": -1
     },
-    "wake": {
+    "bark": {
       "frames": [
         52,
         53,
         54
+      ],
+      "frameRate": 14,
+      "repeat": 0
+    },
+    "wake": {
+      "frames": [
+        55,
+        56,
+        57
       ],
       "frameRate": 6,
       "repeat": 0

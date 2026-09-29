@@ -17,6 +17,7 @@ export function isTrailVisible(trail: ScentTrailDefinition, can: Can): boolean {
 
 /** Is a hidden object close enough, with the right senses, to be revealed? */
 export function shouldReveal(spec: DetectableSpec, can: Can, distance: number): boolean {
+  if (spec.revealedBy === 'event') return false; // revealed by something else (e.g. a bark)
   if ((spec.requiresSuperSniff ?? true) && !can('superSniff')) return false;
   return distance <= (spec.revealRadius ?? DEFAULT_REVEAL_RADIUS);
 }

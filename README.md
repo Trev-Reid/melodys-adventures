@@ -3,15 +3,24 @@
 A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
-Current build: one test level ("Melody's Playground") with 23 sausages to
+Current build: one test level ("Melody's Playground") with 25 sausages to
 collect against the clock, a pixel-art Melody (drawn from photos of her) who
 can walk, run, sprint and jump and naps when left alone, a Super Sausage
 power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
-Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, a HUD,
+Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
+and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things, a HUD,
 simple sound effects, and a debug overlay.
 
 ## Changelog
 
+- **0.9** SUPER BARK. Melody can bark any time (B). A Super Bark Biscuit
+  gives 15 seconds of a huge bark: blue sound waves, a screen shake, and
+  things in front of her react. The new Bark Zone (after the Sniff Zone) has
+  a ball stuck in a tree (bark it down), a pile of leaves hiding a sausage
+  (bark them away) and a cat sitting on a sausage ledge, blocking the way
+  (bark and it runs off). An ordinary woof near them says "Not loud enough!".
+  Bark targets are Tiled objects (`barkTargets` layer). Drop a recording of
+  Melody's real bark in `src/assets/audio/bark.mp3` and the game uses it.
 - **0.8** Levels are now made in the **Tiled** map editor: the Playground is
   `src/levels/maps/melodys-playground.tmj`. Any map saved there becomes a
   playable level (`?level=<name>`). Broken maps show a clear list of what's
@@ -86,6 +95,7 @@ Other commands:
 | Move           | ← → or A D            |
 | Jump           | Space, ↑ or W. Hold for a higher jump, tap for a small hop |
 | Sprint         | Hold Shift (or X) while moving |
+| Bark           | B                     |
 | Respawn / play again | R               |
 | Mute sounds    | M                     |
 | Toggle debug   | F3 or \` (backtick)   |
@@ -93,6 +103,10 @@ Other commands:
 **Super Sniff:** eat the purple Super Sniff Treat (near the start, under the
 staircase). For 15 seconds you can see scent trails and sniff out hidden
 things. Which trail leads to Squirrel? That's for you to work out.
+
+**Super Bark:** eat the blue Super Bark Biscuit (by the "Press B to bark!"
+sign). For 15 seconds her bark is huge: face the tree, the leaves or the cat
+and press B.
 
 **Super Strength:** eat a glowing Super Sausage. For 15 seconds Melody can
 shove heavy crates (just push against them) and break barriers (take a
@@ -151,7 +165,8 @@ has a **Class** that says exactly what it is, and properties for the details:
 | --- | --- | --- | --- |
 | `platforms` | Rectangle | `ground` (solid dirt), `platform` (wooden) | `oneWay`: jump up through it |
 | `obstacles` | Rectangle (top-left corner counts; size comes from the type) | `heavyCrate`, `woodenBarrier`, `fence` | |
-| `collectibles` | Point (centre of the item) | `sausage`, `superSausage`, `sniffTreat`, `squirrelToy` | `hidden` (needs Super Sniff to find), `revealRadius`. Name = id |
+| `collectibles` | Point (centre of the item) | `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it). Name = id |
+| `barkTargets` | Point (where it stands, on the ground) | `ballInTree`, `leafPile`, `cat` | `reveals` (name of the hidden thing it uncovers), `requiresSuperBark`, `height` (tree). Name = id |
 | `signs` | Point (bottom of the post) | `sign` | `text` |
 | `scentTrails` | Polyline, drawn **from the start to where it leads** | `scentTrail` | `scentType`, `targetId` (name of what it leads to), `visibleNormally`... Name = id |
 | `pointsOfInterest` | Point | `pointOfInterest` | `text`, `marker`, `hidden`. Name = id |
@@ -214,6 +229,19 @@ deliberately easy to change (dots, drifting icons, speed, wobble) while
 play-testing. The rules (what's visible, what gets revealed) are pure
 functions in `gameplay/scent/scentRules.ts`.
 
+**Barking.** Bark (B) is an ability every Melody has; SUPER_BARK grants the
+`superBark` capability, which makes it bigger (`MELODY_BARK` in
+`config/abilities.ts`: range, cone, cooldown). Things that react to barks are
+**bark targets** (`config/barkTargets.ts`): each kind says how it reacts
+(`fall`, `scatter`, `flee`) and whether it needs a Super Bark. A target can
+`reveal` a hidden collectible whose `revealedBy` is `event`. The rules (is it
+in range and in front of her, is it loud enough) are pure functions in
+`gameplay/bark/barkRules.ts`.
+
+**Real sounds.** Put audio files in `src/assets/audio/` named after the sound
+(`bark.mp3`, `meow.mp3`, `collect.wav`...) and they replace the synthesized
+ones. `bark` is also used, deeper and louder, for the Super Bark.
+
 **Adding a new obstacle** (e.g. a heavier boulder): add an entry to
 `OBSTACLE_TYPES` in `config/obstacles.ts` and place it in a level's
 `obstacles` list.
@@ -253,11 +281,12 @@ src/
   main.ts                    Phaser game config: scaling, physics, scene list
   config/                    Tunable values only, no logic
     movement.ts              Movement feel (per character)
-    abilities.ts             Ability tuning (sprint, napping)
+    abilities.ts             Ability tuning (sprint, bark, napping)
     audio.ts  camera.ts  controls.ts  display.ts  debug.ts
     powerUps.ts              Power-ups/status effects, capabilities, combos
     obstacles.ts             Obstacle types (crate, barrier, fence)
     scents.ts                Scent types + how trails are drawn
+    barkTargets.ts           Things that react to barks
   core/audio/Sfx.ts          Synthesized sound effects (swap for real sounds later)
   core/input/                Input abstraction
     actions.ts               The action vocabulary (moveX, jump, ...)
@@ -271,6 +300,7 @@ src/
     Character.ts             Base class: physics body + movement + abilities, driven by an intent
     abilities/Ability.ts     Ability interface + CharacterIntent
     abilities/sprint/        Sprint: stamina logic (pure) + Phaser visuals
+    abilities/bark/          Bark: emits bark events (normal or super)
     melody/Melody.ts         Melody, her abilities and animation
     melody/melodyAnimations.ts  Registers animations from melodySheet.json
     melody/melodySheet.json  Frame size + animation list (generated)
@@ -280,6 +310,8 @@ src/
   gameplay/effects/          StatusEffects: timed effects + capability/combo resolution
   gameplay/interactions/     strengthRules (pure) + ObstacleSystem (push/break/hints)
   gameplay/scent/            scentRules (pure), SniffSystem, Detectable interface
+  gameplay/bark/             barkRules (pure), BarkSystem (waves, reactions, hints)
+  entities/bark/             BarkTarget: ball in tree, leaf pile, cat (placeholder art)
   entities/scent/            ScentTrail (renderer), PointOfInterest
   characters/effects/        EffectAura: placeholder glow for active power-ups
   levels/
@@ -297,6 +329,7 @@ src/
   assets/
     keys.ts                  Texture key names
     placeholders.ts          Generated placeholder art (replace with real art later)
+    audio/                   Optional real sound recordings (bark.mp3...)
 public/assets/sprites/       Sprite sheets (melody.png)
 tools/sprites/               Sprite generator script + preview image
 tools/levels/                Tiled helpers (npm run tiled:project)

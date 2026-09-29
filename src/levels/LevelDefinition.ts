@@ -1,5 +1,6 @@
 import type { ObstacleKind } from '@/config/obstacles';
 import type { ScentType } from '@/config/scents';
+import type { BarkTargetKind } from '@/config/barkTargets';
 
 /**
  * Levels are plain data. The LevelBuilder turns this into game objects, so new
@@ -23,7 +24,7 @@ export interface PlatformDefinition {
   oneWay?: boolean;
 }
 
-export type CollectibleKind = 'sausage' | 'superSausage' | 'sniffTreat' | 'squirrelToy';
+export type CollectibleKind = 'sausage' | 'superSausage' | 'sniffTreat' | 'squirrelToy' | 'barkBiscuit' | 'ball';
 
 /**
  * Makes something hidden until Melody's nose finds it. Reusable for bones,
@@ -34,6 +35,26 @@ export interface DetectableSpec {
   requiresSuperSniff?: boolean;
   /** How close she must be (px). Default in config/scents.ts. */
   revealRadius?: number;
+  /**
+   * What reveals it: 'superSniff' (default - sniffing nearby), or 'event'
+   * (only something else in the level, e.g. a bark target it's linked to).
+   */
+  revealedBy?: 'superSniff' | 'event';
+}
+
+/** Something that reacts to a bark (see config/barkTargets.ts). */
+export interface BarkTargetDefinition {
+  kind: BarkTargetKind;
+  id?: string;
+  /** Its base (where it stands on the ground), in world pixels. */
+  x: number;
+  y: number;
+  /** Name of a hidden item it reveals when it reacts (the fallen ball, a sausage under the leaves...). */
+  reveals?: string;
+  /** Override the type's default. */
+  requiresSuperBark?: boolean;
+  /** ballInTree: how tall the tree is. */
+  height?: number;
 }
 
 /** A scent trail: data, not drawing. Rendered by entities/scent/ScentTrail. */
@@ -111,6 +132,8 @@ export interface LevelDefinition {
   scentTrails?: ScentTrailDefinition[];
   /** Things to discover. */
   pointsOfInterest?: PointOfInterestDefinition[];
+  /** Things that react to a bark. */
+  barkTargets?: BarkTargetDefinition[];
   signs?: SignDefinition[];
   /** Development aids such as distance markers. */
   showDistanceMarkers?: boolean;

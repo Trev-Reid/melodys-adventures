@@ -15,9 +15,10 @@ export type Capability =
   | 'strength'   // push heavy objects, break barriers  (SUPER_STRENGTH)
   | 'sprint'     // currently sprinting                 (sprint ability)
   | 'smash'      // plough through breakables without stopping (SUPER_CHARGE combo)
-  | 'superSniff'; // perceive hidden scent trails and hidden objects (SUPER_SNIFF)
+  | 'superSniff' // perceive hidden scent trails and hidden objects (SUPER_SNIFF)
+  | 'superBark';  // a bark loud enough to move things at a distance (SUPER_BARK)
 
-export type EffectType = 'SUPER_STRENGTH' | 'SUPER_SNIFF';
+export type EffectType = 'SUPER_STRENGTH' | 'SUPER_SNIFF' | 'SUPER_BARK';
 // Future: | 'SUPER_SPRINT' | 'INVINCIBLE' ...
 
 export interface EffectDefinition {
@@ -71,6 +72,15 @@ export const EFFECTS: Record<EffectType, EffectDefinition> = {
     startSound: 'sniff',
     ripple: 0xd6b8ff,
     worldTint: { color: 0x1a1240, alpha: 0.38 },
+  },
+  SUPER_BARK: {
+    label: 'SUPER BARK',
+    durationSeconds: 15,
+    grants: ['superBark'],
+    color: 0x4fc3f7,
+    warnAtSeconds: 3,
+    onStart: { pauseSeconds: 0.5, anim: 'bark' },
+    startSound: 'superBark',
   },
 };
 

@@ -6,7 +6,18 @@
  *
  * Regenerate after adding a collectible/obstacle/scent type:  npm run tiled:project
  */
-import { CLASS, CLASS_COLORS, COLLECTIBLE_CLASSES, DEFAULTS, OBSTACLE_CLASSES, PLATFORM_CLASSES, POI_MARKERS, SCENT_CLASSES } from './levelSchema';
+import {
+  BARK_TARGET_CLASSES,
+  CLASS,
+  CLASS_COLORS,
+  COLLECTIBLE_CLASSES,
+  DEFAULTS,
+  OBSTACLE_CLASSES,
+  PLATFORM_CLASSES,
+  POI_MARKERS,
+  REVEALED_BY,
+  SCENT_CLASSES,
+} from './levelSchema';
 
 type Member = { name: string; type: string; value: string | number | boolean; propertyType?: string };
 
@@ -26,6 +37,7 @@ export function tiledProject(): object {
     { name: 'hidden', type: 'bool', value: DEFAULTS.hidden },
     { name: 'requiresSuperSniff', type: 'bool', value: DEFAULTS.requiresSuperSniff },
     { name: 'revealRadius', type: 'int', value: DEFAULTS.revealRadius },
+    { name: 'revealedBy', type: 'string', propertyType: 'RevealedBy', value: DEFAULTS.revealedBy },
   ];
 
   return {
@@ -38,6 +50,7 @@ export function tiledProject(): object {
     propertyTypes: [
       { id: id++, name: 'ScentType', type: 'enum', storageType: 'string', values: SCENT_CLASSES, valuesAsFlags: false },
       { id: id++, name: 'PoiMarker', type: 'enum', storageType: 'string', values: POI_MARKERS, valuesAsFlags: false },
+      { id: id++, name: 'RevealedBy', type: 'enum', storageType: 'string', values: REVEALED_BY, valuesAsFlags: false },
       ...PLATFORM_CLASSES.map((c) => cls(c, [{ name: 'oneWay', type: 'bool', value: DEFAULTS.oneWay }])),
       ...COLLECTIBLE_CLASSES.map((c) => cls(c, hidden)),
       ...OBSTACLE_CLASSES.map((c) => cls(c)),
@@ -54,6 +67,13 @@ export function tiledProject(): object {
         { name: 'marker', type: 'string', propertyType: 'PoiMarker', value: DEFAULTS.marker },
         ...hidden,
       ]),
+      ...BARK_TARGET_CLASSES.map((c) =>
+        cls(c, [
+          { name: 'reveals', type: 'string', value: '' },
+          { name: 'requiresSuperBark', type: 'bool', value: true },
+          ...(c === 'ballInTree' ? [{ name: 'height', type: 'int', value: DEFAULTS.treeHeight }] : []),
+        ]),
+      ),
       cls(CLASS.spawn),
     ],
   };

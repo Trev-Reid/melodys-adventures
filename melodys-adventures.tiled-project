@@ -33,6 +33,17 @@
     },
     {
       "id": 3,
+      "name": "RevealedBy",
+      "type": "enum",
+      "storageType": "string",
+      "values": [
+        "superSniff",
+        "event"
+      ],
+      "valuesAsFlags": false
+    },
+    {
+      "id": 4,
       "name": "ground",
       "type": "class",
       "useAs": [
@@ -49,7 +60,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "name": "platform",
       "type": "class",
       "useAs": [
@@ -66,7 +77,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "sausage",
       "type": "class",
       "useAs": [
@@ -89,11 +100,17 @@
           "name": "revealRadius",
           "type": "int",
           "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
         }
       ]
     },
     {
-      "id": 6,
+      "id": 7,
       "name": "superSausage",
       "type": "class",
       "useAs": [
@@ -116,11 +133,17 @@
           "name": "revealRadius",
           "type": "int",
           "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
         }
       ]
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "sniffTreat",
       "type": "class",
       "useAs": [
@@ -143,11 +166,17 @@
           "name": "revealRadius",
           "type": "int",
           "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
         }
       ]
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "squirrelToy",
       "type": "class",
       "useAs": [
@@ -170,11 +199,83 @@
           "name": "revealRadius",
           "type": "int",
           "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
         }
       ]
     },
     {
-      "id": 9,
+      "id": 10,
+      "name": "barkBiscuit",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff4fc3f7",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "ball",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffc6e03a",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "hidden",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "requiresSuperSniff",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "revealRadius",
+          "type": "int",
+          "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
+        }
+      ]
+    },
+    {
+      "id": 12,
       "name": "heavyCrate",
       "type": "class",
       "useAs": [
@@ -185,7 +286,7 @@
       "members": []
     },
     {
-      "id": 10,
+      "id": 13,
       "name": "woodenBarrier",
       "type": "class",
       "useAs": [
@@ -196,7 +297,7 @@
       "members": []
     },
     {
-      "id": 11,
+      "id": 14,
       "name": "fence",
       "type": "class",
       "useAs": [
@@ -207,7 +308,7 @@
       "members": []
     },
     {
-      "id": 12,
+      "id": 15,
       "name": "sign",
       "type": "class",
       "useAs": [
@@ -224,7 +325,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 16,
       "name": "scentTrail",
       "type": "class",
       "useAs": [
@@ -262,7 +363,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": 17,
       "name": "pointOfInterest",
       "type": "class",
       "useAs": [
@@ -296,11 +397,88 @@
           "name": "revealRadius",
           "type": "int",
           "value": 240
+        },
+        {
+          "name": "revealedBy",
+          "type": "string",
+          "propertyType": "RevealedBy",
+          "value": "superSniff"
         }
       ]
     },
     {
-      "id": 15,
+      "id": 18,
+      "name": "ballInTree",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff3f8f3a",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "reveals",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "requiresSuperBark",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "height",
+          "type": "int",
+          "value": 230
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "leafPile",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffd9822b",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "reveals",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "requiresSuperBark",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "cat",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffe08a3c",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "reveals",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "requiresSuperBark",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 21,
       "name": "spawn",
       "type": "class",
       "useAs": [

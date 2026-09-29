@@ -16,6 +16,7 @@ export const KEYBOARD_BINDINGS: KeyboardBindings = {
   buttons: {
     jump: ['SPACE', 'UP', 'W'],
     sprint: ['SHIFT', 'X'],
+    bark: ['B'],
     toggleDebug: ['F3', 'BACKTICK'],
     restart: ['R'],
     mute: ['M'],
