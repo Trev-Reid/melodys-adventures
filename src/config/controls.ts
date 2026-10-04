@@ -17,6 +17,8 @@ export const KEYBOARD_BINDINGS: KeyboardBindings = {
     jump: ['SPACE', 'UP', 'W'],
     sprint: ['SHIFT', 'X'],
     bark: ['B'],
+    /** Swap between Melody and the boy. */
+    switchCharacter: ['TAB', 'C'],
     toggleDebug: ['F3', 'BACKTICK'],
     restart: ['R'],
     mute: ['M'],

@@ -65,3 +65,14 @@ export const MELODY_MOVEMENT: MovementConfig = {
   coyoteTimeMs: 90,
   jumpBufferMs: 120,
 };
+
+/**
+ * The boy: a bit slower than Melody (nobody's as fast as Melody) and a
+ * slightly smaller jump. Same feel otherwise.
+ */
+export const BOY_MOVEMENT: MovementConfig = {
+  ...MELODY_MOVEMENT,
+  maxSpeed: 250,
+  acceleration: 1500,
+  jumpVelocity: 590,
+};

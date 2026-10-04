@@ -28,6 +28,8 @@ export interface CharacterOptions {
  */
 export abstract class Character extends Phaser.Physics.Arcade.Sprite {
   declare body: Phaser.Physics.Arcade.Body;
+  /** Shown on screen, e.g. when the player swaps to this character. */
+  abstract readonly displayName: string;
   readonly movement: PlatformerMovement;
   protected readonly abilities: Ability[] = [];
   /** Timed power-ups / status effects (SUPER_STRENGTH...). */

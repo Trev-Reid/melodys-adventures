@@ -21,6 +21,7 @@ export function createPlaceholderTextures(scene: Phaser.Scene): void {
   barkBiscuit(scene);
   ball(scene);
   cat(scene);
+  boy(scene);
   leaf(scene);
   glow(scene);
   debris(scene);
@@ -296,4 +297,41 @@ function leaf(scene: Phaser.Scene): void {
   g.fillStyle(0xffffff).fillEllipse(5, 3, 10, 5);
   g.generateTexture(TEXTURES.leaf, 10, 6);
   g.destroy();
+}
+
+function boy(scene: Phaser.Scene): void {
+  // Melody's boy, side-on facing right: standing, and mid-stride (for walking).
+  const draw = (key: string, stride: boolean) => {
+    const g = scene.make.graphics({}, false);
+    const skin = 0xf2c7a5;
+    const jeans = 0x3d5a99;
+    const shoe = 0x2b2b2b;
+    // Legs (back leg darker so the stride reads).
+    if (stride) {
+      g.fillStyle(0x2f477a).fillTriangle(15, 38, 21, 38, 9, 60);
+      g.fillStyle(0x2f477a).fillRect(7, 56, 7, 4);
+      g.fillStyle(jeans).fillTriangle(16, 38, 22, 38, 27, 60);
+      g.fillStyle(shoe).fillRect(5, 59, 10, 5).fillRect(24, 59, 11, 5);
+    } else {
+      g.fillStyle(jeans).fillRect(13, 38, 11, 22);
+      g.fillStyle(0x2f477a).fillRect(18, 38, 1, 22);
+      g.fillStyle(shoe).fillRect(12, 59, 15, 5);
+    }
+    // T-shirt and arm.
+    g.fillStyle(0xd94a3d).fillRoundedRect(11, 20, 15, 20, 4);
+    g.fillStyle(0xb53a2f).fillRect(11, 36, 15, 3);
+    g.fillStyle(skin).fillRoundedRect(stride ? 21 : 17, 24, 5, 13, 2);
+    // Head, hair, eye, smile.
+    g.fillStyle(skin).fillCircle(19, 11, 9);
+    g.fillStyle(skin).fillRect(17, 17, 5, 4); // neck
+    g.fillStyle(0x6b3f1f).fillEllipse(17, 5, 18, 9).fillRect(9, 4, 6, 9);
+    g.fillStyle(0x6b3f1f).fillTriangle(22, 2, 29, 6, 22, 7);
+    g.fillStyle(0x222222).fillCircle(23, 11, 1.4);
+    g.lineStyle(1.2, 0x8a4a3a).beginPath().arc(23, 14, 3, 0.2, 1.4).strokePath();
+    g.fillStyle(0xe8a98c).fillCircle(14, 12, 2.2); // ear
+    g.generateTexture(key, 36, 64);
+    g.destroy();
+  };
+  draw(TEXTURES.boy, false);
+  draw(TEXTURES.boyStep, true);
 }

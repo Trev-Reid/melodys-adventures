@@ -2,6 +2,8 @@
 export const TEXTURES = {
   melody: 'melody',
   melodyBuff: 'melody-buff',
+  boy: 'boy',
+  boyStep: 'boy-step',
   groundTile: 'tile-ground',
   grassTop: 'tile-grass-top',
   platformTile: 'tile-platform',

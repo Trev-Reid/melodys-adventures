@@ -4,9 +4,10 @@ A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
 Current build: two levels of sausages to collect against the clock ("Melody's
-Playground", 29, and "Melody's House and Garden", 22), a pixel-art
-Melody (drawn from photos of her) who can walk, run, sprint and jump and
-naps when left alone, a Super Sausage power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
+Playground", 29, and "Melody's House and Garden", 22), Melody's boy, who
+follows her around (Tab swaps who you control), a pixel-art Melody (drawn
+from photos of her) who can walk, run, sprint and jump and naps when left
+alone, a Super Sausage power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
 Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
 and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things,
 Bark Boost (bark in mid-air) and Bark Break (bark blocks to bits), a HUD,
@@ -14,6 +15,14 @@ simple sound effects, and a debug overlay.
 
 ## Changelog
 
+- **0.12** The boy! He follows Melody everywhere, and **Tab** (or C)
+  swaps who you control; the other one follows. He's a bit slower than Melody
+  with a slightly smaller jump, collects sausages and toys (power-ups are dog
+  treats, so only Melody eats those), and can't push or smash things yet. If
+  the follower gets stuck (Melody boosted somewhere he can't reach) or left far
+  behind, they pop up next to the leader. Follow tuning is in
+  `config/follow.ts`, his movement in `config/movement.ts` (`BOY_MOVEMENT`).
+  Placeholder art; his name is `displayName` in `characters/boy/Boy.ts`.
 - **0.11** New level: **Melody's House and Garden**
   (`?level=house-and-garden`). Puzzles that mix powers: sniff out the
   sausage on top of the fridge and BARK BOOST up to it; scare the cat off the
@@ -113,6 +122,7 @@ Other commands:
 | Jump           | Space, ↑ or W. Hold for a higher jump, tap for a small hop |
 | Sprint         | Hold Shift (or X) while moving |
 | Bark           | B (in mid-air: BARK BOOST) |
+| Swap Melody / the boy | Tab or C             |
 | Respawn / play again | R               |
 | Mute sounds    | M                     |
 | Toggle debug   | F3 or \` (backtick)   |
@@ -308,7 +318,8 @@ instantly.
 src/
   main.ts                    Phaser game config: scaling, physics, scene list
   config/                    Tunable values only, no logic
-    movement.ts              Movement feel (per character)
+    movement.ts              Movement feel (per character: Melody, the boy)
+    follow.ts                How the character you are not controlling follows
     abilities.ts             Ability tuning (sprint, bark, napping)
     audio.ts  camera.ts  controls.ts  display.ts  debug.ts
     powerUps.ts              Power-ups/status effects, capabilities, combos
@@ -330,6 +341,8 @@ src/
     abilities/sprint/        Sprint: stamina logic (pure) + Phaser visuals
     abilities/bark/          Bark: emits bark events (normal or super)
     melody/Melody.ts         Melody, her abilities and animation
+    boy/Boy.ts               The boy (placeholder art, no abilities yet)
+    follow/FollowBrain.ts    Follow-the-leader logic for whoever you're not controlling
     melody/melodyAnimations.ts  Registers animations from melodySheet.json
     melody/melodySheet.json  Frame size + animation list (generated)
   entities/collectibles/     Pick-ups: Collectible + collectibleTypes registry
@@ -372,9 +385,11 @@ tests/                       Vitest unit tests, including level-design checks
 - **Input is decoupled from characters.** Devices produce *actions*.
   `LevelScene` turns actions into a `MovementIntent` and passes it to the
   active character. Characters never touch the keyboard. Adding a gamepad
-  means writing a `GamepadInputSource` and calling `addSource()`. Switching
-  between Melody and the boy means handing the player's intent to a different
-  character.
+  means writing a `GamepadInputSource` and calling `addSource()`. Swapping
+  between Melody and the boy just hands the player's intent to the other
+  character; the one you're not controlling gets its intent from a
+  `FollowBrain` (`characters/follow/`), plain unit-tested logic that steers
+  by the same rules as the keyboard.
 - **Movement logic is separate from Phaser.** `PlatformerMovement` is plain
   TypeScript that takes a config, the body state and an intent, and returns
   velocities. That keeps it unit-testable, and each character (or a power-up)
@@ -403,7 +418,7 @@ tests/                       Vitest unit tests, including level-design checks
 | Gamepad support                  | `core/input/GamepadInputSource.ts` + bindings in `config/controls.ts` |
 | New actions (sniff, switch)      | `core/input/actions.ts` + bindings                         |
 | More abilities (sniff, dig)      | `characters/abilities/<name>/`, added in `Melody.ts`       |
-| The boy                          | `characters/boy/Boy.ts` + his own `MovementConfig`         |
+| The boy's own abilities (climb, levers, carry) | `characters/abilities/<name>/`, added in `Boy.ts` |
 | More collectibles (bones, woozies) | new kind in `LevelDefinition.ts` + `collectibleTypes.ts` |
 | More power-ups (SUPER_SPEED, MEGA_SNIFF) | `config/powerUps.ts` + a collectible type (see above) |
 | Enemies                          | `entities/enemies/`                                         |

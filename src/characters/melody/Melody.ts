@@ -24,6 +24,7 @@ export type RestState = 'awake' | 'sitting' | 'sleeping' | 'busy';
  * Still to come: sniffing, sausage power-ups, getting scared, the squirrel toy.
  */
 export class Melody extends Character {
+  readonly displayName = 'Melody';
   readonly sprint: SprintAbility;
   readonly bark: BarkAbility;
   /** While > 0 she's showing her bark pose (doesn't stop her moving). */
