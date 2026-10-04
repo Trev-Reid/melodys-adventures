@@ -1,6 +1,7 @@
 import type { ObstacleKind } from '@/config/obstacles';
 import type { ScentType } from '@/config/scents';
 import type { BarkTargetKind } from '@/config/barkTargets';
+import type { DecorationKind } from '@/config/decorations';
 
 /**
  * Levels are plain data. The LevelBuilder turns this into game objects, so new
@@ -12,6 +13,32 @@ import type { BarkTargetKind } from '@/config/barkTargets';
  */
 export type PlatformKind = 'ground' | 'platform';
 
+/**
+ * How a platform looks. 'classic' is the original Playground look; the rest
+ * are the garden art: grass on soil, grass on a stone wall, a gravel path,
+ * wooden boards, stone slabs. Unset = the level theme's default.
+ */
+export type PlatformStyle = 'classic' | 'grass' | 'stone' | 'gravel' | 'wood' | 'slab';
+export const PLATFORM_STYLES: PlatformStyle[] = ['classic', 'grass', 'stone', 'gravel', 'wood', 'slab'];
+
+/** The overall look of a level: sky and background scenery, default platform style. */
+export type LevelTheme = 'playground' | 'garden';
+export const LEVEL_THEMES: LevelTheme[] = ['playground', 'garden'];
+
+/** A piece of scenery (house, bush, trampoline...); see config/decorations.ts. */
+export interface DecorationDefinition {
+  kind: DecorationKind;
+  /** Bottom-centre (where it stands), in world pixels. */
+  x: number;
+  y: number;
+  /** Mirror it left-to-right. */
+  flipX?: boolean;
+  /** Override the type's layer: 'back' (behind Melody) or 'front'. */
+  layer?: 'back' | 'front';
+  /** Draw it bigger or smaller (solid parts scale too). */
+  scale?: number;
+}
+
 export interface PlatformDefinition {
   /** Top-left corner, in world pixels. */
   x: number;
@@ -22,9 +49,10 @@ export interface PlatformDefinition {
   kind: PlatformKind;
   /** Can be jumped up through from below and landed on from above. */
   oneWay?: boolean;
+  style?: PlatformStyle;
 }
 
-export type CollectibleKind = 'sausage' | 'superSausage' | 'sniffTreat' | 'squirrelToy' | 'barkBiscuit' | 'ball';
+export type CollectibleKind = 'bone' | 'sausage' | 'superSausage' | 'sniffTreat' | 'squirrelToy' | 'barkBiscuit' | 'ball';
 
 /**
  * Makes something hidden until Melody's nose finds it. Reusable for bones,
@@ -123,6 +151,10 @@ export interface LevelDefinition {
   /** Where Melody starts: x centre, y = where her feet go. */
   spawn: { x: number; y: number };
   skyColor: string;
+  /** Look of the level (default 'playground'). */
+  theme?: LevelTheme;
+  /** Scenery: houses, trees, bushes, the trampoline... */
+  decorations?: DecorationDefinition[];
   platforms: PlatformDefinition[];
   /** Things to pick up. Collecting every goal item completes the level. */
   collectibles?: CollectibleDefinition[];

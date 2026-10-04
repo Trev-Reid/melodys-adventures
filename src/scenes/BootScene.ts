@@ -6,6 +6,7 @@ import { DEFAULT_LEVEL_KEY, getLevel } from '@/levels';
 import { DISPLAY } from '@/config/display';
 import { AUDIO } from '@/config/audio';
 import { sfx, type SoundName } from '@/core/audio/Sfx';
+import { GARDEN_IMAGES, UI_IMAGES, gardenKey, gardenPath, uiKey, uiPath } from '@/assets/artAssets';
 
 /** Any recorded sounds in src/assets/audio (e.g. bark.mp3) - see the README there. */
 const SOUND_FILES = import.meta.glob<string>('../assets/audio/*.{mp3,ogg,wav,m4a}', {
@@ -29,6 +30,8 @@ export class BootScene extends Phaser.Scene {
       const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
       this.load.audio(`sample-${name}`, url);
     }
+    for (const name of GARDEN_IMAGES) this.load.image(gardenKey(name), gardenPath(name));
+    for (const name of UI_IMAGES) this.load.image(uiKey(name), uiPath(name));
     for (const { texture, path } of MELODY_SHEET.skins) {
       this.load.spritesheet(texture, path, {
         frameWidth: MELODY_SHEET.frameWidth,
@@ -42,6 +45,9 @@ export class BootScene extends Phaser.Scene {
     // Pixel art: keep hard edges when scaled.
     for (const { texture } of MELODY_SHEET.skins) {
       this.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+    for (const key of [...GARDEN_IMAGES.map(gardenKey), ...UI_IMAGES.map(uiKey)]) {
+      this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
     createMelodyAnimations(this);
     this.registerRecordedSounds();

@@ -7,11 +7,8 @@ import { InputManager } from '@/core/input/InputManager';
 import { KeyboardInputSource } from '@/core/input/KeyboardInputSource';
 import { sfx } from '@/core/audio/Sfx';
 import { Melody } from '@/characters/melody/Melody';
-import { Boy } from '@/characters/boy/Boy';
 import type { Character } from '@/characters/Character';
-import { IDLE_INTENT, type CharacterIntent } from '@/characters/abilities/Ability';
-import { FollowBrain } from '@/characters/follow/FollowBrain';
-import { FOLLOW } from '@/config/follow';
+import type { CharacterIntent } from '@/characters/abilities/Ability';
 import { COLLECTIBLE_TYPES } from '@/entities/collectibles/collectibleTypes';
 import { LevelProgress } from '@/gameplay/LevelProgress';
 import { getLevel } from '@/levels';
@@ -40,16 +37,7 @@ export class LevelScene extends Phaser.Scene {
   private levelKey!: string;
   private level!: BuiltLevel;
   private input$!: InputManager;
-  /** Melody: power-ups, sniffing and barking are all hers. */
-  private melody!: Melody;
-  private boy!: Boy;
-  /** Whoever the player is controlling; the other one follows. */
-  private active!: Character;
-  private readonly followBrain = new FollowBrain(FOLLOW);
-  /** What Melody was asked to do this frame (by the player or by following). */
-  private melodyIntent: CharacterIntent = IDLE_INTENT;
-  /** Little arrow over whoever you're controlling, just after a swap. */
-  private activeMarker!: Phaser.GameObjects.Text;
+  private player!: Character;
   private progress!: LevelProgress;
   private obstacles!: ObstacleSystem;
   private sniff!: SniffSystem;
@@ -57,6 +45,8 @@ export class LevelScene extends Phaser.Scene {
   private worldTint!: Phaser.GameObjects.Rectangle;
   private lastComboNames = '';
   private readonly playerRect = new Phaser.Geom.Rectangle();
+  /** Set when she lands on a trampoline; applied after her next move. */
+  private pendingBounce?: { speed: number; heldSpeed: number };
 
   constructor() {
     super(SCENES.level);
@@ -71,39 +61,42 @@ export class LevelScene extends Phaser.Scene {
     this.input$ = new InputManager();
     this.input$.addSource(new KeyboardInputSource(this.input.keyboard!, KEYBOARD_BINDINGS));
 
-    // Melody and her boy. The player controls one (TAB / C swaps); the other follows.
-    this.melody = new Melody(this, spawn.x, spawn.y);
-    this.boy = new Boy(this, Math.max(20, spawn.x - 50), spawn.y);
-    this.active = this.melody;
-    this.physics.add.collider([this.melody, this.boy], this.level.solids);
+    // The active player character. Later this becomes switchable (Melody <-> friend).
+    this.player = new Melody(this, spawn.x, spawn.y);
+    this.physics.add.collider(this.player, this.level.solids);
+
+    // Trampolines: land on one and boing! (higher if jump is held).
+    for (const b of this.level.bouncers) {
+      this.physics.add.collider(this.player, b.body, () => {
+        if (this.player.body.touching.down) this.pendingBounce = b.bounce;
+      }, (_p, zone) => {
+        // One-way: only when coming down onto it.
+        const z = (zone as Phaser.GameObjects.Zone).body as Phaser.Physics.Arcade.StaticBody;
+        return this.player.body.velocity.y >= 0 && this.player.body.bottom <= z.top + 12;
+      });
+    }
 
     // Heavy crates, breakable barriers - what she can do depends on her power-ups.
-    this.obstacles = new ObstacleSystem(this, this.melody, this.level.obstacles, this.level.solids, {
+    this.obstacles = new ObstacleSystem(this, this.player, this.level.obstacles, this.level.solids, {
       say: (text, color) => this.say(text, color),
-      moveX: () => this.melodyIntent.moveX,
+      moveX: () => this.input$.moveX,
     });
-    // The boy can't push or smash anything (yet) - to him they're just in the way.
-    this.physics.add.collider(this.boy, this.level.obstacles);
 
     // Melody's nose: scent trails and hidden things.
-    this.sniff = new SniffSystem(this, this.melody, this.level.scentTrails, [
+    this.sniff = new SniffSystem(this, this.player, this.level.scentTrails, [
       ...this.level.collectibles,
       ...this.level.pointsOfInterest,
     ]);
 
     // Barking at things: balls in trees, leaf piles, cats in the way, bark blocks.
-    const byName = new Map<string, Detectable>();
-    for (const c of this.level.collectibles) if (c.id) byName.set(c.id, c);
-    for (const p of this.level.pointsOfInterest) byName.set(p.id, p);
-    const barkBlocks = this.level.obstacles.filter((o) => o.isBarkBreakable);
-    const barks = new BarkSystem(this, this.melody.bark, this.level.barkTargets, byName, (t, c) => this.say(t, c), barkBlocks);
-    this.physics.add.collider([this.melody, this.boy], barks.blockers);
-
-    this.activeMarker = this.add
-      .text(0, 0, '▼', { fontFamily: 'Arial, sans-serif', fontSize: '22px', color: '#ffe066', stroke: '#3b2412', strokeThickness: 4 })
-      .setOrigin(0.5, 1)
-      .setDepth(40)
-      .setAlpha(0);
+    if (this.player instanceof Melody) {
+      const byName = new Map<string, Detectable>();
+      for (const c of this.level.collectibles) if (c.id) byName.set(c.id, c);
+      for (const p of this.level.pointsOfInterest) byName.set(p.id, p);
+      const barkBlocks = this.level.obstacles.filter((o) => o.isBarkBreakable);
+      const barks = new BarkSystem(this, this.player.bark, this.level.barkTargets, byName, (t, c) => this.say(t, c), barkBlocks);
+      this.physics.add.collider(this.player, barks.blockers);
+    }
 
     // Subdues the world (tiles, obstacles, signs) but not items, Melody or scents.
     this.worldTint = this.add
@@ -114,7 +107,7 @@ export class LevelScene extends Phaser.Scene {
       .setAlpha(0);
 
     // Power-up announcements.
-    this.melody.effects.listen({
+    this.player.effects.listen({
       onStart: (type) => {
         const def = EFFECTS[type];
         this.say(`${def.label}!`, '#' + def.color.toString(16).padStart(6, '0'), 30);
@@ -137,7 +130,7 @@ export class LevelScene extends Phaser.Scene {
     const cam = this.cameras.main;
     cam.setBounds(0, 0, width, height);
     cam.setZoom(CAMERA.zoom);
-    cam.startFollow(this.active, false, CAMERA.lerpX, CAMERA.lerpY, 0, CAMERA.followOffsetY);
+    cam.startFollow(this.player, false, CAMERA.lerpX, CAMERA.lerpY, 0, CAMERA.followOffsetY);
     cam.setDeadzone(CAMERA.deadzoneWidth, CAMERA.deadzoneHeight);
     cam.fadeIn(250);
 
@@ -159,108 +152,52 @@ export class LevelScene extends Phaser.Scene {
         return;
       }
       const { spawn } = this.level.definition;
-      this.melody.respawn(spawn.x, spawn.y);
-      this.boy.respawn(Math.max(20, spawn.x - 50), spawn.y);
-      this.followBrain.reset();
+      this.player.respawn(spawn.x, spawn.y);
     }
-    if (input.justPressed('switchCharacter')) this.swapCharacters();
 
     this.obstacles.update(dt);
 
-    const playerIntent: CharacterIntent = {
+    const intent: CharacterIntent = {
       moveX: input.moveX,
       jumpPressed: input.justPressed('jump'),
       jumpHeld: input.isDown('jump'),
       sprintHeld: input.isDown('sprint'),
       barkPressed: input.justPressed('bark'),
     };
-    const follower = this.active === this.melody ? this.boy : this.melody;
-    const followIntent = this.follow(follower, this.active, dt);
-    this.melodyIntent = this.active === this.melody ? playerIntent : followIntent;
-    this.melody.applyIntent(this.melodyIntent, dt);
-    this.boy.applyIntent(this.active === this.boy ? playerIntent : followIntent, dt);
-
+    this.player.applyIntent(intent, dt);
+    if (this.pendingBounce) {
+      const b = this.pendingBounce;
+      this.pendingBounce = undefined;
+      this.player.body.setVelocityY(-(intent.jumpHeld ? b.heldSpeed : b.speed));
+      this.player.movement.endJump();
+      sfx.play('boing');
+    }
     this.announceCombos();
     this.sniff.update(dt);
     this.updateWorldTint(dt);
-    this.updateActiveMarker();
 
     this.progress.tick(dt * 1000);
-    this.checkPickups(this.melody);
-    this.checkPickups(this.boy);
-  }
-
-  // --- Melody and her boy -------------------------------------------------------
-
-  /** TAB / C: control the other character; the one you were controlling follows. */
-  private swapCharacters(): void {
-    this.active.setDepth(9);
-    this.active = this.active === this.melody ? this.boy : this.melody;
-    this.active.setDepth(10);
-    this.followBrain.reset();
-    this.cameras.main.startFollow(this.active, false, CAMERA.lerpX, CAMERA.lerpY, 0, CAMERA.followOffsetY);
-    this.say(this.active.displayName, '#ffe066', 24, this.active);
-    sfx.play('jump');
-    this.tweens.killTweensOf(this.activeMarker);
-    this.activeMarker.setAlpha(1);
-    this.tweens.add({ targets: this.activeMarker, alpha: 0, delay: 1200, duration: 400 });
-  }
-
-  /** The character you're not controlling follows the one you are. */
-  private follow(follower: Character, leader: Character, dt: number): CharacterIntent {
-    const fb = follower.body;
-    const decision = this.followBrain.update(
-      {
-        x: follower.x,
-        feetY: fb.bottom,
-        onGround: follower.onGround,
-        blockedLeft: fb.blocked.left || fb.touching.left,
-        blockedRight: fb.blocked.right || fb.touching.right,
-      },
-      { x: leader.x, feetY: leader.body.bottom, onGround: leader.onGround },
-      dt,
-    );
-    if (decision.catchUp) {
-      // Left behind or stuck: pop in just behind the leader.
-      this.poof(follower.x, fb.center.y);
-      follower.respawn(leader.x - leader.facing * 30, leader.body.bottom);
-      follower.facing = leader.facing;
-      this.poof(follower.x, follower.body.center.y);
-    }
-    return decision.intent;
-  }
-
-  private updateActiveMarker(): void {
-    this.activeMarker.setPosition(this.active.x, this.active.body.top - 8);
-  }
-
-  private poof(x: number, y: number): void {
-    const puff = this.add.circle(x, y, 18, 0xffffff, 0.8).setDepth(35);
-    this.tweens.add({ targets: puff, scale: 2.2, alpha: 0, duration: 350, ease: 'Quad.easeOut', onComplete: () => puff.destroy() });
+    this.checkPickups();
+    this.level.background?.update(this.cameras.main, dt);
   }
 
   // --- Collectibles -------------------------------------------------------------
 
-  /**
-   * Both of them collect sausages and toys. Power-ups are dog treats, so only
-   * Melody eats those.
-   */
-  private checkPickups(who: Character): void {
-    const body = who.body;
+  private checkPickups(): void {
+    const body = this.player.body;
     this.playerRect.setTo(body.x, body.y, body.width, body.height);
 
     for (const item of this.level.collectibles) {
-      if (who !== this.melody && item.info.effect) continue;
       if (!item.overlaps(this.playerRect)) continue;
       item.collect();
       sfx.play(item.info.sound);
       if (item.info.pickupText) this.floatText(item.x, item.y - 10, item.info.pickupText);
-      if (item.info.effect) this.melody.effects.apply(item.info.effect);
+      if (item.info.effect) this.player.effects.apply(item.info.effect);
       if (item.info.celebrate) {
         const c = item.info.celebrate;
-        this.say(c.text, '#ffe066', 30, who);
+        this.say(c.text, '#ffe066', 30);
         this.cameras.main.flash(250, 255, 240, 200);
-        this.melody.perform(c.anim, c.seconds);
+        if (this.player instanceof Melody) this.player.perform(c.anim, c.seconds);
       }
 
       if (item.info.countsTowardGoal && this.progress.collect()) this.onLevelComplete();
@@ -269,14 +206,14 @@ export class LevelScene extends Phaser.Scene {
 
   private onLevelComplete(): void {
     this.time.delayedCall(250, () => sfx.play('celebrate'));
-    this.melody.happy = true;
+    if (this.player instanceof Melody) this.player.happy = true;
     (this.scene.get(SCENES.hud) as HudScene).celebrate();
   }
 
-  /** Say something above Melody (hints, power-up news, BONK!) - or above someone else. */
-  private say(text: string, color = '#ffffff', size = 20, who: Character = this.melody): void {
+  /** Say something above Melody (hints, power-up news, BONK!). */
+  private say(text: string, color = '#ffffff', size = 20): void {
     const t = this.add
-      .text(who.x, who.body.top - 22, text, {
+      .text(this.player.x, this.player.body.top - 22, text, {
         fontFamily: 'Arial, sans-serif',
         fontSize: `${size}px`,
         fontStyle: 'bold',
@@ -291,8 +228,8 @@ export class LevelScene extends Phaser.Scene {
 
   /** Rings expanding from Melody (SUPER SNIFF's "whoosh" of smells). */
   private ripple(color: number): void {
-    const x = this.melody.x;
-    const y = this.melody.body.center.y;
+    const x = this.player.x;
+    const y = this.player.body.center.y;
     for (let i = 0; i < 3; i++) {
       const ring = this.add.circle(x, y, 20).setStrokeStyle(4, color, 0.9).setDepth(35);
       this.tweens.add({
@@ -308,7 +245,7 @@ export class LevelScene extends Phaser.Scene {
   }
 
   private updateWorldTint(dt: number): void {
-    const tints = this.melody.effects.list().map((e) => e.def.worldTint).filter((t) => t !== undefined);
+    const tints = this.player.effects.list().map((e) => e.def.worldTint).filter((t) => t !== undefined);
     const strongest = tints.sort((a, b) => b.alpha - a.alpha)[0];
     if (strongest) this.worldTint.setFillStyle(strongest.color, 1);
     const target = strongest?.alpha ?? 0;
@@ -317,9 +254,9 @@ export class LevelScene extends Phaser.Scene {
   }
 
   private announceCombos(): void {
-    const names = this.melody.activeCombos.map((c) => c.name).join(',');
+    const names = this.player.activeCombos.map((c) => c.name).join(',');
     if (names && names !== this.lastComboNames) {
-      const combo = this.melody.activeCombos[0];
+      const combo = this.player.activeCombos[0];
       this.say(`${combo.name}!`, '#' + combo.color.toString(16).padStart(6, '0'), 26);
     }
     this.lastComboNames = names;
@@ -351,8 +288,13 @@ export class LevelScene extends Phaser.Scene {
       goalTexture: goal.texture,
       goalPlural: goal.plural,
       isMuted: () => sfx.muted,
-      effects: () => this.melody.effects.list(),
-      combos: () => this.melody.activeCombos,
+      effects: () => this.player.effects.list(),
+      combos: () => this.player.activeCombos,
+      health: () => this.player.health,
+      sprint: () => {
+        const s = (this.player as Melody).sprint;
+        return s ? { active: s.isSprinting, stamina: s.stamina.stamina } : { active: false, stamina: 1 };
+      },
     };
     const debugData: DebugSceneData = {
       title: this.level.definition.name,
@@ -366,7 +308,7 @@ export class LevelScene extends Phaser.Scene {
 
     if (import.meta.env.DEV) {
       // Live-tuning from the browser console, e.g.  tune.maxSpeed = 400  or  sprint.speedMultiplier = 2
-      const melody = this.melody;
+      const melody = this.player as Melody;
       Object.assign(window, { tune: melody.movement.config, sprint: melody.sprint.stamina.config, game: this.game });
     }
   }
@@ -377,7 +319,7 @@ export class LevelScene extends Phaser.Scene {
   }
 
   private debugLines(): string[] {
-    const p = this.active;
+    const p = this.player;
     const v = p.body.velocity;
     return [
       `pos   x ${p.x.toFixed(0).padStart(5)}  y ${p.y.toFixed(0).padStart(5)}`,

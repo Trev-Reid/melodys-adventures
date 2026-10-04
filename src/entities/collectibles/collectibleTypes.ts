@@ -1,4 +1,5 @@
 import { TEXTURES } from '@/assets/keys';
+import { gardenKey } from '@/assets/artAssets';
 import type { SoundName } from '@/core/audio/Sfx';
 import type { EffectType } from '@/config/powerUps';
 import type { CollectibleKind } from '@/levels/LevelDefinition';
@@ -27,6 +28,14 @@ export interface CollectibleType {
 }
 
 export const COLLECTIBLE_TYPES: Record<CollectibleKind, CollectibleType> = {
+  bone: {
+    texture: gardenKey('bone'),
+    plural: 'bones',
+    countsTowardGoal: true,
+    sound: 'collect',
+    pickupText: '+1',
+    glow: 0xffe27a,
+  },
   sausage: {
     texture: TEXTURES.sausage,
     plural: 'sausages',

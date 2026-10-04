@@ -50,7 +50,10 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
       level.platforms.map((p) =>
         withProps(
           obj({ type: p.kind, x: p.x, y: p.y, width: p.width, height: p.height ?? DEFAULT_PLATFORM_HEIGHT }),
-          p.oneWay ? [{ name: 'oneWay', type: 'bool', value: true }] : [],
+          [
+            ...(p.oneWay ? [{ name: 'oneWay', type: 'bool', value: true } as TiledProperty] : []),
+            ...(p.style ? [{ name: 'style', type: 'string', propertytype: 'PlatformStyle', value: p.style } as TiledProperty] : []),
+          ],
         ),
       ),
     ),
@@ -108,6 +111,16 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
         return withProps(obj({ type: t.kind, name: t.id ?? '', x: t.x, y: t.y, point: true }), p);
       }),
     ),
+    layer(
+      LAYERS.decorations,
+      (level.decorations ?? []).map((dec) => {
+        const p: TiledProperty[] = [];
+        if (dec.flipX) p.push({ name: 'flipX', type: 'bool', value: true });
+        if (dec.layer) p.push({ name: 'layer', type: 'string', propertytype: 'DecorationLayer', value: dec.layer });
+        if (dec.scale !== undefined) p.push({ name: 'scale', type: 'float', value: dec.scale });
+        return withProps(obj({ type: dec.kind, x: dec.x, y: dec.y, point: true }), p);
+      }),
+    ),
     layer(LAYERS.markers, [obj({ type: CLASS.spawn, name: 'spawn', x: level.spawn.x, y: level.spawn.y, point: true })]),
   ];
   layers.forEach((l) => (l.color = CLASS_COLORS[l.objects[0]?.type ?? ''] ?? '#a0a0a4'));
@@ -132,6 +145,7 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
       { name: 'name', type: 'string', value: level.name },
       { name: 'showDistanceMarkers', type: 'bool', value: level.showDistanceMarkers ?? false },
       { name: 'skyColor', type: 'color', value: `#ff${level.skyColor.replace('#', '')}` },
+      { name: 'theme', type: 'string', propertytype: 'LevelTheme', value: level.theme ?? 'playground' },
     ],
   };
 }

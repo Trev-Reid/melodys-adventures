@@ -15,3 +15,4 @@ desktop.ini
 
 # Screenshots and previews Claude sends back
 Claude outputs/
+__pycache__/

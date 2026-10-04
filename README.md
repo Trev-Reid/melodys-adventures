@@ -3,35 +3,31 @@
 A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
-Current build: two levels of sausages to collect against the clock ("Melody's
-Playground", 29, and "Melody's House and Garden", 22), Melody's boy, who
-follows her around (Tab swaps who you control), a pixel-art Melody (drawn
-from photos of her) who can walk, run, sprint and jump and naps when left
-alone, a Super Sausage power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
+Current build: two levels. **Home & Garden** (the main level, drawn in pixel
+art: the house, garden terraces, a trampoline, a treehouse) with 10 bones to
+find, and **Melody's Playground** (the test level for trying out powers) with
+29 sausages to collect against the clock. Plus a pixel-art Melody (drawn from photos of her) who
+can walk, run, sprint and jump and naps when left alone, a Super Sausage
+power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
 Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
 and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things,
-Bark Boost (bark in mid-air) and Bark Break (bark blocks to bits), a HUD,
+Bark Boost (bark in mid-air) and Bark Break (bark blocks to bits), a HUD
+with Melody's portrait, hearts and power-up badges,
 simple sound effects, and a debug overlay.
 
 ## Changelog
 
-- **0.12** The boy! He follows Melody everywhere, and **Tab** (or C)
-  swaps who you control; the other one follows. He's a bit slower than Melody
-  with a slightly smaller jump, collects sausages and toys (power-ups are dog
-  treats, so only Melody eats those), and can't push or smash things yet. If
-  the follower gets stuck (Melody boosted somewhere he can't reach) or left far
-  behind, they pop up next to the leader. Follow tuning is in
-  `config/follow.ts`, his movement in `config/movement.ts` (`BOY_MOVEMENT`).
-  Placeholder art; his name is `displayName` in `characters/boy/Boy.ts`.
-- **0.11** New level: **Melody's House and Garden**
-  (`?level=house-and-garden`). Puzzles that mix powers: sniff out the
-  sausage on top of the fridge and BARK BOOST up to it; scare the cat off the
-  bookcase and SUPER BOOST over it; smash the stuck back door; break into the
-  shed and sniff out what's hidden inside (Squirrel!); follow your nose to
-  the right leaf pile in the vegetable patch; SUPER CHARGE through the fences;
-  then push the crate to the garden wall and SUPER BOOST over it. 22 sausages.
-  `tests/houseAndGarden.test.ts` checks that each puzzle needs the powers it's
-  meant to.
+- **0.11** HOME & GARDEN. A new main level that looks like the mockup:
+  Melody's house and drive, flower beds, garden terraces with a stump, a
+  trampoline (hold jump for a bigger bounce!), a scent trail to a drain pipe,
+  the crate up to the back lawn, a treehouse with a squirrel, the egg chair,
+  a leaf pile and some cracked blocks. Collect 10 bones. All the art is drawn
+  pixel art (backgrounds that scroll at different speeds, grass, stone walls,
+  gravel, props), made by `tools/art/make_garden.py`. New HUD: Melody's
+  portrait, three hearts (display only for now), the bone counter, and badges
+  for Super Sprint/Strength/Sniff/Bark that light up with a countdown ring.
+  Levels can now have a `theme`, styled platforms and **decorations** (Tiled
+  layer). The Playground is still there: `?level=melodys-playground`.
 - **0.10** Daniel's ideas: BARK BOOST and BARK BREAK. Bark in mid-air and
   Melody pops upwards (once per jump; higher with Super Bark), so she can reach
   ledges a jump can't. Bark at blocks to smash them: cracked sandy blocks
@@ -92,7 +88,8 @@ simple sound effects, and a debug overlay.
 ## Play online
 
 Once set up (see `docs/GITHUB-SETUP.md`), the latest version is always at
-**https://trev-reid.github.io/melodys-adventures/**. Every `git push`
+**https://trev-reid.github.io/melodys-adventures/** (the Playground:
+add `?level=melodys-playground` to the address). Every `git push`
 tests, builds and republishes it automatically.
 
 ## Getting started
@@ -122,7 +119,6 @@ Other commands:
 | Jump           | Space, ↑ or W. Hold for a higher jump, tap for a small hop |
 | Sprint         | Hold Shift (or X) while moving |
 | Bark           | B (in mid-air: BARK BOOST) |
-| Swap Melody / the boy | Tab or C             |
 | Respawn / play again | R               |
 | Mute sounds    | M                     |
 | Toggle debug   | F3 or \` (backtick)   |
@@ -196,19 +192,22 @@ has a **Class** that says exactly what it is, and properties for the details:
 
 | Layer | Draw with | Classes | Properties |
 | --- | --- | --- | --- |
-| `platforms` | Rectangle | `ground` (solid dirt), `platform` (wooden) | `oneWay`: jump up through it |
+| `platforms` | Rectangle | `ground` (solid), `platform` (thin) | `oneWay`: jump up through it. `style`: `grass`, `stone` (grassy stone wall), `gravel`, `wood`, `slab`, `classic` (Playground look) |
 | `obstacles` | Rectangle (top-left corner counts; size comes from the type) | `heavyCrate`, `woodenBarrier`, `fence`, `crackedBlock` (any bark breaks it), `stoneBlock` (Super Bark breaks it) | |
-| `collectibles` | Point (centre of the item) | `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it). Name = id |
+| `collectibles` | Point (centre of the item) | `bone`, `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it). Name = id |
 | `barkTargets` | Point (where it stands, on the ground) | `ballInTree`, `leafPile`, `cat` | `reveals` (name of the hidden thing it uncovers), `requiresSuperBark`, `height` (tree). Name = id |
 | `signs` | Point (bottom of the post) | `sign` | `text` |
 | `scentTrails` | Polyline, drawn **from the start to where it leads** | `scentTrail` | `scentType`, `targetId` (name of what it leads to), `visibleNormally`... Name = id |
 | `pointsOfInterest` | Point | `pointOfInterest` | `text`, `marker`, `hidden`. Name = id |
+| `decorations` | Point (**bottom-centre**: where it stands) | `house`, `trampoline` (bouncy!), `stump` (solid), `treehouse` (deck you can stand on), `bigTree`, `goal`, `football`, `eggChair`, `potPurple`, `potPink`, `bush`, `bushHydrangea`, `bushBerries`, `planter`, `drain`, `squirrel`, `flowers`, `fern` (foreground) | `flipX`, `layer` (`back`/`front`), `scale` |
 | `markers` | Point | `spawn` (exactly one: where Melody starts, at her feet) | |
 
-The map's own properties (Map > Map Properties) hold `name`, `skyColor` and
-`showDistanceMarkers`. The map size is the world size (the grid is 8px).
+The map's own properties (Map > Map Properties) hold `name`, `skyColor`,
+`showDistanceMarkers` and `theme` (`garden` gives the drawn sky, hills,
+trees and fence, and grass platforms by default; `playground` the original
+look). The map size is the world size (the grid is 8px).
 
-**Making a new level:** in Tiled, open the Playground and **File > Save As**
+**Making a new level:** in Tiled, open Home & Garden (or the Playground) and **File > Save As**
 into `src/levels/maps/` with a new name, e.g. `leos-level.tmj`. Choose the
 **JSON map files (*.tmj)** format. Play it at
 http://localhost:5173/?level=leos-level. No code changes are needed.
@@ -312,20 +311,42 @@ needs to change. The "Turn Around" and front-view frames from the character
 sheet aren't included; the rig only draws side-on and the game flips her
 instantly.
 
+### Garden art
+
+Everything in `public/assets/garden/` (backgrounds, ground tiles, props, the
+bone) and `public/assets/ui/` (portrait, hearts, badges) is drawn by
+`tools/art/make_garden.py` (needs `pip install pillow numpy`). Each piece is
+one function, e.g. `trampoline()`; change it and run the script.
+`tools/art/garden_preview.png` shows everything at once.
+
+**Using art from elsewhere (ChatGPT, a drawing app...):** save a PNG with a
+transparent background over the file of the same name. Objects should be
+side-on (not looking down), one object per picture, roughly the size of the
+one it replaces (e.g. house 600×344, treehouse 440×560, trampoline 248×160,
+bone 36×20). The bottom-centre of the picture is where it stands. If a
+replacement has solid parts (trampoline mat, stump top, treehouse deck), check
+those still line up: `solids` in `src/config/decorations.ts`. Ground tiles
+and background strips must repeat seamlessly side by side.
+
+**A new decoration:** draw it (or add the PNG to `public/assets/garden/`), add
+its name to `GARDEN_IMAGES` in `src/assets/artAssets.ts` and an entry to
+`DECORATION_TYPES` in `src/config/decorations.ts`, then run
+`npm run tiled:project` so Tiled knows about it.
+
 ## Project structure
 
 ```
 src/
   main.ts                    Phaser game config: scaling, physics, scene list
   config/                    Tunable values only, no logic
-    movement.ts              Movement feel (per character: Melody, the boy)
-    follow.ts                How the character you are not controlling follows
+    movement.ts              Movement feel (per character)
     abilities.ts             Ability tuning (sprint, bark, napping)
     audio.ts  camera.ts  controls.ts  display.ts  debug.ts
     powerUps.ts              Power-ups/status effects, capabilities, combos
     obstacles.ts             Obstacle types (crate, barrier, fence, bark blocks)
     scents.ts                Scent types + how trails are drawn
     barkTargets.ts           Things that react to barks
+    decorations.ts           Scenery types (house, trampoline...) and their solid parts
   core/audio/Sfx.ts          Synthesized sound effects (swap for real sounds later)
   core/input/                Input abstraction
     actions.ts               The action vocabulary (moveX, jump, ...)
@@ -341,8 +362,6 @@ src/
     abilities/sprint/        Sprint: stamina logic (pure) + Phaser visuals
     abilities/bark/          Bark: emits bark events (normal or super)
     melody/Melody.ts         Melody, her abilities and animation
-    boy/Boy.ts               The boy (placeholder art, no abilities yet)
-    follow/FollowBrain.ts    Follow-the-leader logic for whoever you're not controlling
     melody/melodyAnimations.ts  Registers animations from melodySheet.json
     melody/melodySheet.json  Frame size + animation list (generated)
   entities/collectibles/     Pick-ups: Collectible + collectibleTypes registry
@@ -352,6 +371,7 @@ src/
   gameplay/interactions/     strengthRules (pure) + ObstacleSystem (push/break/hints)
   gameplay/scent/            scentRules (pure), SniffSystem, Detectable interface
   gameplay/bark/             barkRules (pure), BarkSystem (waves, reactions, hints)
+  levels/GardenBackground.ts Sky, clouds and scrolling scenery for garden levels
   entities/bark/             BarkTarget: ball in tree, leaf pile, cat (placeholder art)
   entities/scent/            ScentTrail (renderer), PointOfInterest
   characters/effects/        EffectAura: placeholder glow for active power-ups
@@ -385,11 +405,9 @@ tests/                       Vitest unit tests, including level-design checks
 - **Input is decoupled from characters.** Devices produce *actions*.
   `LevelScene` turns actions into a `MovementIntent` and passes it to the
   active character. Characters never touch the keyboard. Adding a gamepad
-  means writing a `GamepadInputSource` and calling `addSource()`. Swapping
-  between Melody and the boy just hands the player's intent to the other
-  character; the one you're not controlling gets its intent from a
-  `FollowBrain` (`characters/follow/`), plain unit-tested logic that steers
-  by the same rules as the keyboard.
+  means writing a `GamepadInputSource` and calling `addSource()`. Switching
+  between Melody and the boy means handing the player's intent to a different
+  character.
 - **Movement logic is separate from Phaser.** `PlatformerMovement` is plain
   TypeScript that takes a config, the body state and an intent, and returns
   velocities. That keeps it unit-testable, and each character (or a power-up)
@@ -418,7 +436,7 @@ tests/                       Vitest unit tests, including level-design checks
 | Gamepad support                  | `core/input/GamepadInputSource.ts` + bindings in `config/controls.ts` |
 | New actions (sniff, switch)      | `core/input/actions.ts` + bindings                         |
 | More abilities (sniff, dig)      | `characters/abilities/<name>/`, added in `Melody.ts`       |
-| The boy's own abilities (climb, levers, carry) | `characters/abilities/<name>/`, added in `Boy.ts` |
+| The boy                          | `characters/boy/Boy.ts` + his own `MovementConfig`         |
 | More collectibles (bones, woozies) | new kind in `LevelDefinition.ts` + `collectibleTypes.ts` |
 | More power-ups (SUPER_SPEED, MEGA_SNIFF) | `config/powerUps.ts` + a collectible type (see above) |
 | Enemies                          | `entities/enemies/`                                         |

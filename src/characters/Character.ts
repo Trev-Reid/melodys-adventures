@@ -28,13 +28,16 @@ export interface CharacterOptions {
  */
 export abstract class Character extends Phaser.Physics.Arcade.Sprite {
   declare body: Phaser.Physics.Arcade.Body;
-  /** Shown on screen, e.g. when the player swaps to this character. */
-  abstract readonly displayName: string;
   readonly movement: PlatformerMovement;
   protected readonly abilities: Ability[] = [];
   /** Timed power-ups / status effects (SUPER_STRENGTH...). */
   readonly effects = new StatusEffects();
   facing: 1 | -1 = 1;
+  /**
+   * Hearts. Shown on the HUD; nothing takes them away yet - what hurts her
+   * (and what happens at zero) is still to be designed.
+   */
+  readonly health = { current: 3, max: 3 };
   /**
    * Set by the world each frame to slow the character down (e.g. while
    * shoving a heavy crate). 1 = no effect. Reset after every move.

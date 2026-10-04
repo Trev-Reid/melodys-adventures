@@ -1,5 +1,8 @@
 import type {
   BarkTargetDefinition,
+  DecorationDefinition,
+  LevelTheme,
+  PlatformStyle,
   CollectibleDefinition,
   CollectibleKind,
   DetectableSpec,
@@ -13,10 +16,15 @@ import type {
 import type { ObstacleKind } from '@/config/obstacles';
 import type { ScentType } from '@/config/scents';
 import type { BarkTargetKind } from '@/config/barkTargets';
+import type { DecorationKind } from '@/config/decorations';
 import type { TiledMap, TiledObject, TiledObjectLayer, TiledProperty } from './tiledFormat';
 import {
   BARK_TARGET_CLASSES,
   CLASS,
+  DECORATION_CLASSES,
+  DECORATION_LAYERS,
+  LEVEL_THEMES,
+  PLATFORM_STYLES,
   COLLECTIBLE_CLASSES,
   DEFAULTS,
   LAYERS,
@@ -96,6 +104,11 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     const p = props(o.properties);
     const platform: PlatformDefinition = { kind, x: o.x, y: o.y, width: o.width, height: o.height };
     if (p.bool('oneWay', DEFAULTS.oneWay)) platform.oneWay = true;
+    if (p.has('style')) {
+      const style = p.string('style', '');
+      if ((PLATFORM_STYLES as string[]).includes(style)) platform.style = style as PlatformStyle;
+      else problems.push(`${where(LAYERS.platforms, o)} has style "${style}". Use one of: ${PLATFORM_STYLES.join(', ')}.`);
+    }
     platforms.push(platform);
   }
   if (platforms.length === 0) problems.push('The "platforms" layer is empty - Melody needs something to stand on.');
@@ -191,6 +204,32 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     barkTargets.push(t);
   }
 
+  // --- Decorations (point = bottom-centre, where it stands) ---------------------
+  const decorations: DecorationDefinition[] = [];
+  for (const o of objects(LAYERS.decorations)) {
+    const kind = expectClass<DecorationKind>(LAYERS.decorations, o, DECORATION_CLASSES);
+    if (!kind) continue;
+    const p = props(o.properties);
+    const dec: DecorationDefinition = { kind, x: o.x, y: o.y };
+    if (p.bool('flipX', false)) dec.flipX = true;
+    if (p.has('layer')) {
+      const l = p.string('layer', 'back');
+      if ((DECORATION_LAYERS as readonly string[]).includes(l)) dec.layer = l as DecorationDefinition['layer'];
+      else problems.push(`${where(LAYERS.decorations, o)} has layer "${l}". Use back or front.`);
+    }
+    if (p.has('scale')) {
+      const s = p.number('scale', DEFAULTS.scale);
+      if (s > 0) dec.scale = s;
+      else problems.push(`${where(LAYERS.decorations, o)} has scale ${s}; it must be more than 0.`);
+    }
+    decorations.push(dec);
+  }
+
+  const theme = mapProps.string('theme', DEFAULTS.theme);
+  if (!(LEVEL_THEMES as string[]).includes(theme)) {
+    problems.push(`Map property theme "${theme}" isn't valid. Use one of: ${LEVEL_THEMES.join(', ')}.`);
+  }
+
   // --- Spawn -------------------------------------------------------------------
   const spawns = objects(LAYERS.markers).filter((o) => classOf(o) === CLASS.spawn || o.name === CLASS.spawn);
   if (spawns.length !== 1) {
@@ -231,6 +270,8 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     spawn,
     skyColor: mapProps.colorString('skyColor', DEFAULTS.skyColor),
     showDistanceMarkers: mapProps.bool('showDistanceMarkers', DEFAULTS.showDistanceMarkers),
+    theme: theme as LevelTheme,
+    decorations,
     platforms,
     signs,
     collectibles,

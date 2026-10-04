@@ -23,7 +23,7 @@ for (const [path, text] of Object.entries(MAP_FILES)) {
   }
 }
 
-export const DEFAULT_LEVEL_KEY = 'melodys-playground';
+export const DEFAULT_LEVEL_KEY = 'home-and-garden';
 
 /** Level names that can be played. */
 export function levelKeys(): string[] {

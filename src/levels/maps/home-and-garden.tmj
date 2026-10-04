@@ -1,0 +1,1106 @@
+{
+ "type": "map",
+ "version": "1.10",
+ "tiledversion": "1.11.0",
+ "orientation": "orthogonal",
+ "renderorder": "right-down",
+ "infinite": false,
+ "width": 700,
+ "height": 135,
+ "tilewidth": 8,
+ "tileheight": 8,
+ "nextlayerid": 10,
+ "nextobjectid": 64,
+ "backgroundcolor": "#8fd0f0",
+ "layers": [
+  {
+   "id": 1,
+   "name": "platforms",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 1,
+     "name": "",
+     "type": "ground",
+     "width": 1160,
+     "height": 64,
+     "rotation": 0,
+     "visible": true,
+     "x": 0,
+     "y": 1016,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "gravel"
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "",
+     "type": "ground",
+     "width": 200,
+     "height": 80,
+     "rotation": 0,
+     "visible": true,
+     "x": 880,
+     "y": 936,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "stone"
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "",
+     "type": "ground",
+     "width": 2090,
+     "height": 64,
+     "rotation": 0,
+     "visible": true,
+     "x": 1160,
+     "y": 1016
+    },
+    {
+     "id": 4,
+     "name": "",
+     "type": "ground",
+     "width": 260,
+     "height": 76,
+     "rotation": 0,
+     "visible": true,
+     "x": 1260,
+     "y": 940,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "stone"
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "name": "",
+     "type": "platform",
+     "width": 90,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 1570,
+     "y": 880,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "slab"
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "name": "",
+     "type": "ground",
+     "width": 360,
+     "height": 156,
+     "rotation": 0,
+     "visible": true,
+     "x": 1710,
+     "y": 860,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "stone"
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "name": "",
+     "type": "ground",
+     "width": 1560,
+     "height": 250,
+     "rotation": 0,
+     "visible": true,
+     "x": 3240,
+     "y": 830,
+     "properties": [
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "stone"
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "name": "",
+     "type": "platform",
+     "width": 84,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 3740,
+     "y": 650,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "style",
+       "type": "string",
+       "propertytype": "PlatformStyle",
+       "value": "wood"
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "name": "",
+     "type": "ground",
+     "width": 800,
+     "height": 64,
+     "rotation": 0,
+     "visible": true,
+     "x": 4800,
+     "y": 1016
+    }
+   ],
+   "color": "#7a4e2d"
+  },
+  {
+   "id": 2,
+   "name": "obstacles",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 10,
+     "name": "",
+     "type": "heavyCrate",
+     "width": 110,
+     "height": 110,
+     "rotation": 0,
+     "visible": true,
+     "x": 3090,
+     "y": 906
+    },
+    {
+     "id": 11,
+     "name": "",
+     "type": "crackedBlock",
+     "width": 48,
+     "height": 48,
+     "rotation": 0,
+     "visible": true,
+     "x": 5100,
+     "y": 968
+    },
+    {
+     "id": 12,
+     "name": "",
+     "type": "crackedBlock",
+     "width": 48,
+     "height": 48,
+     "rotation": 0,
+     "visible": true,
+     "x": 5100,
+     "y": 920
+    },
+    {
+     "id": 13,
+     "name": "",
+     "type": "crackedBlock",
+     "width": 48,
+     "height": 48,
+     "rotation": 0,
+     "visible": true,
+     "x": 5100,
+     "y": 872
+    }
+   ],
+   "color": "#4a4f57"
+  },
+  {
+   "id": 3,
+   "name": "signs",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 14,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 260,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Find all the bones!"
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2160,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Hold SPACE to\nbounce higher!"
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2960,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Too high? Eat the\nSUPER SAUSAGE\nand push the crate!"
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5440,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Home sweet home!"
+      }
+     ]
+    }
+   ],
+   "color": "#e9c690"
+  },
+  {
+   "id": 4,
+   "name": "collectibles",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 18,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 440,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 19,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1000,
+     "y": 870,
+     "point": true
+    },
+    {
+     "id": 20,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1880,
+     "y": 724,
+     "point": true
+    },
+    {
+     "id": 21,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2290,
+     "y": 720,
+     "point": true
+    },
+    {
+     "id": 22,
+     "name": "high-bounce-bone",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2290,
+     "y": 540,
+     "point": true
+    },
+    {
+     "id": 23,
+     "name": "",
+     "type": "sniffTreat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2470,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 24,
+     "name": "drain-bone",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2700,
+     "y": 995,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealRadius",
+       "type": "int",
+       "value": 120
+      }
+     ]
+    },
+    {
+     "id": 25,
+     "name": "",
+     "type": "superSausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2850,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 26,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3360,
+     "y": 790,
+     "point": true
+    },
+    {
+     "id": 27,
+     "name": "treehouse-bone",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4060,
+     "y": 530,
+     "point": true
+    },
+    {
+     "id": 28,
+     "name": "",
+     "type": "barkBiscuit",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4250,
+     "y": 790,
+     "point": true
+    },
+    {
+     "id": 29,
+     "name": "leaf-bone",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4560,
+     "y": 812,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
+    },
+    {
+     "id": 30,
+     "name": "",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5230,
+     "y": 985,
+     "point": true
+    }
+   ],
+   "color": "#f6d873"
+  },
+  {
+   "id": 5,
+   "name": "scentTrails",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 31,
+     "name": "drain-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2490,
+     "y": 1000,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 50,
+       "y": -15
+      },
+      {
+       "x": 90,
+       "y": 2
+      },
+      {
+       "x": 135,
+       "y": -16
+      },
+      {
+       "x": 175,
+       "y": 0
+      },
+      {
+       "x": 210,
+       "y": -4
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "sausage"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "drain-bone"
+      }
+     ]
+    }
+   ],
+   "color": "#b98cff"
+  },
+  {
+   "id": 6,
+   "name": "pointsOfInterest",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [],
+   "color": "#a0a0a4"
+  },
+  {
+   "id": 7,
+   "name": "barkTargets",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 32,
+     "name": "back-lawn-leaves",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4560,
+     "y": 830,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "leaf-bone"
+      }
+     ]
+    }
+   ],
+   "color": "#d9822b"
+  },
+  {
+   "id": 8,
+   "name": "decorations",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 33,
+     "name": "",
+     "type": "planter",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 200,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 34,
+     "name": "",
+     "type": "potPink",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 330,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 35,
+     "name": "",
+     "type": "house",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 600,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 36,
+     "name": "",
+     "type": "potPurple",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 840,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 37,
+     "name": "",
+     "type": "bushBerries",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 960,
+     "y": 936,
+     "point": true
+    },
+    {
+     "id": 38,
+     "name": "",
+     "type": "fern",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 60,
+     "y": 1080,
+     "point": true,
+     "properties": [
+      {
+       "name": "layer",
+       "type": "string",
+       "propertytype": "DecorationLayer",
+       "value": "front"
+      }
+     ]
+    },
+    {
+     "id": 39,
+     "name": "",
+     "type": "bigTree",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1380,
+     "y": 940,
+     "point": true
+    },
+    {
+     "id": 40,
+     "name": "",
+     "type": "bushHydrangea",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1450,
+     "y": 940,
+     "point": true
+    },
+    {
+     "id": 41,
+     "name": "",
+     "type": "flowers",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1300,
+     "y": 940,
+     "point": true
+    },
+    {
+     "id": 42,
+     "name": "",
+     "type": "stump",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1880,
+     "y": 860,
+     "point": true
+    },
+    {
+     "id": 43,
+     "name": "",
+     "type": "flowers",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2000,
+     "y": 860,
+     "point": true
+    },
+    {
+     "id": 44,
+     "name": "",
+     "type": "bush",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2130,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 45,
+     "name": "",
+     "type": "trampoline",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2290,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 46,
+     "name": "",
+     "type": "fern",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1660,
+     "y": 1080,
+     "point": true,
+     "properties": [
+      {
+       "name": "flipX",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "layer",
+       "type": "string",
+       "propertytype": "DecorationLayer",
+       "value": "front"
+      }
+     ]
+    },
+    {
+     "id": 47,
+     "name": "",
+     "type": "drain",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2700,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 48,
+     "name": "",
+     "type": "bushHydrangea",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2610,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 49,
+     "name": "",
+     "type": "potPurple",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3200,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 50,
+     "name": "",
+     "type": "bigTree",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3420,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 51,
+     "name": "",
+     "type": "stump",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3640,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 52,
+     "name": "",
+     "type": "treehouse",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4000,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 53,
+     "name": "",
+     "type": "squirrel",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4150,
+     "y": 568,
+     "point": true
+    },
+    {
+     "id": 54,
+     "name": "",
+     "type": "eggChair",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4330,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 55,
+     "name": "",
+     "type": "flowers",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4440,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 56,
+     "name": "",
+     "type": "bush",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4700,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 57,
+     "name": "",
+     "type": "fern",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3000,
+     "y": 1080,
+     "point": true,
+     "properties": [
+      {
+       "name": "layer",
+       "type": "string",
+       "propertytype": "DecorationLayer",
+       "value": "front"
+      }
+     ]
+    },
+    {
+     "id": 58,
+     "name": "",
+     "type": "goal",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4990,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 59,
+     "name": "",
+     "type": "football",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4930,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 60,
+     "name": "",
+     "type": "bushBerries",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5330,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 61,
+     "name": "",
+     "type": "bigTree",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5500,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 62,
+     "name": "",
+     "type": "fern",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5600,
+     "y": 1080,
+     "point": true,
+     "properties": [
+      {
+       "name": "flipX",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "layer",
+       "type": "string",
+       "propertytype": "DecorationLayer",
+       "value": "front"
+      }
+     ]
+    }
+   ],
+   "color": "#a0a0a4"
+  },
+  {
+   "id": 9,
+   "name": "markers",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 63,
+     "name": "spawn",
+     "type": "spawn",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 120,
+     "y": 1016,
+     "point": true
+    }
+   ],
+   "color": "#2ecc71"
+  }
+ ],
+ "tilesets": [],
+ "properties": [
+  {
+   "name": "name",
+   "type": "string",
+   "value": "Home & Garden"
+  },
+  {
+   "name": "showDistanceMarkers",
+   "type": "bool",
+   "value": false
+  },
+  {
+   "name": "skyColor",
+   "type": "color",
+   "value": "#ff8fd0f0"
+  },
+  {
+   "name": "theme",
+   "type": "string",
+   "propertytype": "LevelTheme",
+   "value": "garden"
+  }
+ ]
+}

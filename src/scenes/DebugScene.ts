@@ -24,13 +24,14 @@ export class DebugScene extends Phaser.Scene {
   create(data: DebugSceneData): void {
     this.data$ = data;
     this.text = this.add
-      .text(8, 8, '', {
+      .text(8, 532, '', {
         fontFamily: 'monospace',
         fontSize: '14px',
         color: '#ffffff',
         backgroundColor: 'rgba(0,0,0,0.55)',
         padding: { x: 8, y: 6 },
       })
+      .setOrigin(0, 1)
       .setDepth(1000);
     this.text.setVisible(this.visible);
   }
