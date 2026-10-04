@@ -1,0 +1,1594 @@
+{
+ "type": "map",
+ "version": "1.10",
+ "tiledversion": "1.11.0",
+ "orientation": "orthogonal",
+ "renderorder": "right-down",
+ "infinite": false,
+ "width": 975,
+ "height": 135,
+ "tilewidth": 8,
+ "tileheight": 8,
+ "nextlayerid": 9,
+ "nextobjectid": 84,
+ "backgroundcolor": "#a6dcef",
+ "layers": [
+  {
+   "id": 1,
+   "name": "platforms",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 1,
+     "name": "",
+     "type": "ground",
+     "width": 7800,
+     "height": 64,
+     "rotation": 0,
+     "visible": true,
+     "x": 0,
+     "y": 1016
+    },
+    {
+     "id": 2,
+     "name": "",
+     "type": "ground",
+     "width": 240,
+     "height": 96,
+     "rotation": 0,
+     "visible": true,
+     "x": 380,
+     "y": 920
+    },
+    {
+     "id": 3,
+     "name": "",
+     "type": "platform",
+     "width": 160,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 700,
+     "y": 900,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "",
+     "type": "ground",
+     "width": 110,
+     "height": 200,
+     "rotation": 0,
+     "visible": true,
+     "x": 1140,
+     "y": 816
+    },
+    {
+     "id": 5,
+     "name": "",
+     "type": "ground",
+     "width": 140,
+     "height": 256,
+     "rotation": 0,
+     "visible": true,
+     "x": 1980,
+     "y": 760
+    },
+    {
+     "id": 6,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 2150,
+     "y": 920,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 2240,
+     "y": 840,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "name": "",
+     "type": "ground",
+     "width": 60,
+     "height": 416,
+     "rotation": 0,
+     "visible": true,
+     "x": 2500,
+     "y": 400
+    },
+    {
+     "id": 9,
+     "name": "",
+     "type": "platform",
+     "width": 90,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 2770,
+     "y": 930,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "name": "",
+     "type": "platform",
+     "width": 90,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 2880,
+     "y": 860,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "name": "",
+     "type": "ground",
+     "width": 510,
+     "height": 40,
+     "rotation": 0,
+     "visible": true,
+     "x": 2990,
+     "y": 776
+    },
+    {
+     "id": 12,
+     "name": "",
+     "type": "ground",
+     "width": 40,
+     "height": 200,
+     "rotation": 0,
+     "visible": true,
+     "x": 3460,
+     "y": 816
+    },
+    {
+     "id": 13,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 3520,
+     "y": 920,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 14,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 3610,
+     "y": 850,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "name": "",
+     "type": "ground",
+     "width": 200,
+     "height": 380,
+     "rotation": 0,
+     "visible": true,
+     "x": 6960,
+     "y": 636
+    },
+    {
+     "id": 16,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 7180,
+     "y": 920,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 7280,
+     "y": 840,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 7180,
+     "y": 760,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "name": "",
+     "type": "platform",
+     "width": 80,
+     "height": 24,
+     "rotation": 0,
+     "visible": true,
+     "x": 7280,
+     "y": 680,
+     "properties": [
+      {
+       "name": "oneWay",
+       "type": "bool",
+       "value": true
+      }
+     ]
+    }
+   ],
+   "color": "#7a4e2d"
+  },
+  {
+   "id": 2,
+   "name": "obstacles",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 20,
+     "name": "",
+     "type": "woodenBarrier",
+     "width": 44,
+     "height": 200,
+     "rotation": 0,
+     "visible": true,
+     "x": 2508,
+     "y": 816
+    },
+    {
+     "id": 21,
+     "name": "",
+     "type": "woodenBarrier",
+     "width": 44,
+     "height": 200,
+     "rotation": 0,
+     "visible": true,
+     "x": 3000,
+     "y": 816
+    },
+    {
+     "id": 22,
+     "name": "",
+     "type": "fence",
+     "width": 28,
+     "height": 150,
+     "rotation": 0,
+     "visible": true,
+     "x": 5350,
+     "y": 866
+    },
+    {
+     "id": 23,
+     "name": "",
+     "type": "fence",
+     "width": 28,
+     "height": 150,
+     "rotation": 0,
+     "visible": true,
+     "x": 5500,
+     "y": 866
+    },
+    {
+     "id": 24,
+     "name": "",
+     "type": "fence",
+     "width": 28,
+     "height": 150,
+     "rotation": 0,
+     "visible": true,
+     "x": 5650,
+     "y": 866
+    },
+    {
+     "id": 25,
+     "name": "",
+     "type": "heavyCrate",
+     "width": 110,
+     "height": 110,
+     "rotation": 0,
+     "visible": true,
+     "x": 6100,
+     "y": 906
+    }
+   ],
+   "color": "#b07a42"
+  },
+  {
+   "id": 3,
+   "name": "signs",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 26,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 200,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "MELODY'S HOUSE\nFind every sausage!"
+      }
+     ]
+    },
+    {
+     "id": 28,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 870,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "SNIFF! What's on the\nfridge? Jump, then\nBARK (B) in the air!"
+      }
+     ]
+    },
+    {
+     "id": 29,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1460,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "SUPER BARK BISCUIT\nThe cat is on\nthe bookcase!"
+      }
+     ]
+    },
+    {
+     "id": 30,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1870,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "TOO TALL!\nSUPER BARK, jump,\nthen B = SUPER BOOST"
+      }
+     ]
+    },
+    {
+     "id": 31,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2400,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "BACK DOOR STUCK!\nSUPER SAUSAGE,\nthen run at it!"
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2660,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "THE GARDEN\nWho's been\nin the shed?"
+      }
+     ]
+    },
+    {
+     "id": 33,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3700,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "VEGETABLE PATCH\nWhich pile smells\nof sausage?"
+      }
+     ]
+    },
+    {
+     "id": 34,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5080,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "SUPER CHARGE!\nStrength + SHIFT"
+      }
+     ]
+    },
+    {
+     "id": 35,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5830,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "THE GARDEN WALL\nPush the crate over,\nthen SUPER BOOST!"
+      }
+     ]
+    },
+    {
+     "id": 36,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7680,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "HOME SWEET HOME!"
+      }
+     ]
+    }
+   ],
+   "color": "#e9c690"
+  },
+  {
+   "id": 4,
+   "name": "collectibles",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 37,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 330,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 38,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 500,
+     "y": 890,
+     "point": true
+    },
+    {
+     "id": 39,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 780,
+     "y": 870,
+     "point": true
+    },
+    {
+     "id": 40,
+     "name": "",
+     "type": "sniffTreat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1000,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 41,
+     "name": "fridge-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1195,
+     "y": 786,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealRadius",
+       "type": "int",
+       "value": 300
+      }
+     ]
+    },
+    {
+     "id": 42,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1320,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 43,
+     "name": "",
+     "type": "barkBiscuit",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1540,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 44,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1700,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 45,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1800,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 46,
+     "name": "bookcase-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2050,
+     "y": 736,
+     "point": true
+    },
+    {
+     "id": 47,
+     "name": "",
+     "type": "superSausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2280,
+     "y": 815,
+     "point": true
+    },
+    {
+     "id": 48,
+     "name": "",
+     "type": "superSausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2815,
+     "y": 900,
+     "point": true
+    },
+    {
+     "id": 49,
+     "name": "",
+     "type": "sniffTreat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2740,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 50,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2925,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 51,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3250,
+     "y": 746,
+     "point": true
+    },
+    {
+     "id": 52,
+     "name": "shed-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3300,
+     "y": 985,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealRadius",
+       "type": "int",
+       "value": 150
+      }
+     ]
+    },
+    {
+     "id": 53,
+     "name": "squirrel",
+     "type": "squirrelToy",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3420,
+     "y": 990,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealRadius",
+       "type": "int",
+       "value": 150
+      }
+     ]
+    },
+    {
+     "id": 54,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3560,
+     "y": 890,
+     "point": true
+    },
+    {
+     "id": 55,
+     "name": "",
+     "type": "sniffTreat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3820,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 56,
+     "name": "",
+     "type": "barkBiscuit",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3880,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 57,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4225,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 58,
+     "name": "compost-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4450,
+     "y": 992,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
+    },
+    {
+     "id": 59,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4675,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 60,
+     "name": "garden-ball",
+     "type": "ball",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4900,
+     "y": 1004,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
+    },
+    {
+     "id": 61,
+     "name": "",
+     "type": "superSausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5240,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 62,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5430,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 63,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5580,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 64,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5730,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 65,
+     "name": "",
+     "type": "superSausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5990,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 66,
+     "name": "",
+     "type": "barkBiscuit",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 6045,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 67,
+     "name": "wall-sausage",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7060,
+     "y": 612,
+     "point": true
+    },
+    {
+     "id": 68,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7400,
+     "y": 985,
+     "point": true
+    },
+    {
+     "id": 69,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7480,
+     "y": 975,
+     "point": true
+    },
+    {
+     "id": 70,
+     "name": "",
+     "type": "sausage",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7560,
+     "y": 985,
+     "point": true
+    }
+   ],
+   "color": "#e0453a"
+  },
+  {
+   "id": 5,
+   "name": "scentTrails",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 71,
+     "name": "fridge-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 985,
+     "y": 1004,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 75,
+       "y": 2
+      },
+      {
+       "x": 135,
+       "y": -14
+      },
+      {
+       "x": 149,
+       "y": -74
+      },
+      {
+       "x": 149,
+       "y": -144
+      },
+      {
+       "x": 175,
+       "y": -192
+      },
+      {
+       "x": 210,
+       "y": -206
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "sausage"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "fridge-sausage"
+      }
+     ]
+    },
+    {
+     "id": 72,
+     "name": "house-cat-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 985,
+     "y": 1010,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 315,
+       "y": 2
+      },
+      {
+       "x": 615,
+       "y": -2
+      },
+      {
+       "x": 965,
+       "y": 0
+      },
+      {
+       "x": 987,
+       "y": -110
+      },
+      {
+       "x": 995,
+       "y": -220
+      },
+      {
+       "x": 1055,
+       "y": -254
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "cat"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "bookcase-cat"
+      }
+     ]
+    },
+    {
+     "id": 73,
+     "name": "squirrel-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2740,
+     "y": 1002,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 110,
+       "y": 4
+      },
+      {
+       "x": 260,
+       "y": -2
+      },
+      {
+       "x": 410,
+       "y": 3
+      },
+      {
+       "x": 560,
+       "y": -2
+      },
+      {
+       "x": 680,
+       "y": -4
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "squirrel"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "squirrel"
+      }
+     ]
+    },
+    {
+     "id": 74,
+     "name": "shed-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2740,
+     "y": 1010,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 160,
+       "y": 2
+      },
+      {
+       "x": 310,
+       "y": -1
+      },
+      {
+       "x": 460,
+       "y": 2
+      },
+      {
+       "x": 560,
+       "y": -6
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "sausage"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "shed-sausage"
+      }
+     ]
+    },
+    {
+     "id": 75,
+     "name": "compost-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3840,
+     "y": 1004,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 150,
+       "y": -4
+      },
+      {
+       "x": 320,
+       "y": 2
+      },
+      {
+       "x": 490,
+       "y": -2
+      },
+      {
+       "x": 610,
+       "y": -6
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "sausage"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "compost-sausage"
+      }
+     ]
+    },
+    {
+     "id": 76,
+     "name": "garden-cat-trail",
+     "type": "scentTrail",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3840,
+     "y": 1010,
+     "polyline": [
+      {
+       "x": 0,
+       "y": 0
+      },
+      {
+       "x": 60,
+       "y": 2
+      },
+      {
+       "x": 120,
+       "y": -2
+      },
+      {
+       "x": 160,
+       "y": -4
+      }
+     ],
+     "properties": [
+      {
+       "name": "scentType",
+       "type": "string",
+       "propertytype": "ScentType",
+       "value": "cat"
+      },
+      {
+       "name": "targetId",
+       "type": "string",
+       "value": "cat-spot"
+      }
+     ]
+    }
+   ],
+   "color": "#b98cff"
+  },
+  {
+   "id": 6,
+   "name": "pointsOfInterest",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 77,
+     "name": "cat-spot",
+     "type": "pointOfInterest",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4000,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Just the cat's\nfavourite spot!"
+      },
+      {
+       "name": "marker",
+       "type": "string",
+       "propertytype": "PoiMarker",
+       "value": "pawPrints"
+      },
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "requiresSuperSniff",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealRadius",
+       "type": "int",
+       "value": 200
+      }
+     ]
+    }
+   ],
+   "color": "#6fd3ff"
+  },
+  {
+   "id": 7,
+   "name": "barkTargets",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 78,
+     "name": "bookcase-cat",
+     "type": "cat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2050,
+     "y": 760,
+     "point": true
+    },
+    {
+     "id": 79,
+     "name": "pile-1",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4000,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 80,
+     "name": "pile-2",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4450,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "compost-sausage"
+      }
+     ]
+    },
+    {
+     "id": 81,
+     "name": "pile-3",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4900,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "garden-ball"
+      }
+     ]
+    },
+    {
+     "id": 82,
+     "name": "wall-cat",
+     "type": "cat",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 7060,
+     "y": 636,
+     "point": true
+    }
+   ],
+   "color": "#e08a3c"
+  },
+  {
+   "id": 8,
+   "name": "markers",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 83,
+     "name": "spawn",
+     "type": "spawn",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 80,
+     "y": 1016,
+     "point": true
+    }
+   ],
+   "color": "#2ecc71"
+  }
+ ],
+ "tilesets": [],
+ "properties": [
+  {
+   "name": "name",
+   "type": "string",
+   "value": "Melody's House and Garden"
+  },
+  {
+   "name": "showDistanceMarkers",
+   "type": "bool",
+   "value": false
+  },
+  {
+   "name": "skyColor",
+   "type": "color",
+   "value": "#ffa6dcef"
+  }
+ ]
+}

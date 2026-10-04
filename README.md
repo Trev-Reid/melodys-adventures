@@ -3,10 +3,10 @@
 A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
-Current build: one test level ("Melody's Playground") with 29 sausages to
-collect against the clock, a pixel-art Melody (drawn from photos of her) who
-can walk, run, sprint and jump and naps when left alone, a Super Sausage
-power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
+Current build: two levels of sausages to collect against the clock ("Melody's
+Playground", 29, and "Melody's House and Garden", 22), a pixel-art
+Melody (drawn from photos of her) who can walk, run, sprint and jump and
+naps when left alone, a Super Sausage power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
 Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
 and a Super Bark Biscuit (SUPER BARK) that knocks, blows and scares things,
 Bark Boost (bark in mid-air) and Bark Break (bark blocks to bits), a HUD,
@@ -14,6 +14,15 @@ simple sound effects, and a debug overlay.
 
 ## Changelog
 
+- **0.11** New level: **Melody's House and Garden**
+  (`?level=house-and-garden`). Puzzles that mix powers: sniff out the
+  sausage on top of the fridge and BARK BOOST up to it; scare the cat off the
+  bookcase and SUPER BOOST over it; smash the stuck back door; break into the
+  shed and sniff out what's hidden inside (Squirrel!); follow your nose to
+  the right leaf pile in the vegetable patch; SUPER CHARGE through the fences;
+  then push the crate to the garden wall and SUPER BOOST over it. 22 sausages.
+  `tests/houseAndGarden.test.ts` checks that each puzzle needs the powers it's
+  meant to.
 - **0.10** Daniel's ideas: BARK BOOST and BARK BREAK. Bark in mid-air and
   Melody pops upwards (once per jump; higher with Super Bark), so she can reach
   ledges a jump can't. Bark at blocks to smash them: cracked sandy blocks
