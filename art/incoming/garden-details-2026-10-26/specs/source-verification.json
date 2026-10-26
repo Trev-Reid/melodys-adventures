@@ -1,0 +1,386 @@
+[
+  {
+    "file": "src/main.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/artAssets.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/artReplacements.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/gardenSheets.json",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/keys.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/placeholders.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/placeholderSpecs.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/animationState.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/Character.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/abilities.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/ambient.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/audio.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/barkTargets.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/camera.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/controls.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/debug.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/decorations.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/display.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/follow.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/movement.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/obstacles.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/powerUps.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/scents.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/config/teamwork.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/Sign.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/LevelProgress.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/GardenBackground.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/index.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/LevelBuilder.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/LevelDefinition.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/movement/PlatformerMovement.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/review/review.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/review/shots.json",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/AnimationGalleryScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/BootScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/ControllerSetupScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/DebugScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/HudScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/keys.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/LevelScene-1.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/LevelScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/scenes/PauseScene.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/audio/README.md",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/assets/replacements/README.md",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/abilities/Ability.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/boy/Boy.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/effects/EffectAura.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/follow/FollowBrain.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/melody/Melody.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/melody/melodyAnimations.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/melody/melodySheet.json",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/abilities/bark/BarkAbility.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/abilities/climb/ClimbAbility.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/abilities/sprint/SprintAbility.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/characters/abilities/sprint/SprintStamina.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/audio/Sfx.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/actions.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/buttonLabels.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/createPlayerInput.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/InputManager.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/InputSource.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/KeyboardInputSource.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/GamepadInputSource.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/gamepadMapping.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/gamepadSettings.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/bark/BarkTarget.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/collectibles/Collectible.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/collectibles/collectibleTypes.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/obstacles/Obstacle.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/scent/PointOfInterest.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/scent/ScentTrail.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Football.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Gate.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Lever.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Lift.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/ambient/AmbientLife.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/ambient/GroundShadows.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/bark/barkRules.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/bark/BarkSystem.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/effects/StatusEffects.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/interactions/ObstacleSystem.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/interactions/strengthRules.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/Detectable.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/scentRules.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/SniffSystem.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/ActionPrompt.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/teamworkRules.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/TeamworkSystem.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/maps/home-and-garden.tmj",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/maps/house-and-garden.tmj",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/maps/melodys-playground.tmj",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/tiled/levelSchema.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/tiled/levelToTiled.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/tiled/loadTiledLevel.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/tiled/tiledFormat.ts",
+    "same_as_shared": true
+  },
+  {
+    "file": "src/levels/tiled/tiledProject.ts",
+    "same_as_shared": true
+  }
+]

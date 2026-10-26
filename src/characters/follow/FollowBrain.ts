@@ -24,6 +24,15 @@ export interface FollowDecision {
   intent: CharacterIntent;
   /** Too far behind or stuck: put the follower next to the leader. */
   catchUp: boolean;
+  /** Stuck, but not allowed to pop (see FollowOptions.canPop): it waits instead. */
+  stuck: boolean;
+}
+
+export interface FollowOptions {
+  /** May pop next to the leader when stuck or far behind (default true). */
+  canPop?: boolean;
+  /** Tries jumping up to a leader standing higher up (default true). Off = walk underneath and wait. */
+  reachUp?: boolean;
 }
 
 /** The leader has to move this far before "not getting closer" starts over. */
@@ -46,14 +55,16 @@ export class FollowBrain {
 
   constructor(readonly config: FollowConfig) {}
 
-  update(self: FollowerState, leader: LeaderState, dt: number): FollowDecision {
+  update(self: FollowerState, leader: LeaderState, dt: number, options: FollowOptions = {}): FollowDecision {
     const cfg = this.config;
+    const canPop = options.canPop ?? true;
+    const reachUp = options.reachUp ?? true;
     const dx = leader.x - self.x;
     const away = Math.abs(dx);
-    const leaderAbove = self.feetY - leader.feetY > cfg.jumpIfLeaderAbove && leader.onGround;
+    const leaderAbove = reachUp && self.feetY - leader.feetY > cfg.jumpIfLeaderAbove && leader.onGround;
     const distance = Math.hypot(dx, self.feetY - leader.feetY);
 
-    if (distance > cfg.catchUpDistance && leader.onGround) return this.catchUp();
+    if (distance > cfg.catchUpDistance && leader.onGround && canPop) return this.catchUp();
 
     // Walk when too far away, stop when close (two thresholds, so no dithering).
     if (away > cfg.startDistance) this.walking = true;
@@ -84,11 +95,17 @@ export class FollowBrain {
     } else {
       this.stuckFor += dt;
     }
-    if (this.stuckFor >= cfg.stuckSeconds && leader.onGround) return this.catchUp();
+    if (this.stuckFor >= cfg.stuckSeconds && leader.onGround) {
+      if (canPop) return this.catchUp();
+      // Not allowed to pop: stop trying (no endless jumping at walls) until the leader moves.
+      this.jumpHold = 0;
+      return { intent: IDLE_INTENT, catchUp: false, stuck: true };
+    }
 
     return {
       intent: { ...IDLE_INTENT, moveX, jumpPressed, jumpHeld, sprintHeld: away > cfg.sprintDistance },
       catchUp: false,
+      stuck: false,
     };
   }
 
@@ -103,6 +120,6 @@ export class FollowBrain {
 
   private catchUp(): FollowDecision {
     this.reset();
-    return { intent: IDLE_INTENT, catchUp: true };
+    return { intent: IDLE_INTENT, catchUp: true, stuck: false };
   }
 }

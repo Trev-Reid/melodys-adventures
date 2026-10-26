@@ -13,6 +13,8 @@ export class Collectible extends Phaser.GameObjects.Image implements Detectable 
   readonly hiddenSpec?: DetectableSpec;
   revealed: boolean;
   collected = false;
+  /** Stuck up high (in a tree) until the boy's football knocks it down. */
+  stuck: boolean;
   private readonly home: { x: number; y: number };
   private readonly glow?: Phaser.GameObjects.Image;
 
@@ -24,6 +26,7 @@ export class Collectible extends Phaser.GameObjects.Image implements Detectable 
     this.id = def.id;
     this.hiddenSpec = def.hidden;
     this.revealed = !def.hidden;
+    this.stuck = !!def.stuck;
     this.home = { x: def.x, y: def.y };
     scene.add.existing(this);
     this.setDepth(5);
@@ -47,6 +50,28 @@ export class Collectible extends Phaser.GameObjects.Image implements Detectable 
     this.setPosition(x, y);
     this.glow?.setPosition(x, y);
     this.startBobbing();
+  }
+
+  /** Hit by the football: it drops to the ground (groundY) and can be picked up there. */
+  knockDown(groundY: number, onLand?: () => void): void {
+    if (!this.stuck || this.collected) return;
+    this.stuck = false;
+    this.scene.tweens.killTweensOf(this);
+    const restY = groundY - this.displayHeight / 2 - 6;
+    this.glow?.setVisible(false);
+    this.scene.tweens.add({
+      targets: this,
+      y: restY,
+      angle: 540,
+      duration: Math.max(300, Math.sqrt(Math.max(0, restY - this.y)) * 32),
+      ease: 'Bounce.easeOut',
+      onComplete: () => {
+        this.setAngle(0);
+        this.glow?.setVisible(true);
+        this.setHome(this.x, restY);
+        onLand?.();
+      },
+    });
   }
 
   /** Found by sniffing: pop into view with a highlight. Stays found. */

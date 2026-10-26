@@ -1,0 +1,56 @@
+{
+ "files": [
+  {
+   "file": "../../outputs/boy-design-preview-2026-10-26/standing-study.png",
+   "width": 64,
+   "height": 80,
+   "role": "character"
+  }
+ ],
+ "findings": [],
+ "errors": 0,
+ "warnings": 0,
+ "waived": 0
+}
+{
+ "files": [
+  {
+   "file": "../../outputs/boy-design-preview-2026-10-26/running-study.png",
+   "width": 64,
+   "height": 80,
+   "role": "character"
+  }
+ ],
+ "findings": [],
+ "errors": 0,
+ "warnings": 0,
+ "waived": 0
+}
+{
+ "files": [
+  {
+   "file": "../../outputs/boy-design-preview-2026-10-26/climbing-study.png",
+   "width": 64,
+   "height": 80,
+   "role": "character"
+  }
+ ],
+ "findings": [],
+ "errors": 0,
+ "warnings": 0,
+ "waived": 0
+}
+{
+ "files": [
+  {
+   "file": "../../outputs/boy-design-preview-2026-10-26/carrying-study.png",
+   "width": 64,
+   "height": 80,
+   "role": "character"
+  }
+ ],
+ "findings": [],
+ "errors": 0,
+ "warnings": 0,
+ "waived": 0
+}

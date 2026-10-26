@@ -1,0 +1,505 @@
+{
+ "files": [
+  {
+   "file": "public/assets/garden/basket-back.png",
+   "width": 80,
+   "height": 80,
+   "role": "prop",
+   "colours": 7
+  },
+  {
+   "file": "public/assets/garden/basket.png",
+   "width": 80,
+   "height": 36,
+   "role": "prop",
+   "colours": 7
+  },
+  {
+   "file": "public/assets/garden/bg-far.png",
+   "width": 960,
+   "height": 340,
+   "role": "background",
+   "colours": 95
+  },
+  {
+   "file": "public/assets/garden/bg-fence.png",
+   "width": 256,
+   "height": 144,
+   "role": "background",
+   "colours": 95
+  },
+  {
+   "file": "public/assets/garden/bg-sky.png",
+   "width": 960,
+   "height": 540,
+   "role": "background",
+   "colours": 168
+  },
+  {
+   "file": "public/assets/garden/bg-trees.png",
+   "width": 960,
+   "height": 520,
+   "role": "background",
+   "colours": 95
+  },
+  {
+   "file": "public/assets/garden/big-tree-leaves.png",
+   "width": 400,
+   "height": 500,
+   "role": "prop",
+   "colours": 63
+  },
+  {
+   "file": "public/assets/garden/big-tree.png",
+   "width": 400,
+   "height": 500,
+   "role": "prop",
+   "colours": 64
+  },
+  {
+   "file": "public/assets/garden/bird-bath.png",
+   "width": 160,
+   "height": 88,
+   "role": "prop",
+   "colours": 8
+  },
+  {
+   "file": "public/assets/garden/bird-far.png",
+   "width": 28,
+   "height": 8,
+   "role": "background",
+   "colours": 1
+  },
+  {
+   "file": "public/assets/garden/bone.png",
+   "width": 36,
+   "height": 20,
+   "role": "item",
+   "colours": 3
+  },
+  {
+   "file": "public/assets/garden/bush-berries.png",
+   "width": 140,
+   "height": 88,
+   "role": "prop",
+   "colours": 64
+  },
+  {
+   "file": "public/assets/garden/bush-hydrangea.png",
+   "width": 128,
+   "height": 80,
+   "role": "prop",
+   "colours": 63
+  },
+  {
+   "file": "public/assets/garden/bush.png",
+   "width": 128,
+   "height": 80,
+   "role": "prop",
+   "colours": 9
+  },
+  {
+   "file": "public/assets/garden/butterfly.png",
+   "width": 80,
+   "height": 16,
+   "role": "prop",
+   "colours": 4
+  },
+  {
+   "file": "public/assets/garden/cloud-1.png",
+   "width": 160,
+   "height": 68,
+   "role": "background",
+   "colours": 2
+  },
+  {
+   "file": "public/assets/garden/cloud-2.png",
+   "width": 112,
+   "height": 52,
+   "role": "background",
+   "colours": 2
+  },
+  {
+   "file": "public/assets/garden/drain.png",
+   "width": 88,
+   "height": 72,
+   "role": "prop",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/garden/egg-chair.png",
+   "width": 104,
+   "height": 208,
+   "role": "prop",
+   "colours": 63
+  },
+  {
+   "file": "public/assets/garden/fern.png",
+   "width": 220,
+   "height": 120,
+   "role": "prop",
+   "colours": 4
+  },
+  {
+   "file": "public/assets/garden/flowers.png",
+   "width": 320,
+   "height": 36,
+   "role": "prop",
+   "colours": 6
+  },
+  {
+   "file": "public/assets/garden/football.png",
+   "width": 24,
+   "height": 24,
+   "role": "item",
+   "colours": 6
+  },
+  {
+   "file": "public/assets/garden/fx-mote.png",
+   "width": 4,
+   "height": 4,
+   "role": "fx",
+   "colours": 1
+  },
+  {
+   "file": "public/assets/garden/fx-shade-top.png",
+   "width": 8,
+   "height": 28,
+   "role": "fx",
+   "colours": 0
+  },
+  {
+   "file": "public/assets/garden/fx-shadow.png",
+   "width": 64,
+   "height": 16,
+   "role": "fx",
+   "colours": 0
+  },
+  {
+   "file": "public/assets/garden/fx-sunrays.png",
+   "width": 480,
+   "height": 540,
+   "role": "fx",
+   "colours": 0
+  },
+  {
+   "file": "public/assets/garden/fx-vignette.png",
+   "width": 320,
+   "height": 180,
+   "role": "fx",
+   "colours": 0
+  },
+  {
+   "file": "public/assets/garden/gate.png",
+   "width": 128,
+   "height": 156,
+   "role": "prop",
+   "colours": 9
+  },
+  {
+   "file": "public/assets/garden/gnome.png",
+   "width": 48,
+   "height": 68,
+   "role": "prop",
+   "colours": 13
+  },
+  {
+   "file": "public/assets/garden/goal.png",
+   "width": 224,
+   "height": 120,
+   "role": "prop",
+   "colours": 3
+  },
+  {
+   "file": "public/assets/garden/hedge-arch.png",
+   "width": 104,
+   "height": 300,
+   "role": "prop",
+   "colours": 13
+  },
+  {
+   "file": "public/assets/garden/house.png",
+   "width": 600,
+   "height": 344,
+   "role": "prop",
+   "colours": 128
+  },
+  {
+   "file": "public/assets/garden/leaf.png",
+   "width": 56,
+   "height": 14,
+   "role": "prop",
+   "colours": 3
+  },
+  {
+   "file": "public/assets/garden/lever.png",
+   "width": 72,
+   "height": 60,
+   "role": "prop",
+   "colours": 12
+  },
+  {
+   "file": "public/assets/garden/planter.png",
+   "width": 104,
+   "height": 68,
+   "role": "prop",
+   "colours": 10
+  },
+  {
+   "file": "public/assets/garden/pot-pink.png",
+   "width": 56,
+   "height": 60,
+   "role": "prop",
+   "colours": 16
+  },
+  {
+   "file": "public/assets/garden/pot-purple.png",
+   "width": 56,
+   "height": 60,
+   "role": "prop",
+   "colours": 16
+  },
+  {
+   "file": "public/assets/garden/pulley.png",
+   "width": 80,
+   "height": 168,
+   "role": "prop",
+   "colours": 15
+  },
+  {
+   "file": "public/assets/garden/robin.png",
+   "width": 160,
+   "height": 28,
+   "role": "prop",
+   "colours": 7
+  },
+  {
+   "file": "public/assets/garden/squirrel.png",
+   "width": 260,
+   "height": 44,
+   "role": "prop",
+   "colours": 7
+  },
+  {
+   "file": "public/assets/garden/stump.png",
+   "width": 120,
+   "height": 112,
+   "role": "prop",
+   "colours": 63
+  },
+  {
+   "file": "public/assets/garden/tall-grass.png",
+   "width": 208,
+   "height": 44,
+   "role": "prop",
+   "colours": 6
+  },
+  {
+   "file": "public/assets/garden/tile-dirt.png",
+   "width": 64,
+   "height": 64,
+   "role": "tile",
+   "colours": 32
+  },
+  {
+   "file": "public/assets/garden/tile-grass-cap.png",
+   "width": 20,
+   "height": 60,
+   "role": "tile",
+   "colours": 6
+  },
+  {
+   "file": "public/assets/garden/tile-grass-top.png",
+   "width": 64,
+   "height": 36,
+   "role": "tile",
+   "colours": 11
+  },
+  {
+   "file": "public/assets/garden/tile-gravel-top.png",
+   "width": 64,
+   "height": 20,
+   "role": "tile",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/garden/tile-slab.png",
+   "width": 64,
+   "height": 24,
+   "role": "tile",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/garden/tile-stone.png",
+   "width": 96,
+   "height": 96,
+   "role": "tile",
+   "colours": 32
+  },
+  {
+   "file": "public/assets/garden/tile-wood.png",
+   "width": 64,
+   "height": 24,
+   "role": "tile",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/garden/trampoline.png",
+   "width": 248,
+   "height": 114,
+   "role": "prop",
+   "colours": 64
+  },
+  {
+   "file": "public/assets/garden/trampoline_old.png",
+   "width": 248,
+   "height": 160,
+   "role": "prop",
+   "unused": true
+  },
+  {
+   "file": "public/assets/garden/treehouse-leaves.png",
+   "width": 440,
+   "height": 560,
+   "role": "prop",
+   "colours": 64
+  },
+  {
+   "file": "public/assets/garden/treehouse.png",
+   "width": 440,
+   "height": 560,
+   "role": "prop",
+   "colours": 128
+  },
+  {
+   "file": "public/assets/garden/washing-line.png",
+   "width": 1200,
+   "height": 180,
+   "role": "prop",
+   "colours": 20
+  },
+  {
+   "file": "public/assets/sprites/melody.png",
+   "width": 796,
+   "height": 636,
+   "role": "character",
+   "colours": 18
+  },
+  {
+   "file": "public/assets/sprites/melody_buff.png",
+   "width": 796,
+   "height": 636,
+   "role": "character",
+   "colours": 19
+  },
+  {
+   "file": "public/assets/ui/badge-bark.png",
+   "width": 60,
+   "height": 60,
+   "role": "ui",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/ui/badge-sniff.png",
+   "width": 60,
+   "height": 60,
+   "role": "ui",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/ui/badge-sprint.png",
+   "width": 60,
+   "height": 60,
+   "role": "ui",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/ui/badge-strength.png",
+   "width": 60,
+   "height": 60,
+   "role": "ui",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/ui/heart-empty.png",
+   "width": 26,
+   "height": 24,
+   "role": "ui",
+   "colours": 2
+  },
+  {
+   "file": "public/assets/ui/heart-full.png",
+   "width": 26,
+   "height": 24,
+   "role": "ui",
+   "colours": 5
+  },
+  {
+   "file": "public/assets/ui/portrait-melody.png",
+   "width": 76,
+   "height": 76,
+   "role": "ui",
+   "colours": 15
+  },
+  {
+   "file": "src/assets/replacements/boy-step.png",
+   "width": 36,
+   "height": 64,
+   "role": "character",
+   "colours": 15
+  },
+  {
+   "file": "src/assets/replacements/boy.png",
+   "width": 36,
+   "height": 64,
+   "role": "character",
+   "colours": 15
+  },
+  {
+   "file": "src/assets/replacements/obstacle-crackedBlock.png",
+   "width": 48,
+   "height": 48,
+   "role": "prop",
+   "colours": 4
+  },
+  {
+   "file": "src/assets/replacements/obstacle-fence.png",
+   "width": 28,
+   "height": 150,
+   "role": "prop",
+   "colours": 6
+  },
+  {
+   "file": "src/assets/replacements/obstacle-heavyCrate.png",
+   "width": 110,
+   "height": 110,
+   "role": "prop",
+   "colours": 12
+  },
+  {
+   "file": "src/assets/replacements/obstacle-stoneBlock.png",
+   "width": 48,
+   "height": 48,
+   "role": "prop",
+   "colours": 4
+  },
+  {
+   "file": "src/assets/replacements/obstacle-woodenBarrier.png",
+   "width": 44,
+   "height": 200,
+   "role": "prop",
+   "colours": 6
+  }
+ ],
+ "findings": [
+  {
+   "file": "public/assets/garden/trampoline_old.png",
+   "check": "unused",
+   "level": "warning",
+   "message": "nothing in the game loads this file, so it never shows and isn't checked - but it's still shipped with the game. Delete it, or keep old versions in art/source/ instead."
+  }
+ ],
+ "errors": 0,
+ "warnings": 1,
+ "waived": 0
+}

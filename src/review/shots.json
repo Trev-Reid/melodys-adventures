@@ -1,0 +1,59 @@
+{
+  "about": "Screens the art is reviewed on. Open one with http://localhost:5173/?review=<name>. camera = top-left of the view in level pixels; melody/boy = where they stand (x, and y of their feet). frames = how long the scene runs before the picture is taken (60 = 1 second). Add your own: press F9 while playing (npm run dev) and the details are copied for you. See docs/ART-PIPELINE.md.",
+  "shots": [
+    {
+      "name": "garden-house",
+      "level": "home-and-garden",
+      "note": "The start: the house, patio pots, the first sign and bone.",
+      "camera": { "x": 120, "y": 540 },
+      "melody": { "x": 370, "y": 1016 },
+      "boy": { "x": 300, "y": 1016 },
+      "frames": 90
+    },
+    {
+      "name": "garden-gate",
+      "level": "home-and-garden",
+      "note": "The side gate in the hedge, and the raised flower bed.",
+      "camera": { "x": 560, "y": 540 },
+      "melody": { "x": 880, "y": 1016 },
+      "boy": { "x": 640, "y": 1016 },
+      "frames": 90
+    },
+    {
+      "name": "garden-trampoline",
+      "level": "home-and-garden",
+      "note": "Stump, gnome, the trampoline and the high bones above it.",
+      "camera": { "x": 1840, "y": 500 },
+      "melody": { "x": 1990, "y": 860 },
+      "boy": { "x": 1925, "y": 860 },
+      "frames": 90
+    },
+    {
+      "name": "garden-crate",
+      "level": "home-and-garden",
+      "note": "The drain, power-ups, the heavy crate and the step up to the back lawn.",
+      "camera": { "x": 2560, "y": 540 },
+      "melody": { "x": 2790, "y": 1016 },
+      "boy": { "x": 2625, "y": 1016 },
+      "frames": 90
+    },
+    {
+      "name": "garden-treehouse",
+      "level": "home-and-garden",
+      "note": "The treehouse, its ladder, the basket lift, the egg chair and bird bath.",
+      "camera": { "x": 3560, "y": 330 },
+      "melody": { "x": 4100, "y": 830, "facing": -1 },
+      "boy": { "x": 3990, "y": 830 },
+      "frames": 90
+    },
+    {
+      "name": "garden-goal",
+      "level": "home-and-garden",
+      "note": "The football goal, the bark-break blocks and the big tree at the end.",
+      "camera": { "x": 4640, "y": 540 },
+      "melody": { "x": 5035, "y": 1016, "facing": -1 },
+      "boy": { "x": 4975, "y": 1016 },
+      "frames": 90
+    }
+  ]
+}

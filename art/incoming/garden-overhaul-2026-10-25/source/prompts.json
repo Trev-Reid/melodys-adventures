@@ -1,0 +1,107 @@
+[
+  {
+    "name": "bg-far",
+    "path": "source/generated/bg-far.png",
+    "tool": "built-in image_gen",
+    "prompt": null,
+    "brief_summary": "Original generation: retain project asset dimensions and role; match warm sunlit cottage-garden mockup, open valley background or richly detailed cottage; transparent cutout output."
+  },
+  {
+    "name": "bg-trees",
+    "path": "source/generated/bg-trees.png",
+    "tool": "built-in image_gen",
+    "prompt": "Edit this parallax tree layer: preserve the existing trees, colours, canvas framing and transparent upper sky exactly. Fill all transparent gaps in the LOWER 35 percent of the canvas with softly receding grassy meadow, small hedgerows and distant sunlit fields, so the entire bottom third is opaque scenery through the bottom edge with NO transparent horizontal strip. Transition from transparent upper centre to meadow along a gentle irregular low hill horizon at 65 percent height. No sky colour fill: upper65% centre remains transparent. Match current moss green yellowgreen forest teal pixel clusters, moderate contrast distant meadow, same horizontal repeating edges, no buildings no characters no ground platforms. Output still a genuine alpha parallax layer 960x520 proportion.",
+    "brief_summary": null
+  },
+  {
+    "name": "house",
+    "path": "source/generated/house.png",
+    "tool": "built-in image_gen",
+    "prompt": null,
+    "brief_summary": "Original generation: retain project asset dimensions and role; match warm sunlit cottage-garden mockup, open valley background or richly detailed cottage; transparent cutout output."
+  },
+  {
+    "name": "treehouse",
+    "path": "source/generated/treehouse.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign ONLY the isolated treehouse BODY asset from image1 using sumptuous warm sunlit handcrafted wood, slate roof, ivory window frames, little flower boxes and subtle moss like image2. Keep EXACT normalized geometry of image1: 440x560 canvas, balcony walk surface at y298, ladder x130-170 from y315 to bottom, trunk foot at bottom centre. No canopy foliage (separate asset), no pulley basket or extra objects outside silhouette. Preserve roof and platform footprint, paw flag. True transparent canvas, body fills same placement. No ground plane. Crisp rich pixel-art clusters designed to downsample to 220x280 logical pixels.",
+    "brief_summary": null
+  },
+  {
+    "name": "treehouse-leaves",
+    "path": "source/generated/treehouse-leaves.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign ONLY the oak foliage layer image1, preserving its EXACT 440x560 canvas placement: canopy occupies top 300 pixels, entire bottom260 remains TRANSPARENT, central lower opening as reference so cabin visible. Warm dappled yellowgreen sunlit leafclusters, deep forest teal shaded pockets, irregular majestic oak lobes, fewer noisy tiny details, match image2. No treehouse, NO trunk branches or ground. Genuine alpha transparent. Pixel art at logical220x280, golden upperleft illumination.",
+    "brief_summary": null
+  },
+  {
+    "name": "big-tree",
+    "path": "source/generated/big-tree.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign ONLY bare oak trunk and branches image1 on same 400x500 transparent canvas with EXACT same foot centre, branch locations and silhouette extent. Rich aged warm chestnut bark, knot holes and climbing ivy restrained to left trunk edge, natural flared roots. Keep bottom foot same and no ground. No leaves, no canopy, no house. Match sumptuous handcrafted pixel art wood of image2 with upperleft golden highlights. Logical200x250 pixels crisp clusters.",
+    "brief_summary": null
+  },
+  {
+    "name": "big-tree-leaves",
+    "path": "source/generated/big-tree-leaves.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign ONLY oak canopy layer image1 using the leafy majestic oak treatment of image2. Preserve EXACT 400x500 canvas and normalized coverage: leaves top0..280, bottom220 entirely TRANSPARENT. Rounded irregular wide oak shape, rich forest-teal shaded cavities, yellowgreen sunlit small leaf clusters along upperleft, balanced greens not uniformly lime. Genuine alpha, NO trunk NO branches no scenery no ground. Crisp handmade pixel-art, designed for logical200x250 pixels.",
+    "brief_summary": null
+  },
+  {
+    "name": "bg-fence",
+    "path": "source/generated/bg-fence.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign background fence strip image1 in handcrafted cozy garden style of image2. SAME wide256x144 composition. Weathered warm honeybrown vertical garden fence with uneven tops, understated tealgrey shadows, climbing rose sprays and ivy along upper edge (not across entire face). Solid fence covers bottom75%; top little negative-space transparency. MUST TILE horizontally: left and right edges same height/tone/board pattern. Straight front elevation. Not a scene; only fence, no grass/ground/cast shadow/sky. Readable clustered pixel art designed for128x72 logical pixels. Golden upperleft lighting.",
+    "brief_summary": null
+  },
+  {
+    "name": "trampoline",
+    "path": "source/generated/trampoline.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign isolated trampoline image1 to match artisanal pixel-art visual quality of image2. Exact 248x114 landscape footprint, low side elevation, mat plane y64 (50 pixels above bottom) feet reach bottom. Preserve width, net posts with visible entrance and safety net. Teal padded rim, charcoal metal posts, warm steel highlights, delicate dark net with real transparency in openings, small ladder centre. No environment, no grass, no cast shadow, transparent alpha canvas. Crisp attractive pixelart logical124x57, restrained detailed clusters, no neonblue.",
+    "brief_summary": null
+  },
+  {
+    "name": "bush-berries",
+    "path": "source/generated/bush-berries.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign isolated compact flowering garden shrub image1, same140x88 landscape footprint. Organic arching stems instead of three round balls. Rich deep-green glossy leaves in deliberate shaded clusters, little coral pink roses, pale buttercream highlights from upperleft. Cozy country cottage pixel art matching image2. True transparent background, no pot no groundplane no shadow no scenery. Fill width and bottom centre, small margins. Legible at logical70x44.",
+    "brief_summary": null
+  },
+  {
+    "name": "bush-hydrangea",
+    "path": "source/generated/bush-hydrangea.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign isolated compact hydrangea shrub image1, same128x80 landscape footprint. Natural varied leafy silhouette, lush forestgreen leaves and five uneven delicate lavender blue hydrangea flowerheads with cream upperleft highlights. Beautiful cozy cottage pixelart matching image2, readable at64x40 logical pixels. Transparent cutout, no groundplane no pot no castshadow. Fill width with bottom centre grounded.",
+    "brief_summary": null
+  },
+  {
+    "name": "egg-chair",
+    "path": "source/generated/egg-chair.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign isolated garden hanging egg chair image1, same104x208 portrait footprint and shape, tall curved charcoal metal stand left, circularbase at bottom, egg basket suspended right. Natural honey wicker intricately woven, warm ivory tufted cushion and small muted teal pillow. Rich handcrafted cozy pixelart matching image2 at52x104 logicalpixels. Golden upperleft light. Entire object visible, genuine transparent background, no groundplane no scenery no cast shadow.",
+    "brief_summary": null
+  },
+  {
+    "name": "tile-stone",
+    "path": "source/generated/tile-stone.png",
+    "tool": "built-in image_gen",
+    "prompt": "Create a seamless repeating square TILE texture replacing image1 to match dry stone terrace wall in image2. Front elevation warm grey limestone garden wall, irregular small blocks in 4 staggered courses, deep cool dark joints, warm ivory upperleft edges, scattered restrained moss/ivy in cracks. Fill whole square, opaque, no border, no groundtop no grass lip no perspective no scene. Left/right AND top/bottom must tile seamlessly. Precise beautiful pixel-art designed to read at48x48 logical pixels (96x96 export), 24-32 coherent colors, strong 3-tone blocks not noisy smoothphotograph.",
+    "brief_summary": null
+  },
+  {
+    "name": "tile-dirt",
+    "path": "source/generated/tile-dirt.png",
+    "tool": "built-in image_gen",
+    "prompt": "Create seamless repeating square TILE texture replacing image1 to match earthy garden platform cross-section in image2. Dense rich dark brown soil with irregular embedded tan grey stones, tiny roots/ochre pebbles, muted cool earth shadows. Fill whole square, opaque, NO grassy top NO sky NO platform framing no border no groundplane. Left/right AND top/bottom tile seamlessly. Refined chunky pixelart designed for32x32 logicalpixels (64x64 export), 24-32 colors, broad readable groups not fine noisy realism.",
+    "brief_summary": null
+  },
+  {
+    "name": "stump",
+    "path": "source/generated/stump.png",
+    "tool": "built-in image_gen",
+    "prompt": "Redesign isolated old oak stump from image1 in rich textured warm countrygarden pixelart of image2. Same120x112 canvas footprint: flat oval top surface14px below top, bottomcentre foot grounded. Warm golden cut rings, chunky natural bark facets, a little darkgreen moss at left root. NO groundplane no castshadow no extra scenery. Genuine transparency. Logical60x56 pixels, crisp readable woodgrain clusters upperleft goldenlight, same squat shape.",
+    "brief_summary": null
+  }
+]

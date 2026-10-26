@@ -9,8 +9,8 @@
  "height": 135,
  "tilewidth": 8,
  "tileheight": 8,
- "nextlayerid": 10,
- "nextobjectid": 64,
+ "nextlayerid": 11,
+ "nextobjectid": 83,
  "backgroundcolor": "#8fd0f0",
  "layers": [
   {
@@ -46,11 +46,11 @@
      "id": 2,
      "name": "",
      "type": "ground",
-     "width": 200,
+     "width": 180,
      "height": 80,
      "rotation": 0,
      "visible": true,
-     "x": 880,
+     "x": 980,
      "y": 936,
      "properties": [
       {
@@ -151,30 +151,6 @@
     {
      "id": 8,
      "name": "",
-     "type": "platform",
-     "width": 84,
-     "height": 24,
-     "rotation": 0,
-     "visible": true,
-     "x": 3740,
-     "y": 650,
-     "properties": [
-      {
-       "name": "oneWay",
-       "type": "bool",
-       "value": true
-      },
-      {
-       "name": "style",
-       "type": "string",
-       "propertytype": "PlatformStyle",
-       "value": "wood"
-      }
-     ]
-    },
-    {
-     "id": 9,
-     "name": "",
      "type": "ground",
      "width": 800,
      "height": 64,
@@ -197,7 +173,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 10,
+     "id": 9,
      "name": "",
      "type": "heavyCrate",
      "width": 110,
@@ -208,7 +184,7 @@
      "y": 906
     },
     {
-     "id": 11,
+     "id": 10,
      "name": "",
      "type": "crackedBlock",
      "width": 48,
@@ -219,7 +195,7 @@
      "y": 968
     },
     {
-     "id": 12,
+     "id": 11,
      "name": "",
      "type": "crackedBlock",
      "width": 48,
@@ -230,7 +206,7 @@
      "y": 920
     },
     {
-     "id": 13,
+     "id": 12,
      "name": "",
      "type": "crackedBlock",
      "width": 48,
@@ -254,7 +230,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 14,
+     "id": 13,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -273,7 +249,7 @@
      ]
     },
     {
-     "id": 15,
+     "id": 14,
      "name": "",
      "type": "sign",
      "width": 0,
@@ -287,7 +263,26 @@
       {
        "name": "text",
        "type": "string",
-       "value": "Hold SPACE to\nbounce higher!"
+       "value": "Hold {jump} to\nbounce higher!"
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 760,
+     "y": 1016,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Melody can't open\nthe gate! Swap to\nthe boy ({switch})"
       }
      ]
     },
@@ -318,14 +313,33 @@
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 5440,
+     "x": 3712,
+     "y": 830,
+     "point": true,
+     "properties": [
+      {
+       "name": "text",
+       "type": "string",
+       "value": "Melody can't climb!\nPut her in the basket,\nthen swap ({switch})"
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "name": "",
+     "type": "sign",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4890,
      "y": 1016,
      "point": true,
      "properties": [
       {
        "name": "text",
        "type": "string",
-       "value": "Home sweet home!"
+       "value": "Throw the ball at\nthe bone stuck in\nthe big tree! ({use})"
       }
      ]
     }
@@ -343,7 +357,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 18,
+     "id": 19,
      "name": "",
      "type": "bone",
      "width": 0,
@@ -355,19 +369,19 @@
      "point": true
     },
     {
-     "id": 19,
+     "id": 20,
      "name": "",
      "type": "bone",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 1000,
+     "x": 1040,
      "y": 870,
      "point": true
     },
     {
-     "id": 20,
+     "id": 21,
      "name": "",
      "type": "bone",
      "width": 0,
@@ -379,7 +393,7 @@
      "point": true
     },
     {
-     "id": 21,
+     "id": 22,
      "name": "",
      "type": "bone",
      "width": 0,
@@ -391,7 +405,7 @@
      "point": true
     },
     {
-     "id": 22,
+     "id": 23,
      "name": "high-bounce-bone",
      "type": "bone",
      "width": 0,
@@ -403,7 +417,7 @@
      "point": true
     },
     {
-     "id": 23,
+     "id": 24,
      "name": "",
      "type": "sniffTreat",
      "width": 0,
@@ -415,7 +429,7 @@
      "point": true
     },
     {
-     "id": 24,
+     "id": 25,
      "name": "drain-bone",
      "type": "bone",
      "width": 0,
@@ -444,7 +458,7 @@
      ]
     },
     {
-     "id": 25,
+     "id": 26,
      "name": "",
      "type": "superSausage",
      "width": 0,
@@ -456,7 +470,7 @@
      "point": true
     },
     {
-     "id": 26,
+     "id": 27,
      "name": "",
      "type": "bone",
      "width": 0,
@@ -468,31 +482,44 @@
      "point": true
     },
     {
-     "id": 27,
+     "id": 28,
      "name": "treehouse-bone",
      "type": "bone",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4060,
-     "y": 530,
-     "point": true
+     "x": 3862,
+     "y": 545,
+     "point": true,
+     "properties": [
+      {
+       "name": "hidden",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "revealedBy",
+       "type": "string",
+       "propertytype": "RevealedBy",
+       "value": "event"
+      }
+     ]
     },
     {
-     "id": 28,
+     "id": 29,
      "name": "",
      "type": "barkBiscuit",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4250,
-     "y": 790,
+     "x": 4010,
+     "y": 545,
      "point": true
     },
     {
-     "id": 29,
+     "id": 30,
      "name": "leaf-bone",
      "type": "bone",
      "width": 0,
@@ -517,7 +544,7 @@
      ]
     },
     {
-     "id": 30,
+     "id": 31,
      "name": "",
      "type": "bone",
      "width": 0,
@@ -527,6 +554,25 @@
      "x": 5230,
      "y": 985,
      "point": true
+    },
+    {
+     "id": 32,
+     "name": "tree-bone",
+     "type": "bone",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5490,
+     "y": 690,
+     "point": true,
+     "properties": [
+      {
+       "name": "stuck",
+       "type": "bool",
+       "value": true
+      }
+     ]
     }
    ],
    "color": "#f6d873"
@@ -542,7 +588,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 31,
+     "id": 33,
      "name": "drain-trail",
      "type": "scentTrail",
      "width": 0,
@@ -617,7 +663,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 32,
+     "id": 34,
      "name": "back-lawn-leaves",
      "type": "leafPile",
      "width": 0,
@@ -634,12 +680,117 @@
        "value": "leaf-bone"
       }
      ]
+    },
+    {
+     "id": 35,
+     "name": "treehouse-leaves",
+     "type": "leafPile",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 3862,
+     "y": 568,
+     "point": true,
+     "properties": [
+      {
+       "name": "reveals",
+       "type": "string",
+       "value": "treehouse-bone"
+      }
+     ]
     }
    ],
    "color": "#d9822b"
   },
   {
    "id": 8,
+   "name": "interactables",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "opacity": 1,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "objects": [
+    {
+     "id": 36,
+     "name": "side-gate",
+     "type": "gate",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 925,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 37,
+     "name": "treehouse-basket",
+     "type": "lift",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4215,
+     "y": 830,
+     "point": true,
+     "properties": [
+      {
+       "name": "travel",
+       "type": "int",
+       "value": 262
+      }
+     ]
+    },
+    {
+     "id": 38,
+     "name": "",
+     "type": "lever",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4128,
+     "y": 568,
+     "point": true,
+     "properties": [
+      {
+       "name": "target",
+       "type": "string",
+       "value": "treehouse-basket"
+      }
+     ]
+    },
+    {
+     "id": 39,
+     "name": "",
+     "type": "teamArea",
+     "width": 480,
+     "height": 195,
+     "rotation": 0,
+     "visible": true,
+     "x": 3790,
+     "y": 380
+    },
+    {
+     "id": 40,
+     "name": "",
+     "type": "football",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5000,
+     "y": 1016,
+     "point": true
+    }
+   ],
+   "color": "#8a5a2b"
+  },
+  {
+   "id": 9,
    "name": "decorations",
    "type": "objectgroup",
    "draworder": "topdown",
@@ -649,7 +800,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 33,
+     "id": 41,
      "name": "",
      "type": "planter",
      "width": 0,
@@ -661,7 +812,7 @@
      "point": true
     },
     {
-     "id": 34,
+     "id": 42,
      "name": "",
      "type": "potPink",
      "width": 0,
@@ -673,7 +824,7 @@
      "point": true
     },
     {
-     "id": 35,
+     "id": 43,
      "name": "",
      "type": "house",
      "width": 0,
@@ -685,7 +836,7 @@
      "point": true
     },
     {
-     "id": 36,
+     "id": 44,
      "name": "",
      "type": "potPurple",
      "width": 0,
@@ -697,19 +848,79 @@
      "point": true
     },
     {
-     "id": 37,
+     "id": 45,
+     "name": "",
+     "type": "robin",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 470,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 46,
      "name": "",
      "type": "bushBerries",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 960,
+     "x": 1050,
      "y": 936,
      "point": true
     },
     {
-     "id": 38,
+     "id": 47,
+     "name": "",
+     "type": "flowers",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1118,
+     "y": 936,
+     "point": true
+    },
+    {
+     "id": 48,
+     "name": "",
+     "type": "tallGrass",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1200,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 49,
+     "name": "",
+     "type": "butterflies",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1550,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 50,
+     "name": "",
+     "type": "gnome",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 1760,
+     "y": 860,
+     "point": true
+    },
+    {
+     "id": 51,
      "name": "",
      "type": "fern",
      "width": 0,
@@ -729,7 +940,7 @@
      ]
     },
     {
-     "id": 39,
+     "id": 52,
      "name": "",
      "type": "bigTree",
      "width": 0,
@@ -741,7 +952,7 @@
      "point": true
     },
     {
-     "id": 40,
+     "id": 53,
      "name": "",
      "type": "bushHydrangea",
      "width": 0,
@@ -753,7 +964,7 @@
      "point": true
     },
     {
-     "id": 41,
+     "id": 54,
      "name": "",
      "type": "flowers",
      "width": 0,
@@ -765,7 +976,7 @@
      "point": true
     },
     {
-     "id": 42,
+     "id": 55,
      "name": "",
      "type": "stump",
      "width": 0,
@@ -777,7 +988,7 @@
      "point": true
     },
     {
-     "id": 43,
+     "id": 56,
      "name": "",
      "type": "flowers",
      "width": 0,
@@ -789,7 +1000,7 @@
      "point": true
     },
     {
-     "id": 44,
+     "id": 57,
      "name": "",
      "type": "bush",
      "width": 0,
@@ -801,7 +1012,31 @@
      "point": true
     },
     {
-     "id": 45,
+     "id": 58,
+     "name": "",
+     "type": "tallGrass",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2440,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 59,
+     "name": "",
+     "type": "robin",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 2520,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 60,
      "name": "",
      "type": "trampoline",
      "width": 0,
@@ -813,7 +1048,7 @@
      "point": true
     },
     {
-     "id": 46,
+     "id": 61,
      "name": "",
      "type": "fern",
      "width": 0,
@@ -838,7 +1073,7 @@
      ]
     },
     {
-     "id": 47,
+     "id": 62,
      "name": "",
      "type": "drain",
      "width": 0,
@@ -850,7 +1085,7 @@
      "point": true
     },
     {
-     "id": 48,
+     "id": 63,
      "name": "",
      "type": "bushHydrangea",
      "width": 0,
@@ -862,7 +1097,7 @@
      "point": true
     },
     {
-     "id": 49,
+     "id": 64,
      "name": "",
      "type": "potPurple",
      "width": 0,
@@ -874,7 +1109,7 @@
      "point": true
     },
     {
-     "id": 50,
+     "id": 65,
      "name": "",
      "type": "bigTree",
      "width": 0,
@@ -886,19 +1121,27 @@
      "point": true
     },
     {
-     "id": 51,
+     "id": 66,
      "name": "",
-     "type": "stump",
+     "type": "tallGrass",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 3640,
+     "x": 3290,
      "y": 830,
-     "point": true
+     "point": true,
+     "properties": [
+      {
+       "name": "layer",
+       "type": "string",
+       "propertytype": "DecorationLayer",
+       "value": "front"
+      }
+     ]
     },
     {
-     "id": 52,
+     "id": 67,
      "name": "",
      "type": "treehouse",
      "width": 0,
@@ -910,55 +1153,67 @@
      "point": true
     },
     {
-     "id": 53,
+     "id": 68,
      "name": "",
      "type": "squirrel",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4150,
+     "x": 4060,
      "y": 568,
      "point": true
     },
     {
-     "id": 54,
+     "id": 69,
      "name": "",
      "type": "eggChair",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4330,
+     "x": 4345,
      "y": 830,
      "point": true
     },
     {
-     "id": 55,
+     "id": 70,
      "name": "",
-     "type": "flowers",
+     "type": "birdBath",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4440,
+     "x": 4455,
      "y": 830,
      "point": true
     },
     {
-     "id": 56,
+     "id": 71,
+     "name": "",
+     "type": "washingLine",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4640,
+     "y": 830,
+     "point": true
+    },
+    {
+     "id": 72,
      "name": "",
      "type": "bush",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4700,
+     "x": 4740,
      "y": 830,
      "point": true
     },
     {
-     "id": 57,
+     "id": 73,
      "name": "",
      "type": "fern",
      "width": 0,
@@ -978,7 +1233,19 @@
      ]
     },
     {
-     "id": 58,
+     "id": 74,
+     "name": "",
+     "type": "tallGrass",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 4860,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 75,
      "name": "",
      "type": "goal",
      "width": 0,
@@ -990,19 +1257,43 @@
      "point": true
     },
     {
-     "id": 59,
+     "id": 76,
      "name": "",
-     "type": "football",
+     "type": "gnome",
      "width": 0,
      "height": 0,
      "rotation": 0,
      "visible": true,
-     "x": 4930,
+     "x": 5180,
      "y": 1016,
      "point": true
     },
     {
-     "id": 60,
+     "id": 77,
+     "name": "",
+     "type": "butterflies",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5250,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 78,
+     "name": "",
+     "type": "robin",
+     "width": 0,
+     "height": 0,
+     "rotation": 0,
+     "visible": true,
+     "x": 5380,
+     "y": 1016,
+     "point": true
+    },
+    {
+     "id": 79,
      "name": "",
      "type": "bushBerries",
      "width": 0,
@@ -1014,7 +1305,7 @@
      "point": true
     },
     {
-     "id": 61,
+     "id": 80,
      "name": "",
      "type": "bigTree",
      "width": 0,
@@ -1026,7 +1317,7 @@
      "point": true
     },
     {
-     "id": 62,
+     "id": 81,
      "name": "",
      "type": "fern",
      "width": 0,
@@ -1054,7 +1345,7 @@
    "color": "#a0a0a4"
   },
   {
-   "id": 9,
+   "id": 10,
    "name": "markers",
    "type": "objectgroup",
    "draworder": "topdown",
@@ -1064,7 +1355,7 @@
    "y": 0,
    "objects": [
     {
-     "id": 63,
+     "id": 82,
      "name": "spawn",
      "type": "spawn",
      "width": 0,

@@ -1,0 +1,40 @@
+{
+  "platform": "win32",
+  "browser": "156.0.4314.42",
+  "renderer": "SwiftShader",
+  "frame": "960x540",
+  "frames": 90,
+  "phase": "after",
+  "results": [
+    {
+      "shot": "house",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-house.png",
+      "errors": []
+    },
+    {
+      "shot": "gate",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-gate.png",
+      "errors": []
+    },
+    {
+      "shot": "trampoline",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-trampoline.png",
+      "errors": []
+    },
+    {
+      "shot": "crate",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-crate.png",
+      "errors": []
+    },
+    {
+      "shot": "treehouse",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-treehouse.png",
+      "errors": []
+    },
+    {
+      "shot": "goal",
+      "file": "C:\\Users\\trevr\\Documents\\Codex\\2026-10-25\\referenced-chatgpt-conversation-this-is-an\\outputs\\garden-overhaul\\review\\after\\garden-goal.png",
+      "errors": []
+    }
+  ]
+}

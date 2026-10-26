@@ -435,7 +435,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "SNIFF! What's on the\nfridge? Jump, then\nBARK (B) in the air!"
+       "value": "SNIFF! What's on the\nfridge? Jump, then\nBARK ({bark}) in the air!"
       }
      ]
     },
@@ -473,7 +473,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "TOO TALL!\nSUPER BARK, jump,\nthen B = SUPER BOOST"
+       "value": "TOO TALL!\nSUPER BARK, jump,\nthen {bark} = SUPER BOOST"
       }
      ]
     },
@@ -549,7 +549,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "SUPER CHARGE!\nStrength + SHIFT"
+       "value": "SUPER CHARGE!\nStrength + {sprint}"
       }
      ]
     },

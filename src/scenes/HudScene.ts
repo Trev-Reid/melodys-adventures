@@ -6,6 +6,8 @@ import { formatTime, type LevelProgress } from '@/gameplay/LevelProgress';
 import type { ActiveEffect } from '@/gameplay/effects/StatusEffects';
 import type { ComboDefinition, EffectType } from '@/config/powerUps';
 import { uiKey, type UiImage } from '@/assets/artAssets';
+import { onGamepadConnection } from '@/core/input/gamepad/GamepadInputSource';
+import { hasCustomMapping } from '@/core/input/gamepad/gamepadSettings';
 
 export interface HudSceneData {
   progress: LevelProgress;
@@ -62,6 +64,7 @@ export class HudScene extends Phaser.Scene {
   private badges: BadgeView[] = [];
   private rings!: Phaser.GameObjects.Graphics;
   private comboLabel!: Phaser.GameObjects.Text;
+  private toastBox?: Phaser.GameObjects.Container;
 
   constructor() {
     super(SCENES.hud);
@@ -94,6 +97,15 @@ export class HudScene extends Phaser.Scene {
         .setOrigin(1, 1);
       return { icon, label, seconds, active: true };
     });
+    // "Controller connected!" message.
+    const stopListening = onGamepadConnection((e) =>
+      this.toast(
+        e.connected ? `${e.name} connected!` : `${e.name} unplugged`,
+        e.connected && !hasCustomMapping(e.id) ? 'B jump  ·  hold Y sprint  ·  A bark  ·  START pause' : '',
+      ),
+    );
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, stopListening);
+
     this.comboLabel = this.add
       .text(right - (BADGES.length * BADGE_GAP) / 2 + 10, 12 + BADGE_SIZE + 40, '', { ...TEXT_STYLE, fontSize: '16px', color: '#ffd23f', strokeThickness: 4 })
       .setOrigin(0.5, 0);
@@ -184,7 +196,7 @@ export class HudScene extends Phaser.Scene {
       .setOrigin(0.5);
     const time = this.add.text(0, 4, `Time: ${formatTime(p.elapsedMs)}`, TEXT_STYLE).setOrigin(0.5);
     const again = this.add
-      .text(0, 52, 'Press R to play again', { ...TEXT_STYLE, fontSize: '20px', strokeThickness: 4 })
+      .text(0, 52, 'Press R or START to play again', { ...TEXT_STYLE, fontSize: '20px', strokeThickness: 4 })
       .setOrigin(0.5);
     panel.add([bg, title, time, again]);
 
@@ -193,6 +205,30 @@ export class HudScene extends Phaser.Scene {
     this.tweens.add({ targets: again, alpha: 0.35, duration: 600, yoyo: true, repeat: -1, delay: 800 });
 
     this.confetti();
+  }
+
+  /** A short message across the top of the screen (fades after a few seconds). */
+  toast(title: string, detail = ''): void {
+    this.toastBox?.destroy();
+    const box = this.add.container(DISPLAY.width / 2, -60).setDepth(200);
+    const t1 = this.add.text(16, detail ? -11 : 0, title, { ...TEXT_STYLE, fontSize: '20px', strokeThickness: 4 }).setOrigin(0.5);
+    const t2 = this.add.text(16, 14, detail, { ...TEXT_STYLE, fontSize: '14px', strokeThickness: 3, color: '#ffe8a3' }).setOrigin(0.5);
+    const w = Math.max(t1.width, t2.width) + 100;
+    const h = detail ? 62 : 44;
+    const bg = this.add.graphics();
+    bg.fillStyle(0x1f2a20, 0.85).fillRoundedRect(-w / 2, -h / 2, w, h, 12);
+    bg.lineStyle(2, 0xffe066, 0.8).strokeRoundedRect(-w / 2, -h / 2, w, h, 12);
+    // tiny controller icon
+    const icon = this.add.graphics();
+    const ix = -w / 2 + 28;
+    const iy = detail ? -11 : 0;
+    icon.fillStyle(0xc9c9d3).fillCircle(ix - 8, iy, 8).fillCircle(ix + 8, iy, 8).fillRect(ix - 8, iy - 8, 16, 16);
+    icon.fillStyle(0x2b2b33).fillRect(ix - 13, iy - 1, 7, 2).fillRect(ix - 10.5, iy - 3.5, 2, 7);
+    icon.fillStyle(0xd83d3d).fillCircle(ix + 11, iy - 2, 2).fillStyle(0xe8c23a).fillCircle(ix + 8, iy + 2, 2);
+    box.add([bg, icon, t1, t2]);
+    this.toastBox = box;
+    this.tweens.add({ targets: box, y: 150, duration: 350, ease: 'Back.easeOut' });
+    this.tweens.add({ targets: box, alpha: 0, delay: 4200, duration: 500, onComplete: () => box.destroy() });
   }
 
   private confetti(): void {

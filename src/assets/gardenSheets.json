@@ -1,0 +1,79 @@
+{
+ "bird-bath": {
+  "fps": 1.5,
+  "frameHeight": 88,
+  "frameWidth": 80,
+  "frames": 2,
+  "yoyo": false
+ },
+ "bird-far": {
+  "fps": 6,
+  "frameHeight": 8,
+  "frameWidth": 14,
+  "frames": 2,
+  "yoyo": false
+ },
+ "butterfly": {
+  "fps": 14,
+  "frameHeight": 16,
+  "frameWidth": 20,
+  "frames": 4,
+  "yoyo": false
+ },
+ "flowers": {
+  "fps": 3,
+  "frameHeight": 36,
+  "frameWidth": 80,
+  "frames": 4,
+  "yoyo": true
+ },
+ "gate": {
+  "fps": 1,
+  "frameHeight": 156,
+  "frameWidth": 64,
+  "frames": 2,
+  "yoyo": false
+ },
+ "leaf": {
+  "fps": 6,
+  "frameHeight": 14,
+  "frameWidth": 14,
+  "frames": 4,
+  "yoyo": false
+ },
+ "lever": {
+  "fps": 1,
+  "frameHeight": 60,
+  "frameWidth": 36,
+  "frames": 2,
+  "yoyo": false
+ },
+ "robin": {
+  "fps": 10,
+  "frameHeight": 28,
+  "frameWidth": 32,
+  "frames": 5,
+  "yoyo": false
+ },
+ "squirrel": {
+  "fps": 8,
+  "frameHeight": 44,
+  "frameWidth": 52,
+  "frames": 5,
+  "yoyo": false
+ },
+ "tall-grass": {
+  "fps": 3,
+  "frameHeight": 44,
+  "frameWidth": 52,
+  "frames": 4,
+  "yoyo": true
+ },
+ "washing-line": {
+  "fps": 4,
+  "frameHeight": 180,
+  "frameWidth": 300,
+  "frames": 4,
+  "yoyo": true
+ }
+}

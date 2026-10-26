@@ -1,0 +1,50 @@
+[
+  {
+    "file": "boy.png",
+    "size": [
+      540,
+      752
+    ],
+    "frames": 66,
+    "emptyFrames": [
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "opaqueColours": 25,
+    "grid": "exact 2x2",
+    "alpha": [
+      0,
+      255
+    ],
+    "grounded": "all required frames touch row 79",
+    "sha256": "36e7d31a2cc24154d78b05c3055e82fdd4a99de7974a8ce2c7166b10c438ef0c"
+  },
+  {
+    "file": "boy_carry.png",
+    "size": [
+      540,
+      752
+    ],
+    "frames": 66,
+    "emptyFrames": [
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "opaqueColours": 25,
+    "grid": "exact 2x2",
+    "alpha": [
+      0,
+      255
+    ],
+    "grounded": "all required frames touch row 79",
+    "sha256": "c3045863eddc6e81bc162d2d8c6439e996f2404fbd1e5bb6b6e5284a0cb6e00e"
+  }
+]

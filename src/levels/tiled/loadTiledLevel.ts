@@ -6,6 +6,8 @@ import type {
   CollectibleDefinition,
   CollectibleKind,
   DetectableSpec,
+  InteractableDefinition,
+  InteractableKind,
   LevelDefinition,
   ObstacleDefinition,
   PlatformDefinition,
@@ -19,6 +21,7 @@ import type { BarkTargetKind } from '@/config/barkTargets';
 import type { DecorationKind } from '@/config/decorations';
 import type { TiledMap, TiledObject, TiledObjectLayer, TiledProperty } from './tiledFormat';
 import {
+  AREA_INTERACTABLES,
   BARK_TARGET_CLASSES,
   CLASS,
   DECORATION_CLASSES,
@@ -27,6 +30,7 @@ import {
   PLATFORM_STYLES,
   COLLECTIBLE_CLASSES,
   DEFAULTS,
+  INTERACTABLE_CLASSES,
   LAYERS,
   OBSTACLE_CLASSES,
   PLATFORM_CLASSES,
@@ -136,8 +140,10 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     if (!kind) continue;
     const c: CollectibleDefinition = { kind, x: o.x, y: o.y };
     if (o.name) c.id = o.name;
-    const hidden = hiddenSpec(props(o.properties));
+    const p = props(o.properties);
+    const hidden = hiddenSpec(p);
     if (hidden) c.hidden = hidden;
+    if (p.bool('stuck', DEFAULTS.stuck)) c.stuck = true;
     collectibles.push(c);
   }
 
@@ -204,6 +210,38 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     barkTargets.push(t);
   }
 
+  // --- Interactables: gates, levers, lifts, ladders, the football, team areas ---
+  const interactables: InteractableDefinition[] = [];
+  for (const o of objects(LAYERS.interactables)) {
+    const kind = expectClass<InteractableKind>(LAYERS.interactables, o, INTERACTABLE_CLASSES);
+    if (!kind) continue;
+    const p = props(o.properties);
+    const it: InteractableDefinition = { kind, x: o.x, y: o.y };
+    if (o.name) it.id = o.name;
+    if ((AREA_INTERACTABLES as readonly string[]).includes(kind)) {
+      if (!(o.width > 0 && o.height > 0)) {
+        problems.push(`${where(LAYERS.interactables, o)} (${kind}) must be a rectangle with a size.`);
+        continue;
+      }
+      it.width = o.width;
+      it.height = o.height;
+    }
+    if (kind === 'gate' && p.bool('startsOpen', DEFAULTS.startsOpen)) it.startsOpen = true;
+    if (kind === 'lever') {
+      const target = p.string('target', '');
+      if (target) it.target = target;
+      else problems.push(`${where(LAYERS.interactables, o)} is a lever but has no target (the name of the gate or lift it works).`);
+    }
+    if (kind === 'lift') {
+      if (!o.name) problems.push(`${where(LAYERS.interactables, o)} is a lift and needs a Name, so a lever can work it.`);
+      const travel = p.number('travel', DEFAULTS.travel);
+      if (travel > 0) it.travel = travel;
+      else problems.push(`${where(LAYERS.interactables, o)} has travel ${travel}; it must be more than 0 (how far up it goes).`);
+      if (p.bool('startsUp', DEFAULTS.startsUp)) it.startsUp = true;
+    }
+    interactables.push(it);
+  }
+
   // --- Decorations (point = bottom-centre, where it stands) ---------------------
   const decorations: DecorationDefinition[] = [];
   for (const o of objects(LAYERS.decorations)) {
@@ -244,6 +282,7 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     ...pointsOfInterest.map((p) => p.id),
     ...scentTrails.map((t) => t.id),
     ...barkTargets.map((t) => t.id),
+    ...interactables.map((t) => t.id),
   ]) {
     if (id) ids.set(id, (ids.get(id) ?? 0) + 1);
   }
@@ -257,6 +296,12 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
   for (const t of barkTargets) {
     if (t.reveals && !ids.has(t.reveals)) {
       problems.push(`Bark target ${t.kind} at (${t.x}, ${t.y}) reveals "${t.reveals}", but nothing has that name.`);
+    }
+  }
+  const workable = new Set(interactables.filter((t) => t.kind === 'gate' || t.kind === 'lift').map((t) => t.id));
+  for (const t of interactables) {
+    if (t.kind === 'lever' && t.target && !workable.has(t.target)) {
+      problems.push(`Lever at (${t.x}, ${t.y}) works "${t.target}", but there's no gate or lift with that name.`);
     }
   }
 
@@ -280,6 +325,7 @@ export function levelFromTiled(map: TiledMap, key: string): LevelDefinition {
     pointsOfInterest,
     barkTargets,
   };
+  if (interactables.length) level.interactables = interactables;
   return level;
 }
 

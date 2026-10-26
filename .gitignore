@@ -16,3 +16,6 @@ desktop.ini
 # Screenshots and previews Claude sends back
 Claude outputs/
 __pycache__/
+
+# Latest review screenshots and comparison boards (made again any time)
+art/review/out/

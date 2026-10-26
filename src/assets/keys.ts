@@ -2,8 +2,9 @@
 export const TEXTURES = {
   melody: 'melody',
   melodyBuff: 'melody-buff',
+  /** The boy's sprite sheets (tools/sprites/make_boy.py). */
   boy: 'boy',
-  boyStep: 'boy-step',
+  boyCarry: 'boy-carry',
   groundTile: 'tile-ground',
   grassTop: 'tile-grass-top',
   platformTile: 'tile-platform',

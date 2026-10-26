@@ -16,7 +16,9 @@ export function barkReaches(bark: BarkShape, target: { x: number; y: number }): 
   const dy = target.y - bark.y;
   const distance = Math.hypot(dx, dy);
   if (distance > bark.range) return false;
-  if (distance < 30) return true; // right under her nose
+  // Right under her nose - or her paws: the bark starts at her mouth, so standing on
+  // a pile of leaves (even facing the other way) still blows it about.
+  if (distance < 60) return true;
   const angle = Math.abs((Math.atan2(dy, dx) * 180) / Math.PI);
   return angle <= bark.coneDegrees;
 }

@@ -2,11 +2,14 @@ import Phaser from 'phaser';
 import { SCENES } from './keys';
 import { createPlaceholderTextures } from '@/assets/placeholders';
 import { MELODY_SHEET, createMelodyAnimations } from '@/characters/melody/melodyAnimations';
+import { BOY_SHEET, createBoyAnimations } from '@/characters/boy/boyAnimations';
 import { DEFAULT_LEVEL_KEY, getLevel } from '@/levels';
 import { DISPLAY } from '@/config/display';
 import { AUDIO } from '@/config/audio';
 import { sfx, type SoundName } from '@/core/audio/Sfx';
-import { GARDEN_IMAGES, UI_IMAGES, gardenKey, gardenPath, uiKey, uiPath } from '@/assets/artAssets';
+import { GARDEN_IMAGES, GARDEN_SHEETS, UI_IMAGES, gardenAnimKey, gardenKey, gardenPath, isSheet, uiKey, uiPath } from '@/assets/artAssets';
+import { REPLACEMENT_ART, replacementWarnings } from '@/assets/artReplacements';
+import { requestedShot, startReview, type ReviewShot } from '@/review/review';
 
 /** Any recorded sounds in src/assets/audio (e.g. bark.mp3) - see the README there. */
 const SOUND_FILES = import.meta.glob<string>('../assets/audio/*.{mp3,ogg,wav,m4a}', {
@@ -17,8 +20,9 @@ const SOUND_FILES = import.meta.glob<string>('../assets/audio/*.{mp3,ogg,wav,m4a
 import type { LevelSceneData } from './LevelScene';
 
 /**
- * Loads everything the game needs (Melody's sprite sheet; generated
- * placeholders for the rest), then starts the first level.
+ * Loads everything the game needs (Melody's sprite sheet, the garden art,
+ * any replacement art in src/assets/replacements; generated placeholders for
+ * the rest), then starts the first level.
  */
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -30,8 +34,14 @@ export class BootScene extends Phaser.Scene {
       const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
       this.load.audio(`sample-${name}`, url);
     }
-    for (const name of GARDEN_IMAGES) this.load.image(gardenKey(name), gardenPath(name));
+    for (const name of GARDEN_IMAGES) {
+      const sheet = GARDEN_SHEETS[name];
+      if (sheet) this.load.spritesheet(gardenKey(name), gardenPath(name), { frameWidth: sheet.frameWidth, frameHeight: sheet.frameHeight });
+      else this.load.image(gardenKey(name), gardenPath(name));
+    }
     for (const name of UI_IMAGES) this.load.image(uiKey(name), uiPath(name));
+    // Real art for placeholders: loaded first, so placeholders.ts skips drawing those.
+    for (const { key, url } of REPLACEMENT_ART) this.load.image(key, url);
     for (const { texture, path } of MELODY_SHEET.skins) {
       this.load.spritesheet(texture, path, {
         frameWidth: MELODY_SHEET.frameWidth,
@@ -39,17 +49,41 @@ export class BootScene extends Phaser.Scene {
         spacing: MELODY_SHEET.spacing,
       });
     }
+    for (const { texture, path } of BOY_SHEET.skins) {
+      this.load.spritesheet(texture, path, { frameWidth: BOY_SHEET.frameWidth, frameHeight: BOY_SHEET.frameHeight, spacing: BOY_SHEET.spacing });
+    }
   }
 
   create(): void {
     // Pixel art: keep hard edges when scaled.
-    for (const { texture } of MELODY_SHEET.skins) {
+    for (const { texture } of [...MELODY_SHEET.skins, ...BOY_SHEET.skins]) {
       this.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
-    for (const key of [...GARDEN_IMAGES.map(gardenKey), ...UI_IMAGES.map(uiKey)]) {
+    for (const key of [...GARDEN_IMAGES.map(gardenKey), ...UI_IMAGES.map(uiKey), ...REPLACEMENT_ART.map((r) => r.key)]) {
       this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
+    if (import.meta.env.DEV && REPLACEMENT_ART.length) {
+      console.info(`Own art instead of placeholders: ${REPLACEMENT_ART.map((r) => r.key).join(', ')}`);
+      const size = (key: string) => {
+        const src = this.textures.exists(key) ? this.textures.get(key).getSourceImage() : undefined;
+        return src ? { width: src.width, height: src.height } : undefined;
+      };
+      for (const w of replacementWarnings(size)) console.warn(w);
+    }
+    // Animated garden pictures (swaying flowers, flapping washing, the robin...).
+    for (const name of GARDEN_IMAGES) {
+      if (!isSheet(name) || this.anims.exists(gardenAnimKey(name))) continue;
+      const sheet = GARDEN_SHEETS[name];
+      this.anims.create({
+        key: gardenAnimKey(name),
+        frames: this.anims.generateFrameNumbers(gardenKey(name), { start: 0, end: sheet.frames - 1 }),
+        frameRate: sheet.fps,
+        repeat: -1,
+        yoyo: sheet.yoyo,
+      });
+    }
     createMelodyAnimations(this);
+    createBoyAnimations(this);
     this.registerRecordedSounds();
     createPlaceholderTextures(this);
     // http://localhost:5173/?gallery shows every animation instead of the game.
@@ -58,8 +92,18 @@ export class BootScene extends Phaser.Scene {
       return;
     }
 
+    // http://localhost:5173/?review=garden-house sets up a screen for art review (src/review/shots.json).
+    let shot: ReviewShot | undefined;
+    try {
+      shot = requestedShot();
+    } catch (e) {
+      this.showError(e as Error);
+      window.__review = { shot: '', ready: false, error: (e as Error).message, advance: () => undefined, capture: async () => '' };
+      return;
+    }
+
     // http://localhost:5173/?level=my-level plays src/levels/maps/my-level.tmj
-    const requested = new URLSearchParams(window.location.search).get('level');
+    const requested = shot?.level ?? new URLSearchParams(window.location.search).get('level');
     const levelKey = requested ? requested.replace(/^.*[\\/]/, '').replace(/\.tmj$/, '') : DEFAULT_LEVEL_KEY;
     try {
       getLevel(levelKey);
@@ -68,6 +112,8 @@ export class BootScene extends Phaser.Scene {
       return;
     }
     const data: LevelSceneData = { levelKey };
+    // From here a review shot runs frame by frame, the same way every time.
+    if (shot) startReview(this.game, shot);
     this.scene.start(SCENES.level, data);
   }
 

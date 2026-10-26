@@ -1,0 +1,23 @@
+{
+  "file": "public/assets/garden/trampoline.png",
+  "size": [
+    248,
+    114
+  ],
+  "logical_size": [
+    124,
+    57
+  ],
+  "grid": 2,
+  "alpha": [
+    0,
+    255
+  ],
+  "colours": 63,
+  "colour_budget": 64,
+  "anchor": "bottom centre",
+  "bounce_surface": "50 pixels above foot; y64 on 114px canvas",
+  "solid_width": 216,
+  "code_changes": false,
+  "sha256": "0a7e9868ea64903763c9ca3a42339a337740af49e1dd2b3f0581a0bc51e68106"
+}

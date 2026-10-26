@@ -1,0 +1,382 @@
+[
+  {
+    "file": "src/assets/artAssets.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/artReplacements.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/audio/README.md",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/gardenSheets.json",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/keys.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/placeholders.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/assets/placeholderSpecs.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/abilities/Ability.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/abilities/bark/BarkAbility.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/abilities/climb/ClimbAbility.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/abilities/sprint/SprintAbility.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/abilities/sprint/SprintStamina.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/animationState.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/boy/Boy.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/Character.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/effects/EffectAura.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/follow/FollowBrain.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/melody/Melody.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/melody/melodyAnimations.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/characters/melody/melodySheet.json",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/abilities.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/ambient.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/audio.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/barkTargets.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/camera.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/controls.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/debug.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/decorations.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/display.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/follow.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/movement.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/obstacles.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/powerUps.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/scents.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/config/teamwork.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/audio/Sfx.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/actions.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/buttonLabels.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/createPlayerInput.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/GamepadInputSource.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/gamepadMapping.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/gamepad/gamepadSettings.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/InputManager.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/InputSource.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/core/input/KeyboardInputSource.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/bark/BarkTarget.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/collectibles/Collectible.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/collectibles/collectibleTypes.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/obstacles/Obstacle.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/scent/PointOfInterest.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/scent/ScentTrail.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/Sign.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Football.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Gate.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Lever.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/entities/teamwork/Lift.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/ambient/AmbientLife.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/ambient/GroundShadows.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/bark/barkRules.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/bark/BarkSystem.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/effects/StatusEffects.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/interactions/ObstacleSystem.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/interactions/strengthRules.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/LevelProgress.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/Detectable.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/scentRules.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/scent/SniffSystem.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/ActionPrompt.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/teamworkRules.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/gameplay/teamwork/TeamworkSystem.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/GardenBackground.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/index.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/LevelBuilder.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/LevelDefinition.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/maps/home-and-garden.tmj",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/maps/house-and-garden.tmj",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/maps/melodys-playground.tmj",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/tiled/levelSchema.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/tiled/levelToTiled.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/tiled/loadTiledLevel.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/tiled/tiledFormat.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/levels/tiled/tiledProject.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/main.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/movement/PlatformerMovement.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/review/review.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/review/shots.json",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/AnimationGalleryScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/BootScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/ControllerSetupScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/DebugScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/HudScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/keys.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/LevelScene-1.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/LevelScene.ts",
+    "matches_shared": true
+  },
+  {
+    "file": "src/scenes/PauseScene.ts",
+    "matches_shared": true
+  }
+]

@@ -3,10 +3,14 @@
 A family-friendly 2D side-scrolling platform game starring Melody the dog.
 Built with **Phaser 4**, **TypeScript** and **Vite**.
 
-Current build: two levels. **Home & Garden** (the main level, drawn in pixel
-art: the house, garden terraces, a trampoline, a treehouse) with 10 bones to
-find, and **Melody's Playground** (the test level for trying out powers) with
-29 sausages to collect against the clock. Plus a pixel-art Melody (drawn from photos of her) who
+Current build: three levels. **Home & Garden** (the main level, drawn in pixel
+art: the house, garden terraces, a trampoline, a treehouse) with 11 bones to
+find and puzzles that need Melody and her boy to work together, **Melody's House and Garden** (puzzles that mix Melody's powers) with 22
+sausages, and **Melody's Playground** (the test level for trying out powers)
+with 29 sausages. Melody's boy follows her around (Tab, or Select on a
+controller, swaps who you control), and he can do what she can't: open gates,
+pull levers, climb ladders, throw the football and tell her to sit. Plays with the keyboard or a USB
+controller (SNES-style pads included). Plus a pixel-art Melody (drawn from photos of her) who
 can walk, run, sprint and jump and naps when left alone, a Super Sausage
 power-up (SUPER STRENGTH) with crates to push and barriers to smash, a Super
 Sniff Treat (SUPER SNIFF) that reveals scent trails and hidden things, barking
@@ -17,7 +21,111 @@ simple sound effects, and a debug overlay.
 
 ## Changelog
 
-- **0.11** HOME & GARDEN. A new main level that looks like the mockup:
+- **0.16** An art pipeline, so the game can be brought up to the concept art
+  without breaking anything. Nothing in the game looks or plays differently yet.
+  - **The melody-art-director Skill** (`.claude/skills/melody-art-director/`)
+    holds the house style for Claude: the style guide, the asset sizes and
+    contracts, and the rules for perspective, layering and transparent PNGs. It
+    also has the review checklist and the Phaser pixel-art settings. The overview
+    and the audit of how the game draws and loads its art are in
+    `docs/ART-PIPELINE.md`.
+  - **`npm run art:check`** checks every picture: whether it's on the 2×2 pixel
+    grid, has hard edges and real transparency (no painted-in checkerboards),
+    and stays within its colour budget. It also checks that repeating pictures
+    join up, that sprite sheets divide into their frames, that Melody's feet are
+    on the ground, and that solid tops line up. It runs in `npm test` too.
+  - **Replacement art without code:** save a PNG named after a placeholder's
+    key in `src/assets/replacements/` (e.g. `boy.png`, `item-sausage.png`,
+    `obstacle-heavyCrate.png`) and the game uses it instead.
+  - **Screenshot review:** `?review=garden-house` sets up the same screen,
+    pixel for pixel, every time. `npm run review:capture`, `review:compare` and
+    `review:approve` photograph the shots and compare them with the concept art
+    and with the last approved look. In `npm run dev`, **F9** saves a photo.
+  - **`npm run art:palette`** exports the house palette for drawing programs,
+    or pulls a palette out of a reference picture (and says how big its art
+    pixels are, or that it isn't pixel art).
+  - **Checked (25 Oct):** the Skill is updated in `docs/claude-skills/`. Move it
+    into `.claude/skills/` once (see the README there) so Claude Code uses it.
+    `npm test` no longer fails because of an old picture nothing uses
+    (`trampoline_old.png` is just flagged). Review
+    photos remember which computer and browser took them, and compare warns when a
+    baseline came from another one. `--display 1920x1080,1366x768` photos get a
+    crisp/soft verdict. The Phaser 4 pixel-art settings were tested and are ready
+    for the first screen pass. The style guide marks what still waits for the
+    concept art.
+  - **New garden art (25 Oct):** the first delivery from ChatGPT as art
+    director, the "garden-overhaul" pack. A cream stone cottage, an oak-tree
+    garden with fields and a lake behind it, a pixel-art trampoline, round
+    forest-and-gold HUD badges, a boy in a teal hoodie, and real art for the
+    crate, barrier, fence and blocks (56 pictures). Every size, solid surface
+    and animation is the same as before, so nothing plays differently. The
+    style guide is now v2 (confirmed). Trevor's painted trampoline is kept in
+    `art/source/pre-garden-overhaul-2026-10-25/`. Still to do: the HUD panel
+    and quieter signs from the same brief.
+  - **The boy moves properly (26 Oct):** he used to have two pictures for
+    everything. Now he walks, runs, jumps, falls and lands, climbs ladders seen
+    from behind (hand over hand, in time with the rungs), bends down to pick
+    the ball up, carries it in both hands, throws it (high when you hold up),
+    takes it back from Melody, pulls levers, pushes gates, whistles for Melody,
+    points for "Sit!", cheers at a goal, and fidgets when you leave him
+    standing. His speed, jump, body and throw are exactly as before. The art
+    director then redrew every frame from the brief
+    (`art/briefs/boy-sprite-sheet.md`): swept hair, a textured hoodie, and arms
+    that open out when he cheers. See every move at
+    `?gallery=boy` (C switches to Melody, S to carrying the ball).
+- **0.15** Teamwork: the boy gets his own skills, and Home & Garden gets
+  puzzles that need both of them.
+  - **The boy's action button** is Melody's bark button (B or E on the
+    keyboard, A on a controller): one button, and each of them does their own
+    thing. A little label over his head says what it'll do right now:
+    **Open** a gate, **Pull** a lever, **Throw** the ball, **Sit!** (tell
+    Melody to stay) or **Come, Melody!** (call her back).
+  - **Climbing:** the boy climbs ladders (↑ ↓, or the D-pad). Melody can't.
+  - **The football:** the boy picks it up and throws it (hold ↑ to throw it
+    high). It knocks things out of trees, and Melody fetches it back. Get it in
+    the goal for a GOAL!
+  - **Melody stays put** when the boy tells her to sit, or when you swap away
+    while she's in the basket. She gets up when he comes back for her or calls
+    her, and if she waits long enough she nods off.
+  - **Home & Garden puzzles:** a garden door in a tall hedge that only the boy
+    can open; the treehouse step is gone, so the boy climbs the ladder and
+    hauls Melody up in a basket with the lever, where a Super Bark Biscuit and
+    a pile of leaves hiding a bone are waiting (the biscuit is the only one in
+    the level, and the back-lawn leaves need it too); and a bone stuck up the
+    big tree at the end that only the football can knock down. 11 bones now.
+  - Whoever's following no longer pops into the treehouse when left behind
+    (**team areas**): they wait instead of jumping at walls, until you bring
+    them up.
+  - Barks now reach whatever Melody is standing on, whichever way she faces.
+    A railing stops anyone walking off the treehouse deck by accident.
+  - Tiled: a new `interactables` layer (`gate`, `lever`, `lift`, `ladder`,
+    `football`, `teamArea`); collectibles can be `stuck` (only the football
+    knocks them down); sign text can use `{use}` and `{climb}`.
+- **0.14** USB controllers and a living, sunlit garden.
+  - **Controllers:** plug in a USB pad (SNES-style ones included) and play,
+    Mario style: D-pad moves, **B** jumps, hold **Y** (or L/R) to sprint, **A**
+    (or X) barks, **Start** pauses, **Select** swaps Melody and the boy. Retrolink
+    and Buffalo SNES pads and anything the browser knows ("standard" pads, Xbox,
+    8BitDo) work straight away; for any other pad, **Start > Set up controller**
+    lights up each button on a drawn SNES pad and remembers your choices.
+    A message pops up when a controller is plugged in.
+  - **Pause menu** (Start, Esc or P): keep playing, start again, change level,
+    sound on/off, controller setup.
+  - **Signs speak your language:** `{jump}`, `{bark}`, `{sprint}`, `{switch}`...
+    in sign text show "SPACE" at the keyboard and "B" with a controller.
+  - **Richer world and lighting** (Home & Garden): sunlit sky with a warm glow,
+    sunbeams and drifting pollen, Irish countryside in the distance, fuller
+    trees with leafy clumps, a proper dry-stone wall, lush grass with daisies,
+    rounded grass edges, shade under ledges, soft shadows under Melody, the boy
+    and the scenery, and a gentle vignette.
+  - **A living garden:** tree canopies sway, flowers and long grass wave,
+    washing flaps on the line, leaves drift down, butterflies flutter (and dart
+    away from Melody), robins hop and peck (and fly off if she runs at them or
+    barks), the squirrel on the treehouse flicks its tail and scampers off, and
+    birds cross the sky. New decorations: `tallGrass`, `washingLine`,
+    `birdBath`, `gnome`, `robin`, `butterflies`.
+  - The boy is back in the game (a later update had accidentally unplugged him).
+- **0.13** HOME & GARDEN. A new main level that looks like the mockup:
   Melody's house and drive, flower beds, garden terraces with a stump, a
   trampoline (hold jump for a bigger bounce!), a scent trail to a drain pipe,
   the crate up to the back lawn, a treehouse with a squirrel, the egg chair,
@@ -28,6 +136,23 @@ simple sound effects, and a debug overlay.
   for Super Sprint/Strength/Sniff/Bark that light up with a countdown ring.
   Levels can now have a `theme`, styled platforms and **decorations** (Tiled
   layer). The Playground is still there: `?level=melodys-playground`.
+- **0.12** The boy! He follows Melody everywhere, and **Tab** (or C)
+  swaps who you control; the other one follows. He's a bit slower than Melody
+  with a slightly smaller jump, collects sausages and toys (power-ups are dog
+  treats, so only Melody eats those), and can't push or smash things yet. If
+  the follower gets stuck (Melody boosted somewhere he can't reach) or left far
+  behind, they pop up next to the leader. Follow tuning is in
+  `config/follow.ts`, his movement in `config/movement.ts` (`BOY_MOVEMENT`).
+  Placeholder art; his name is `displayName` in `characters/boy/Boy.ts`.
+- **0.11** New level: **Melody's House and Garden**
+  (`?level=house-and-garden`). Puzzles that mix powers: sniff out the
+  sausage on top of the fridge and BARK BOOST up to it; scare the cat off the
+  bookcase and SUPER BOOST over it; smash the stuck back door; break into the
+  shed and sniff out what's hidden inside (Squirrel!); follow your nose to
+  the right leaf pile in the vegetable patch; SUPER CHARGE through the fences;
+  then push the crate to the garden wall and SUPER BOOST over it. 22 sausages.
+  `tests/houseAndGarden.test.ts` checks that each puzzle needs the powers it's
+  meant to.
 - **0.10** Daniel's ideas: BARK BOOST and BARK BREAK. Bark in mid-air and
   Melody pops upwards (once per jump; higher with Super Bark), so she can reach
   ledges a jump can't. Bark at blocks to smash them: cracked sandy blocks
@@ -110,6 +235,11 @@ Other commands:
 | `npm test`          | Runs the unit tests (movement and input logic)       |
 | `npm run typecheck` | Type-checks only                                     |
 | `npm run tiled:project` | Regenerates the Tiled project file (after adding new object types) |
+| `npm run art:check` | Checks every picture against the art rules (also part of `npm test`) |
+| `npm run art:palette` | Exports the house palette for drawing programs (`art/palettes/`) |
+| `npm run review:capture` | Photographs the review shots (needs `npm i -D playwright` once) |
+| `npm run review:compare` | Compares them with the concept art and the last approved photos |
+| `npm run review:approve -- <shot>` | Makes the latest photo of a shot the approved one |
 
 ## Controls
 
@@ -119,9 +249,35 @@ Other commands:
 | Jump           | Space, ↑ or W. Hold for a higher jump, tap for a small hop |
 | Sprint         | Hold Shift (or X) while moving |
 | Bark           | B (in mid-air: BARK BOOST) |
+| The boy's action | B or E: open, pull, throw, "Sit!", "Come!" |
+| Climb a ladder (the boy) | ↑ ↓ (or W S) |
+| Throw high (the boy) | Hold ↑ and press B |
 | Respawn / play again | R               |
 | Mute sounds    | M                     |
+| Swap Melody / the boy | Tab or C       |
+| Pause menu     | Esc or P              |
 | Toggle debug   | F3 or \` (backtick)   |
+
+**With a USB controller** (SNES layout, like Super Mario World):
+
+| Action                | Button                     |
+| --------------------- | -------------------------- |
+| Move (and menus)      | D-pad (or left stick)      |
+| Jump                  | B (hold for higher)        |
+| Sprint                | Hold Y (or L / R)          |
+| Bark                  | A (or X); in mid-air: BARK BOOST |
+| The boy's action      | A: open, pull, throw, "Sit!", "Come!" (hold ↑ to throw high) |
+| Climb a ladder (the boy) | D-pad ↑ ↓               |
+| Pause menu            | Start                      |
+| Swap Melody / the boy | Select                     |
+
+The browser only shows a controller to the game after one of its buttons has
+been pressed, so press any button once if it doesn't respond at first. If the
+buttons are muddled (some pads number them differently), open the pause menu
+and choose **Set up controller**: press each button as it lights up and it's
+remembered for that controller (in this browser). **Use standard controller
+buttons** in the same menu undoes it. Ready-made layouts live in
+`core/input/gamepad/gamepadMapping.ts`.
 
 **Super Sniff:** eat the purple Super Sniff Treat (near the start, under the
 staircase). For 15 seconds you can see scent trails and sniff out hidden
@@ -140,6 +296,17 @@ Super Bark. Step back a little to break more of a wall at once.
 **Super Strength:** eat a glowing Super Sausage. For 15 seconds Melody can
 shove heavy crates (just push against them) and break barriers (take a
 run-up or jump into them). Hold Shift while strong for a SUPER CHARGE.
+
+**Teamwork (the boy):** swap to him (Tab / Select) for the things Melody
+can't do. Walk up to a gate or lever and press the action button (a label
+over his head says what it'll do). Push up at a ladder to climb it. Walk over
+the football to pick it up, then press the action button to throw it (hold up
+to throw it high); Melody runs after it and brings it back. Near Melody, the
+action button tells her to **Sit!**; press it again (from anywhere) to call
+her. Melody can't climb, so to get her up to the treehouse: put her in the
+basket, swap to the boy (she'll wait there), climb the ladder and pull the
+lever. Tuning (reach, climbing speed, throws, how far she'll fetch) is in
+`config/teamwork.ts`.
 
 Leave Melody alone for 5 seconds and she sits down; after 12 seconds she
 naps. Timings are in `config/abilities.ts` (`MELODY_REST`).
@@ -194,12 +361,13 @@ has a **Class** that says exactly what it is, and properties for the details:
 | --- | --- | --- | --- |
 | `platforms` | Rectangle | `ground` (solid), `platform` (thin) | `oneWay`: jump up through it. `style`: `grass`, `stone` (grassy stone wall), `gravel`, `wood`, `slab`, `classic` (Playground look) |
 | `obstacles` | Rectangle (top-left corner counts; size comes from the type) | `heavyCrate`, `woodenBarrier`, `fence`, `crackedBlock` (any bark breaks it), `stoneBlock` (Super Bark breaks it) | |
-| `collectibles` | Point (centre of the item) | `bone`, `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it). Name = id |
+| `collectibles` | Point (centre of the item) | `bone`, `sausage`, `superSausage`, `sniffTreat`, `squirrelToy`, `barkBiscuit`, `ball` | `hidden`, `revealRadius`, `revealedBy` (`superSniff`, or `event` = only a bark target reveals it), `stuck` (up a tree: only the football knocks it down). Name = id |
 | `barkTargets` | Point (where it stands, on the ground) | `ballInTree`, `leafPile`, `cat` | `reveals` (name of the hidden thing it uncovers), `requiresSuperBark`, `height` (tree). Name = id |
 | `signs` | Point (bottom of the post) | `sign` | `text` |
 | `scentTrails` | Polyline, drawn **from the start to where it leads** | `scentTrail` | `scentType`, `targetId` (name of what it leads to), `visibleNormally`... Name = id |
 | `pointsOfInterest` | Point | `pointOfInterest` | `text`, `marker`, `hidden`. Name = id |
-| `decorations` | Point (**bottom-centre**: where it stands) | `house`, `trampoline` (bouncy!), `stump` (solid), `treehouse` (deck you can stand on), `bigTree`, `goal`, `football`, `eggChair`, `potPurple`, `potPink`, `bush`, `bushHydrangea`, `bushBerries`, `planter`, `drain`, `squirrel`, `flowers`, `fern` (foreground) | `flipX`, `layer` (`back`/`front`), `scale` |
+| `interactables` | Point (**bottom-centre**) for `gate`, `lever`, `lift`, `football`; Rectangle for `ladder`, `teamArea` | `gate` (garden door in a tall hedge: only the boy opens it), `lever` (the boy pulls it), `lift` (a basket on a rope), `ladder` (only the boy climbs it; drawn for you), `football`, `teamArea` (somewhere a left-behind character can't just pop into) | gate: `startsOpen`. lever: `target` (name of the gate or lift it works). lift: `travel` (how far up it goes, px), `startsUp`; Name = id (needed so a lever can work it). A lift's point is where its floor is at the bottom |
+| `decorations` | Point (**bottom-centre**: where it stands) | `house`, `trampoline` (bouncy!), `stump` (solid), `treehouse` (deck you can stand on, and a ladder the boy can climb), `bigTree`, `goal` (throw the football in!), `football` (just a picture: use the interactable to play with it), `eggChair`, `potPurple`, `potPink`, `bush`, `bushHydrangea`, `bushBerries`, `planter`, `drain`, `flowers`, `tallGrass`, `washingLine`, `birdBath`, `gnome`, `fern` (foreground); creatures: `robin`, `butterflies`, `squirrel` | `flipX`, `layer` (`back`/`front`), `scale` |
 | `markers` | Point | `spawn` (exactly one: where Melody starts, at her feet) | |
 
 The map's own properties (Map > Map Properties) hold `name`, `skyColor`,
@@ -211,6 +379,11 @@ look). The map size is the world size (the grid is 8px).
 into `src/levels/maps/` with a new name, e.g. `leos-level.tmj`. Choose the
 **JSON map files (*.tmj)** format. Play it at
 http://localhost:5173/?level=leos-level. No code changes are needed.
+
+**Sign text** can show the right button for whatever the player is using:
+write `{jump}`, `{bark}`, `{use}` (the boy's action), `{climb}`, `{sprint}`, `{pause}`, `{move}` or `{switch}`, e.g.
+"Hold {jump} to bounce higher!" reads "Hold SPACE..." at the keyboard and
+"Hold B..." with a controller.
 
 **If something's wrong** (an object with no Class, a sign with no text, a
 scent trail leading to a name that doesn't exist...), the game shows a list
@@ -317,12 +490,56 @@ Everything in `public/assets/garden/` (backgrounds, ground tiles, props, the
 bone) and `public/assets/ui/` (portrait, hearts, badges) is drawn by
 `tools/art/make_garden.py` (needs `pip install pillow numpy`). Each piece is
 one function, e.g. `trampoline()`; change it and run the script.
-`tools/art/garden_preview.png` shows everything at once.
+`tools/art/garden_preview.png` shows everything at once. Pictures you've
+replaced with your own are left alone (the script remembers what it drew in
+`tools/art/generated.json`); run it with `--force` to redraw everything.
+
+Animated pictures (swaying flowers, the washing line, the robin...) are strips
+of frames side by side; their frame sizes and speeds are written to
+`src/assets/gardenSheets.json`. Trees are two pictures: the trunk, and the
+leaves (`big-tree-leaves`, `treehouse-leaves`), which the game sways gently.
+Two-state pictures are strips of two frames too: the garden door (`gate`:
+shut, open) and the `lever` (off, on). The hedge it sits in is `hedge-arch`;
+the lift is `basket` (its front, drawn over whoever's in it), `basket-back`
+and `pulley` (its wheel must stay 60px from the left and 24px from the top -
+see `entities/teamwork/Lift.ts`).
+
+**The mood** - sunbeams, pollen, birds in the sky, the vignette, how far the
+background layers sit - is `GARDEN_LIGHT` and `GARDEN_LAYERS` in
+`src/levels/GardenBackground.ts`. The wildlife (how close Melody can get
+before robins fly off, how often leaves fall, butterfly colours) is in
+`src/config/ambient.ts`. If the garden ever runs slowly on an older computer,
+turn `sunbeams`, `frontBeams`, `motesPerSecond` and `vignette` down to 0.
+
+### Art pipeline: the style, the checks and the review
+
+How the game's art is kept consistent, and checked against the concept art, is
+in **`docs/ART-PIPELINE.md`**. The house style itself lives in the
+melody-art-director Skill (`.claude/skills/melody-art-director/references/`),
+starting with `style-guide.md`. In short:
+
+- Draw at half size and export at 200% (one art pixel is 2×2 screen pixels).
+  Use hard edges, real transparency, the v2 material ramps (in the style guide),
+  selective dark edges, and warm light from the upper left. (Style v2, confirmed
+  on 25 Oct 2026 with the art director's first delivery.)
+- `npm run art:check` before playing, and `npm run review:capture` then
+  `npm run review:compare` to see what changed on screen.
+- Code-drawn placeholders (treats, the cat) are replaced by saving a PNG named
+  after the placeholder in `src/assets/replacements/`, as the crate, the
+  barrier, the fence and the blocks already are. The sizes are in that
+  folder's README. Melody and the boy are sprite sheets in
+  `public/assets/sprites/` instead.
+- Concept art goes in `art/reference/concept/`, listed in
+  `art/reference/README.md`. A picture of what a review shot should look like
+  goes in `art/reference/targets/<shot>.png`. When the concept art arrives, ask
+  Claude to calibrate the style guide to it first.
 
 **Using art from elsewhere (ChatGPT, a drawing app...):** save a PNG with a
-transparent background over the file of the same name. Objects should be
+transparent background over the file of the same name, then run
+`npm run art:check` (it spots soft edges, painted-in backgrounds and off-grid
+pixels). Objects should be
 side-on (not looking down), one object per picture, roughly the size of the
-one it replaces (e.g. house 600×344, treehouse 440×560, trampoline 248×160,
+one it replaces (e.g. house 600×344, treehouse 440×560, trampoline 248×114,
 bone 36×20). The bottom-centre of the picture is where it stands. If a
 replacement has solid parts (trampoline mat, stump top, treehouse deck), check
 those still line up: `solids` in `src/config/decorations.ts`. Ground tiles
@@ -339,20 +556,26 @@ its name to `GARDEN_IMAGES` in `src/assets/artAssets.ts` and an entry to
 src/
   main.ts                    Phaser game config: scaling, physics, scene list
   config/                    Tunable values only, no logic
-    movement.ts              Movement feel (per character)
+    movement.ts              Movement feel (per character: Melody, the boy)
+    follow.ts                How the character you are not controlling follows
     abilities.ts             Ability tuning (sprint, bark, napping)
     audio.ts  camera.ts  controls.ts  display.ts  debug.ts
     powerUps.ts              Power-ups/status effects, capabilities, combos
     obstacles.ts             Obstacle types (crate, barrier, fence, bark blocks)
     scents.ts                Scent types + how trails are drawn
     barkTargets.ts           Things that react to barks
-    decorations.ts           Scenery types (house, trampoline...) and their solid parts
+    decorations.ts           Scenery types (house, trampoline...): solid parts, swaying leaves, creatures
+    ambient.ts               Wildlife tuning (scare distances, leaf fall, butterfly colours)
+    teamwork.ts              Gates, levers, lifts, ladders, the football; sit/fetch distances
   core/audio/Sfx.ts          Synthesized sound effects (swap for real sounds later)
   core/input/                Input abstraction
     actions.ts               The action vocabulary (moveX, jump, ...)
     InputSource.ts           Interface every device implements
     KeyboardInputSource.ts   Keyboard -> actions (uses config/controls.ts)
     InputManager.ts          Merges sources, detects presses and releases
+    createPlayerInput.ts     Keyboard + controllers, ready to use
+    buttonLabels.ts          Button names for signs ({jump} -> SPACE or B)
+    gamepad/                 USB controllers: mappings (pure, tested), input source, saved setups
   movement/
     PlatformerMovement.ts    Engine-agnostic run/jump logic driven by a MovementConfig
   characters/
@@ -361,16 +584,23 @@ src/
     abilities/Ability.ts     Ability interface + CharacterIntent
     abilities/sprint/        Sprint: stamina logic (pure) + Phaser visuals
     abilities/bark/          Bark: emits bark events (normal or super)
+    abilities/climb/         Climbing ladders (the boy)
     melody/Melody.ts         Melody, her abilities and animation
+    boy/Boy.ts               The boy (placeholder art): climbs, holds the football
+    follow/FollowBrain.ts    Follow-the-leader logic for whoever you're not controlling
     melody/melodyAnimations.ts  Registers animations from melodySheet.json
     melody/melodySheet.json  Frame size + animation list (generated)
   entities/collectibles/     Pick-ups: Collectible + collectibleTypes registry
+  entities/Sign.ts           Hint signs (show keyboard or controller buttons)
   entities/obstacles/        Obstacle: pushable/breakable things (placeholder art)
   gameplay/LevelProgress.ts  Items collected, timer, level complete
   gameplay/effects/          StatusEffects: timed effects + capability/combo resolution
   gameplay/interactions/     strengthRules (pure) + ObstacleSystem (push/break/hints)
   gameplay/scent/            scentRules (pure), SniffSystem, Detectable interface
   gameplay/bark/             barkRules (pure), BarkSystem (waves, reactions, hints)
+  gameplay/ambient/          AmbientLife (butterflies, robins, squirrel, falling leaves), GroundShadows
+  gameplay/teamwork/         teamworkRules (pure), TeamworkSystem (the boy's action, follow/sit/fetch, ball), ActionPrompt
+  entities/teamwork/         Gate, Lever, Lift (the basket), Football
   levels/GardenBackground.ts Sky, clouds and scrolling scenery for garden levels
   entities/bark/             BarkTarget: ball in tree, leaf pile, cat (placeholder art)
   entities/scent/            ScentTrail (renderer), PointOfInterest
@@ -384,16 +614,26 @@ src/
   scenes/
     BootScene.ts             Loads/generates assets, starts the first level
     LevelScene.ts            Generic gameplay scene: plays any level
-    HudScene.ts              Sausage counter, timer, celebration
+    HudScene.ts              Portrait, hearts, counter, power badges, celebration, messages
+    PauseScene.ts            Pause menu (Start / Esc)
+    ControllerSetupScene.ts  Press-each-button controller setup
     AnimationGalleryScene.ts Art review page (/?gallery)
     DebugScene.ts            Overlay drawn on top of the level
   assets/
     keys.ts                  Texture key names
     placeholders.ts          Generated placeholder art (replace with real art later)
+    placeholderSpecs.ts      What real art must be like to replace each placeholder
+    replacements/            Drop-in PNGs that replace placeholders (named after the key)
     audio/                   Optional real sound recordings (bark.mp3...)
+  review/                    Screenshot review mode (?review=<shot>) and shots.json
 public/assets/sprites/       Sprite sheets (melody.png)
 tools/sprites/               Sprite generator script + preview image
+tools/art/                   Garden art generator, plus art:check and art:palette
+tools/review/                review:capture, review:compare, review:approve
 tools/levels/                Tiled helpers (npm run tiled:project)
+art/                         Not shipped: concept art, targets, palettes, review baselines and log
+docs/ART-PIPELINE.md         The art pipeline: audit, style, checks, review
+.claude/skills/melody-art-director/   Claude's art-director Skill (style guide and rules)
 docs/GITHUB-SETUP.md         One-time GitHub + publishing setup
 .github/workflows/           Automatic test + publish on every push
 melodys-adventures.tiled-project   Open this in Tiled
@@ -405,9 +645,11 @@ tests/                       Vitest unit tests, including level-design checks
 - **Input is decoupled from characters.** Devices produce *actions*.
   `LevelScene` turns actions into a `MovementIntent` and passes it to the
   active character. Characters never touch the keyboard. Adding a gamepad
-  means writing a `GamepadInputSource` and calling `addSource()`. Switching
-  between Melody and the boy means handing the player's intent to a different
-  character.
+  means writing an `InputSource` and calling `addSource()` (that's how USB
+  controllers work: `core/input/gamepad/`). Swapping between Melody and the
+  boy just hands the player's intent to the other character; the one you're
+  not controlling gets its intent from a `FollowBrain` (`characters/follow/`),
+  plain unit-tested logic that steers by the same rules as the keyboard.
 - **Movement logic is separate from Phaser.** `PlatformerMovement` is plain
   TypeScript that takes a config, the body state and an intent, and returns
   velocities. That keeps it unit-testable, and each character (or a power-up)
@@ -433,13 +675,13 @@ tests/                       Vitest unit tests, including level-design checks
 
 | Feature                          | Likely home                                                |
 | -------------------------------- | ---------------------------------------------------------- |
-| Gamepad support                  | `core/input/GamepadInputSource.ts` + bindings in `config/controls.ts` |
-| New actions (sniff, switch)      | `core/input/actions.ts` + bindings                         |
+| New actions (sniff, dig)         | `core/input/actions.ts` + bindings (keyboard and `gamepadMapping.ts`) |
 | More abilities (sniff, dig)      | `characters/abilities/<name>/`, added in `Melody.ts`       |
-| The boy                          | `characters/boy/Boy.ts` + his own `MovementConfig`         |
+| More things for the boy (carry, push) | `gameplay/teamwork/` (action button) or `characters/abilities/<name>/` |
+| Two players (one each)           | A second InputManager driving the follower instead of `TeamworkSystem.followerIntent` |
 | More collectibles (bones, woozies) | new kind in `LevelDefinition.ts` + `collectibleTypes.ts` |
 | More power-ups (SUPER_SPEED, MEGA_SNIFF) | `config/powerUps.ts` + a collectible type (see above) |
 | Enemies                          | `entities/enemies/`                                         |
-| Menus, title screen              | new scenes in `scenes/`                                    |
+| Title screen, more menus         | new scenes in `scenes/` (see `PauseScene.ts`)              |
 | Real sounds                      | load in `BootScene`, play from `core/audio/Sfx.ts`         |
 | The house and garden             | New maps in `src/levels/maps/`                             |

@@ -155,6 +155,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -188,6 +193,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -221,6 +231,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -254,6 +269,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -287,6 +307,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -320,6 +345,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -353,6 +383,11 @@
           "type": "string",
           "propertyType": "RevealedBy",
           "value": "superSniff"
+        },
+        {
+          "name": "stuck",
+          "type": "bool",
+          "value": false
         }
       ]
     },
@@ -583,6 +618,95 @@
     },
     {
       "id": 27,
+      "name": "gate",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ff8a5a2b",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "startsOpen",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "lever",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffd64545",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "target",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "lift",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffc99a52",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "travel",
+          "type": "int",
+          "value": 200
+        },
+        {
+          "name": "startsUp",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "ladder",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffb88a4a",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 31,
+      "name": "football",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#fff4f4f4",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 32,
+      "name": "teamArea",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffffb84a",
+      "drawFill": true,
+      "members": []
+    },
+    {
+      "id": 33,
       "name": "house",
       "type": "class",
       "useAs": [
@@ -610,7 +734,7 @@
       ]
     },
     {
-      "id": 28,
+      "id": 34,
       "name": "trampoline",
       "type": "class",
       "useAs": [
@@ -638,7 +762,7 @@
       ]
     },
     {
-      "id": 29,
+      "id": 35,
       "name": "stump",
       "type": "class",
       "useAs": [
@@ -666,7 +790,7 @@
       ]
     },
     {
-      "id": 30,
+      "id": 36,
       "name": "treehouse",
       "type": "class",
       "useAs": [
@@ -694,7 +818,7 @@
       ]
     },
     {
-      "id": 31,
+      "id": 37,
       "name": "bigTree",
       "type": "class",
       "useAs": [
@@ -722,7 +846,7 @@
       ]
     },
     {
-      "id": 32,
+      "id": 38,
       "name": "goal",
       "type": "class",
       "useAs": [
@@ -750,13 +874,13 @@
       ]
     },
     {
-      "id": 33,
+      "id": 39,
       "name": "football",
       "type": "class",
       "useAs": [
         "object"
       ],
-      "color": "#ffa0a0a4",
+      "color": "#fff4f4f4",
       "drawFill": true,
       "members": [
         {
@@ -778,7 +902,7 @@
       ]
     },
     {
-      "id": 34,
+      "id": 40,
       "name": "eggChair",
       "type": "class",
       "useAs": [
@@ -806,7 +930,7 @@
       ]
     },
     {
-      "id": 35,
+      "id": 41,
       "name": "potPurple",
       "type": "class",
       "useAs": [
@@ -834,7 +958,7 @@
       ]
     },
     {
-      "id": 36,
+      "id": 42,
       "name": "potPink",
       "type": "class",
       "useAs": [
@@ -862,7 +986,7 @@
       ]
     },
     {
-      "id": 37,
+      "id": 43,
       "name": "bush",
       "type": "class",
       "useAs": [
@@ -890,7 +1014,7 @@
       ]
     },
     {
-      "id": 38,
+      "id": 44,
       "name": "bushHydrangea",
       "type": "class",
       "useAs": [
@@ -918,7 +1042,7 @@
       ]
     },
     {
-      "id": 39,
+      "id": 45,
       "name": "bushBerries",
       "type": "class",
       "useAs": [
@@ -946,7 +1070,7 @@
       ]
     },
     {
-      "id": 40,
+      "id": 46,
       "name": "planter",
       "type": "class",
       "useAs": [
@@ -974,7 +1098,7 @@
       ]
     },
     {
-      "id": 41,
+      "id": 47,
       "name": "drain",
       "type": "class",
       "useAs": [
@@ -1002,7 +1126,7 @@
       ]
     },
     {
-      "id": 42,
+      "id": 48,
       "name": "squirrel",
       "type": "class",
       "useAs": [
@@ -1030,7 +1154,7 @@
       ]
     },
     {
-      "id": 43,
+      "id": 49,
       "name": "flowers",
       "type": "class",
       "useAs": [
@@ -1058,7 +1182,7 @@
       ]
     },
     {
-      "id": 44,
+      "id": 50,
       "name": "fern",
       "type": "class",
       "useAs": [
@@ -1086,7 +1210,175 @@
       ]
     },
     {
-      "id": 45,
+      "id": 51,
+      "name": "tallGrass",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "name": "washingLine",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "name": "birdBath",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "name": "gnome",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "name": "robin",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "butterflies",
+      "type": "class",
+      "useAs": [
+        "object"
+      ],
+      "color": "#ffa0a0a4",
+      "drawFill": true,
+      "members": [
+        {
+          "name": "flipX",
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "layer",
+          "type": "string",
+          "propertyType": "DecorationLayer",
+          "value": ""
+        },
+        {
+          "name": "scale",
+          "type": "float",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": 57,
       "name": "spawn",
       "type": "class",
       "useAs": [

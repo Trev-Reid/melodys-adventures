@@ -1,0 +1,42 @@
+[
+  {
+    "name": "goal",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-4f5a988a-ec7b-452f-90ec-71b0628babaa.png",
+    "prompt": "Improve this isolated football goal, same224x120 footprint and front side-on view. Elegant weathered ivory metal tubular frame, subtle warm highlights and cool grey joints. Thin readable dark warm-grey diamond netting with REAL TRANSPARENT holes, no solid grey mesh panel. Small depth support feet stay inside footprint. No football or ground plane. Cozy handcrafted detailed pixel art for logical112x60. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "bird-bath",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-9db66593-bb70-4a53-aed1-148312d5b55d.png",
+    "prompt": "Redesign this TWO-FRAME horizontal birdbath sprite strip. Exactly two equal cells side by side, each80x88 output (40x44 logical), whole160x88. SAME ornate carved warm limestone pedestal birdbath in both frames, identical registration and silhouette, feet at bottom, bowl near upper quarter, broad scalloped rim, rich subtle stone facets and small moss patches at base. Turquoise water in bowl; ONLY the few water glints/ripple positions change between frames. No birds, no fountain jet beyond canvas, no scene. Match warm cottage garden pixelart. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "washing-line",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-bdf7129a-3974-499f-8984-72ed88b0cda1.png",
+    "prompt": "Redesign this FOUR-FRAME horizontal clothesline animation sheet. Four equally sized300x180 cells, whole1200x180, 150x90 logical percell. Each frame same two aged timber upright posts at left/right edges, feet exactly bottom, fixed top rope near y30; white linen sheet left, coral red shirt, deep blue shirt, small mustard towel and sage sock right. Cloth has tactile folds, sunlit cream edges, little wooden pegs; warm wooden posts with subtle grain. Only fabric lower edges sway gently across four frames; posts and rope registration fixed. Transparent gaps. Complete identical objects eachcell, no cropped posts. Cozy detailed pixelart, upperleft light. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "gate",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-734274cf-468a-4a36-b362-8d487745c0c4.png",
+    "prompt": "Redesign this TWO-FRAME gate sprite sheet. Two equal64x156 cells side by side, total128x156 (32x78 logicalpercell). First is CLOSED narrow arched oak garden door filling itscell; second is SAME door swung open almost edge-on, on LEFT hinge so narrow vertical side sliver occupies LEFT of secondcell and remainder is transparent. Same warm honey oak planks, diagonalbrace, aged dark wroughtiron strap hinges and small ringlatch. Bottom feet same. Preserve full arch silhouette and normalized source frame geometry. Rich readable pixel art, no wall hedge scenery or ground. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "bush",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-8e019037-1058-442b-9fe7-bae95d59e56e.png",
+    "prompt": "Improve this isolated plain garden shrub128x80,64x40 logical. Replace the round ball with natural uneven arching leafy boughs. Rich forest teal shadow pockets, olivegreen mids, golden yellowgreen highlights upperleft; tasteful clustered leaves with small gaps, dense bottomcentre. No flowers berries pot or ground. Strong attractive organic silhouette, cozy handcrafted cottage-garden pixel art. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "hedge-arch",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-70b6bb9d-b1ff-4c07-8d4f-c652968536de.png",
+    "prompt": "Improve ONLY this tall rectangular hedge surround104x300,52x150 logical. Same overall tall narrow silhouette, full opaque central panel as reference so wooden gate can overlay lower half. Sculpted small ivy and evergreen leaf clusters, rich deep green shadow at lowercentre, sunlit yellowgreen upperleft edge, irregular softly clipped leafy edges, a few tiny cream climbing roses near upper half and sides. Do not draw any door or arch opening; gate is a separate overlaid asset. No ground sky pots. Cohesive rich cottage garden pixelart. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "obstacle-heavyCrate",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-9eef075c-703b-4bf4-93df-e5d14b9e9cb1.png",
+    "prompt": "Redesign isolated heavy wooden crate exactly110x110,55x55 logical. Square front-on, entire physical face fills footprint with no perspective protrusions. Rich weathered honey oak planks, chunky diagonal cross braces, textured grain and little knots, forged dark iron corner bands and rivets. CLEAR dark metal WEIGHT emblem with loop handle at centre (keep functional symbol). Restrained ivy only tiny lowercorner, no flowers. Upperleft sunlit edges, deep coolbrown creases; cozy highquality pixelart, not simple flat vector. No groundshadow backdrop. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  },
+  {
+    "name": "treehouse",
+    "path": "C:\\Users\\trevr\\.codex\\generated_images\\01a1748c-8d0f-77b3-844c-f3380696adf9\\exec-b07e94be-cd87-4986-b185-ebd432e96298.png",
+    "prompt": "PRECISE EDIT to this treehouse asset: remove ONLY the TWO diagonal cut-off branches sticking out ABOVE the roof, one at upperleft and one upperright. Replace their pixels with genuine transparency. Keep the right-facing horizontal branch at eaves height and ALL cabin, roof, ivy, flag, railings, ladder, trunk, roots, support braces unchanged. Keep EXACT full440x560 canvas registration and every remaining object position, no crop or scale or redesign. Preserve transparency and existing crisp 2x pixelart. Do not add foliage: that is a separate layer. True transparent RGBA background. No labels text watermark or checkerboard. This is an export-ready game prop, not a scene illustration. Keep source aspect and frame layout."
+  }
+]

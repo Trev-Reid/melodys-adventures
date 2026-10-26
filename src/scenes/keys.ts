@@ -4,4 +4,6 @@ export const SCENES = {
   hud: 'HudScene',
   debug: 'DebugScene',
   gallery: 'AnimationGalleryScene',
+  pause: 'PauseScene',
+  controllerSetup: 'ControllerSetupScene',
 } as const;

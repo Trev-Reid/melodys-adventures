@@ -121,9 +121,44 @@ export interface CollectibleDefinition {
   id?: string;
   /** Hidden until sniffed out. */
   hidden?: DetectableSpec;
+  /** Stuck up high (in a tree): knock it down with the boy's football. */
+  stuck?: boolean;
   /** Centre of the item, in world pixels. */
   x: number;
   y: number;
+}
+
+/**
+ * The boy's things and teamwork helpers (see config/teamwork.ts):
+ * - gate: only the boy can open it (in a hedge too tall to jump).
+ * - lever: the boy pulls it to work a gate or a lift (`target`).
+ * - lift: a basket on a rope that goes up `travel` px and back.
+ * - ladder: only the boy can climb it.
+ * - football: the boy throws it; Melody fetches it.
+ * - teamArea: somewhere the other character can't just pop into when left
+ *   behind - they have to get there themselves (the treehouse).
+ */
+export type InteractableKind = 'gate' | 'lever' | 'lift' | 'ladder' | 'football' | 'teamArea';
+export const INTERACTABLE_KINDS: InteractableKind[] = ['gate', 'lever', 'lift', 'ladder', 'football', 'teamArea'];
+
+export interface InteractableDefinition {
+  kind: InteractableKind;
+  /** Name, so a lever can say which gate or lift it works. */
+  id?: string;
+  /** gate, lever, lift, football: bottom-centre. ladder, teamArea: top-left corner. */
+  x: number;
+  y: number;
+  /** ladder, teamArea: size. */
+  width?: number;
+  height?: number;
+  /** lever: name of the gate or lift it works. */
+  target?: string;
+  /** lift: how far up it goes (px). */
+  travel?: number;
+  /** gate: starts open. */
+  startsOpen?: boolean;
+  /** lift: starts at the top. */
+  startsUp?: boolean;
 }
 
 /** Something to push or smash; behaviour comes from config/obstacles.ts. */
@@ -166,6 +201,8 @@ export interface LevelDefinition {
   pointsOfInterest?: PointOfInterestDefinition[];
   /** Things that react to a bark. */
   barkTargets?: BarkTargetDefinition[];
+  /** Gates, levers, lifts, ladders, the football, teamwork areas. */
+  interactables?: InteractableDefinition[];
   signs?: SignDefinition[];
   /** Development aids such as distance markers. */
   showDistanceMarkers?: boolean;

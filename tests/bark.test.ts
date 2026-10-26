@@ -16,6 +16,12 @@ describe('bark rules', () => {
     expect(barkReaches(superBark(0, 0, -1), { x: -200, y: 0 })).toBe(true);
   });
 
+  it('reaches what she is standing on, whichever way she faces', () => {
+    // The bark starts at her mouth, 34px in front of her middle.
+    expect(barkReaches(woof(-34, -16, -1), { x: 0, y: 0 })).toBe(true);
+    expect(barkReaches(woof(34, -16, 1), { x: 0, y: 0 })).toBe(true);
+  });
+
   it('a super bark reaches further than an ordinary woof', () => {
     expect(barkReaches(woof(0, 0, 1), { x: 300, y: 0 })).toBe(false);
     expect(barkReaches(superBark(0, 0, 1), { x: 300, y: 0 })).toBe(true);

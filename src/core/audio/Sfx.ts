@@ -1,6 +1,7 @@
 import { AUDIO } from '@/config/audio';
 
-export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal' | 'bark' | 'superBark' | 'meow' | 'rustle' | 'boost' | 'crumble' | 'boing';
+export type SoundName = 'jump' | 'collect' | 'celebrate' | 'powerup' | 'powerdown' | 'smash' | 'bonk' | 'strain' | 'sniff' | 'reveal' | 'bark' | 'superBark' | 'meow' | 'rustle' | 'boost' | 'crumble' | 'boing' | 'menuMove' | 'menuSelect'
+  | 'gate' | 'lever' | 'pulley' | 'rung' | 'throw' | 'catch' | 'whistle' | 'sit' | 'thud' | 'goal';
 
 /**
  * Tiny synthesized sound effects (Web Audio beeps), so we have audio feedback
@@ -65,6 +66,13 @@ class Sfx {
           this.woof(0.8, 1);
           this.woof(0.8, 0.6, 0.16);
           break;
+        case 'menuMove':
+          this.tone({ from: 660, to: 660, duration: 0.05, type: 'square', volume: AUDIO.collectVolume * 0.25 });
+          break;
+        case 'menuSelect':
+          this.tone({ from: 520, to: 520, duration: 0.06, type: 'square', volume: AUDIO.collectVolume * 0.3 });
+          this.tone({ from: 780, to: 780, duration: 0.09, type: 'square', volume: AUDIO.collectVolume * 0.3, delay: 0.06 });
+          break;
         case 'boing':
           this.tone({ from: 160, to: 520, duration: 0.18, type: 'sine', volume: AUDIO.jumpVolume * 1.2 });
           this.tone({ from: 520, to: 380, duration: 0.12, type: 'sine', volume: AUDIO.jumpVolume * 0.6, delay: 0.17 });
@@ -91,6 +99,48 @@ class Sfx {
         case 'reveal':
           [1047, 1319, 1568].forEach((f, i) =>
             this.tone({ from: f, to: f, duration: 0.14, type: 'sine', volume: AUDIO.collectVolume * 0.5, delay: i * 0.07 }),
+          );
+          break;
+        case 'gate':
+          // Creaky hinges, then the latch.
+          this.tone({ from: 380, to: 560, duration: 0.28, type: 'sawtooth', volume: AUDIO.collectVolume * 0.18 });
+          this.tone({ from: 520, to: 430, duration: 0.22, type: 'sawtooth', volume: AUDIO.collectVolume * 0.14, delay: 0.26 });
+          this.noise(0.05, AUDIO.collectVolume * 0.4, 0.02, 2500);
+          break;
+        case 'lever':
+          this.noise(0.05, AUDIO.collectVolume * 0.5, 0, 1500);
+          this.tone({ from: 240, to: 90, duration: 0.14, type: 'square', volume: AUDIO.collectVolume * 0.4, delay: 0.03 });
+          break;
+        case 'pulley':
+          [0, 0.18, 0.36].forEach((d) => this.tone({ from: 700, to: 640, duration: 0.07, type: 'triangle', volume: AUDIO.collectVolume * 0.18, delay: d }));
+          break;
+        case 'rung':
+          this.tone({ from: 300, to: 260, duration: 0.05, type: 'triangle', volume: AUDIO.jumpVolume * 0.5 });
+          break;
+        case 'throw':
+          this.noise(0.16, AUDIO.collectVolume * 0.35, 0, 1200);
+          this.tone({ from: 300, to: 700, duration: 0.14, type: 'triangle', volume: AUDIO.jumpVolume * 0.6 });
+          break;
+        case 'catch':
+          this.tone({ from: 600, to: 900, duration: 0.07, type: 'sine', volume: AUDIO.collectVolume * 0.4 });
+          break;
+        case 'whistle':
+          // "Come here, Melody!"
+          this.tone({ from: 1300, to: 1700, duration: 0.14, type: 'sine', volume: AUDIO.collectVolume * 0.35 });
+          this.tone({ from: 1500, to: 1100, duration: 0.2, type: 'sine', volume: AUDIO.collectVolume * 0.35, delay: 0.16 });
+          break;
+        case 'sit':
+          this.tone({ from: 520, to: 390, duration: 0.16, type: 'triangle', volume: AUDIO.collectVolume * 0.35 });
+          break;
+        case 'thud':
+          this.tone({ from: 140, to: 60, duration: 0.16, type: 'sine', volume: AUDIO.collectVolume * 0.7 });
+          this.noise(0.08, AUDIO.collectVolume * 0.3, 0, 300);
+          break;
+        case 'goal':
+          // The crowd goes wild.
+          this.noise(1.1, AUDIO.celebrateVolume * 0.5, 0.05, 700);
+          [392, 523, 659, 784].forEach((f, i) =>
+            this.tone({ from: f, to: f, duration: 0.18, type: 'square', volume: AUDIO.celebrateVolume * 0.35, delay: i * 0.1 }),
           );
           break;
         case 'strain':

@@ -5,9 +5,15 @@ import { LevelScene } from '@/scenes/LevelScene';
 import { HudScene } from '@/scenes/HudScene';
 import { DebugScene } from '@/scenes/DebugScene';
 import { AnimationGalleryScene } from '@/scenes/AnimationGalleryScene';
+import { PauseScene } from '@/scenes/PauseScene';
+import { ControllerSetupScene } from '@/scenes/ControllerSetupScene';
+
+/** ?review=<shot>: screenshots for art review must come out the same every time (src/review). */
+const reviewing = new URLSearchParams(window.location.search).has('review');
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
+  ...(reviewing ? { seed: ['melody-review'] } : {}),
   parent: 'game',
   width: DISPLAY.width,
   height: DISPLAY.height,
@@ -28,10 +34,10 @@ const config: Phaser.Types.Core.GameConfig = {
     },
   },
   input: {
-    // Ready for controller support later.
-    gamepad: true,
+    // Controllers are read directly (core/input/gamepad), not by Phaser's plugin.
+    gamepad: false,
   },
-  scene: [BootScene, LevelScene, HudScene, DebugScene, AnimationGalleryScene],
+  scene: [BootScene, LevelScene, HudScene, DebugScene, AnimationGalleryScene, PauseScene, ControllerSetupScene],
 };
 
 export const game = new Phaser.Game(config);

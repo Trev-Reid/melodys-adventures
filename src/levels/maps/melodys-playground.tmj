@@ -645,7 +645,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "← → to run\nSPACE to jump"
+       "value": "{move} to run\n{jump} to jump"
       }
      ]
     },
@@ -664,7 +664,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "Hold SHIFT\nto sprint!"
+       "value": "Hold {sprint}\nto sprint!"
       }
      ]
     },
@@ -778,7 +778,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "SUPER CHARGE!\nStrength + SHIFT"
+       "value": "SUPER CHARGE!\nStrength + {sprint}"
       }
      ]
     },
@@ -816,7 +816,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "SUPER BARK BISCUIT\nPress B to bark!"
+       "value": "SUPER BARK BISCUIT\nPress {bark} to bark!"
       }
      ]
     },
@@ -835,7 +835,7 @@
       {
        "name": "text",
        "type": "string",
-       "value": "BARK BOOST!\nJump, then press B\nin the air"
+       "value": "BARK BOOST!\nJump, then press {bark}\nin the air"
       }
      ]
     },

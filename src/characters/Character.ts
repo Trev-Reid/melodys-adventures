@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import type { MovementConfig } from '@/config/movement';
 import { PlatformerMovement, neutralModifiers, type MovementOutput } from '@/movement/PlatformerMovement';
-import type { Ability, CharacterIntent } from './abilities/Ability';
+import type { Ability, CharacterIntent, MovementOverride } from './abilities/Ability';
 import { StatusEffects, resolveCapabilities } from '@/gameplay/effects/StatusEffects';
 import type { Capability, ComboDefinition } from '@/config/powerUps';
 import { EffectAura } from './effects/EffectAura';
@@ -32,6 +32,8 @@ export abstract class Character extends Phaser.Physics.Arcade.Sprite {
   protected readonly abilities: Ability[] = [];
   /** Timed power-ups / status effects (SUPER_STRENGTH...). */
   readonly effects = new StatusEffects();
+  /** Shown on screen, e.g. when the player swaps to this character. */
+  abstract readonly displayName: string;
   facing: 1 | -1 = 1;
   /**
    * Hearts. Shown on the HUD; nothing takes them away yet - what hurts her
@@ -94,6 +96,11 @@ export abstract class Character extends Phaser.Physics.Arcade.Sprite {
     return this.caps.has(capability);
   }
 
+  /** Passing through platforms that can be jumped up through (climbing down a ladder through a deck). */
+  get passesThroughOneWay(): boolean {
+    return this.abilities.some((a) => a.passesThroughOneWay?.() ?? false);
+  }
+
   /** Combos currently active, e.g. SUPER CHARGE. */
   get activeCombos(): ComboDefinition[] {
     return this.combos;
@@ -119,6 +126,17 @@ export abstract class Character extends Phaser.Physics.Arcade.Sprite {
     ]);
     this.caps = resolved.capabilities;
     this.combos = resolved.combos;
+
+    // An ability can take over movement for a while (climbing a ladder).
+    let override: MovementOverride | undefined;
+    for (const ability of this.abilities) override ??= ability.overrideMovement?.(this, intent, dtSeconds);
+    if (override) {
+      this.body.setVelocity(override.vx, override.vy);
+      this.body.setGravityY(override.gravityY);
+      this.afterMove({ vx: override.vx, vy: override.vy, gravityY: override.gravityY, jumped: false, landed: false }, dtSeconds);
+      this.aura.update(dtSeconds, this.combos);
+      return;
+    }
 
     const out = this.movement.step(
       { vx: this.body.velocity.x, vy: this.body.velocity.y, onGround: this.onGround },

@@ -1,0 +1,320 @@
+[
+ {
+  "name": "OUTLINE",
+  "from": "garden",
+  "colours": [
+   "#2b1d14"
+  ]
+ },
+ {
+  "name": "LEAF_OUTLINE",
+  "from": "garden",
+  "colours": [
+   "#1f3a14"
+  ]
+ },
+ {
+  "name": "GRASS",
+  "from": "garden",
+  "colours": [
+   "#2c5a19",
+   "#3f7d22",
+   "#58a02c",
+   "#79c13a",
+   "#a3dc4e",
+   "#c9ee6e"
+  ]
+ },
+ {
+  "name": "FOLIAGE",
+  "from": "garden",
+  "colours": [
+   "#1f4417",
+   "#2f6522",
+   "#427f2c",
+   "#5b9c37",
+   "#7cb946",
+   "#a3d35c"
+  ]
+ },
+ {
+  "name": "FOLIAGE_FAR",
+  "from": "garden",
+  "colours": [
+   "#3d6b3a",
+   "#4f8248",
+   "#659a57",
+   "#7fb26a",
+   "#9ac77f"
+  ]
+ },
+ {
+  "name": "DIRT",
+  "from": "garden",
+  "colours": [
+   "#4a2a16",
+   "#64391e",
+   "#7e4c29",
+   "#9a6236",
+   "#b57a46"
+  ]
+ },
+ {
+  "name": "STONE",
+  "from": "garden",
+  "colours": [
+   "#5c5448",
+   "#7a7262",
+   "#988f7c",
+   "#b5ab95",
+   "#d1c8b0",
+   "#e6dfc9"
+  ]
+ },
+ {
+  "name": "GRAVEL",
+  "from": "garden",
+  "colours": [
+   "#8a7658",
+   "#a6906c",
+   "#c0aa84",
+   "#d8c5a0",
+   "#ece0c0"
+  ]
+ },
+ {
+  "name": "WOOD",
+  "from": "garden",
+  "colours": [
+   "#4a2c16",
+   "#6b4222",
+   "#8c5a30",
+   "#ab7442",
+   "#c99559"
+  ]
+ },
+ {
+  "name": "BARK",
+  "from": "garden",
+  "colours": [
+   "#3a2414",
+   "#553520",
+   "#6e4a2e",
+   "#8a6240",
+   "#a67c55"
+  ]
+ },
+ {
+  "name": "SKY_TOP",
+  "from": "garden",
+  "colours": [
+   "#3f9be6"
+  ]
+ },
+ {
+  "name": "SKY_BOTTOM",
+  "from": "garden",
+  "colours": [
+   "#c3e8f6"
+  ]
+ },
+ {
+  "name": "WALL",
+  "from": "garden",
+  "colours": [
+   "#b9b3a6",
+   "#d3cec2",
+   "#e8e4da",
+   "#f6f3ec"
+  ]
+ },
+ {
+  "name": "ROOF",
+  "from": "garden",
+  "colours": [
+   "#1f232c",
+   "#2c323d",
+   "#3b4250",
+   "#4d5566"
+  ]
+ },
+ {
+  "name": "DOOR",
+  "from": "garden",
+  "colours": [
+   "#4b5f70",
+   "#62798c",
+   "#7f95a7",
+   "#9db0bf"
+  ]
+ },
+ {
+  "name": "FLOWER_W",
+  "from": "garden",
+  "colours": [
+   "#d9d2c2",
+   "#f4f0e6",
+   "#ffffff"
+  ]
+ },
+ {
+  "name": "TERRACOTTA",
+  "from": "garden",
+  "colours": [
+   "#7a3a1e",
+   "#9e4f2a",
+   "#bf6a3a",
+   "#d98a54"
+  ]
+ },
+ {
+  "name": "BLUE",
+  "from": "garden",
+  "colours": [
+   "#1a3f8a",
+   "#2456b8",
+   "#3a74d8",
+   "#62a0f0"
+  ]
+ },
+ {
+  "name": "RED",
+  "from": "garden",
+  "colours": [
+   "#7a1414",
+   "#a82020",
+   "#d23434",
+   "#f05a5a"
+  ]
+ },
+ {
+  "name": "BARK_V2",
+  "from": "garden",
+  "colours": [
+   "#2e1c10",
+   "#432a18",
+   "#5a3a22",
+   "#73502f",
+   "#8d683f",
+   "#a8835a"
+  ]
+ },
+ {
+  "name": "LEAVES",
+  "from": "garden",
+  "colours": [
+   "#163319",
+   "#1e461d",
+   "#2b5e25",
+   "#3a7530",
+   "#4f8f38",
+   "#6aab42",
+   "#8fc752",
+   "#b8e070"
+  ]
+ },
+ {
+  "name": "LEAVES_FAR",
+  "from": "garden",
+  "colours": [
+   "#2f5a44",
+   "#3b6a4d",
+   "#497b55",
+   "#5a8c5d",
+   "#6e9f66",
+   "#86b373",
+   "#9fc684"
+  ]
+ },
+ {
+  "name": "STONE_V2",
+  "from": "garden",
+  "colours": [
+   "#4a453d",
+   "#5f594e",
+   "#777062",
+   "#8f8876",
+   "#a8a08b",
+   "#c0b8a0",
+   "#d8d1b9",
+   "#ebe6d2"
+  ]
+ },
+ {
+  "name": "GRASS_V2",
+  "from": "garden",
+  "colours": [
+   "#24501a",
+   "#2f6420",
+   "#3d7a27",
+   "#4f9330",
+   "#66ab3a",
+   "#84c247",
+   "#a8d95a",
+   "#cdee82"
+  ]
+ },
+ {
+  "name": "SOIL",
+  "from": "garden",
+  "colours": [
+   "#3a2112",
+   "#4d2d18",
+   "#613a20",
+   "#764a2a",
+   "#8b5b34",
+   "#a06e40"
+  ]
+ },
+ {
+  "name": "HEDGE",
+  "from": "garden",
+  "colours": [
+   "#12290f",
+   "#183617",
+   "#20461d",
+   "#2b5a24",
+   "#386f2c",
+   "#488535",
+   "#5d9c40",
+   "#79b54e"
+  ]
+ },
+ {
+  "name": "WICKER",
+  "from": "garden",
+  "colours": [
+   "#5a3a18",
+   "#7a5226",
+   "#9a6c36",
+   "#b88a4c",
+   "#d4a865",
+   "#e8c48a"
+  ]
+ },
+ {
+  "name": "MELODY",
+  "from": "melody",
+  "colours": [
+   "#18100c",
+   "#1a1a1e",
+   "#221e20",
+   "#2e1e16",
+   "#5c2424",
+   "#46464e",
+   "#74401e",
+   "#806450",
+   "#aa622e",
+   "#b46c34",
+   "#ec707c",
+   "#dd944e",
+   "#b0a08e",
+   "#c0b4a6",
+   "#e6ba3c",
+   "#eeb574",
+   "#dad0c2",
+   "#faf6ee",
+   "#ffffff"
+  ]
+ }
+]

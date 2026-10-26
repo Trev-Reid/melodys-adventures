@@ -72,7 +72,10 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
     layer(
       LAYERS.collectibles,
       (level.collectibles ?? []).map((c) =>
-        withProps(obj({ type: c.kind, name: c.id ?? '', x: c.x, y: c.y, point: true }), hiddenProps(c.hidden)),
+        withProps(obj({ type: c.kind, name: c.id ?? '', x: c.x, y: c.y, point: true }), [
+          ...hiddenProps(c.hidden),
+          ...(c.stuck ? [{ name: 'stuck', type: 'bool', value: true } as TiledProperty] : []),
+        ]),
       ),
     ),
     layer(
@@ -109,6 +112,21 @@ export function levelToTiled(level: LevelDefinition): TiledMap {
         if (t.requiresSuperBark !== undefined) p.push({ name: 'requiresSuperBark', type: 'bool', value: t.requiresSuperBark });
         if (t.height !== undefined) p.push({ name: 'height', type: 'int', value: t.height });
         return withProps(obj({ type: t.kind, name: t.id ?? '', x: t.x, y: t.y, point: true }), p);
+      }),
+    ),
+    layer(
+      LAYERS.interactables,
+      (level.interactables ?? []).map((t) => {
+        const p: TiledProperty[] = [];
+        if (t.target) p.push({ name: 'target', type: 'string', value: t.target });
+        if (t.travel !== undefined) p.push({ name: 'travel', type: 'int', value: t.travel });
+        if (t.startsOpen) p.push({ name: 'startsOpen', type: 'bool', value: true });
+        if (t.startsUp) p.push({ name: 'startsUp', type: 'bool', value: true });
+        const area = t.width !== undefined && t.height !== undefined;
+        return withProps(
+          obj({ type: t.kind, name: t.id ?? '', x: t.x, y: t.y, ...(area ? { width: t.width, height: t.height } : { point: true }) }),
+          p,
+        );
       }),
     ),
     layer(

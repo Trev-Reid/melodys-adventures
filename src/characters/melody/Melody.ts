@@ -33,6 +33,8 @@ export class Melody extends Character {
   rest: RestState = 'awake';
   /** Set when the level is complete - she celebrates instead of idling. */
   happy = false;
+  /** Told to sit by the boy (or left in the basket): she sits and waits. */
+  staying = false;
 
   private secondsSinceLanding = Number.POSITIVE_INFINITY;
   private stillSeconds = 0;
@@ -93,6 +95,32 @@ export class Melody extends Character {
     }
   }
 
+  /**
+   * "Sit!" - she sits down and waits (and after a while, nods off), even if
+   * she's riding the basket. stay(false) gets her up again.
+   */
+  stay(on: boolean): void {
+    if (on === this.staying) return;
+    this.staying = on;
+    if (on) {
+      this.barkPoseTimer = 0;
+      this.busyTimer = 0;
+      this.rest = 'sitting';
+      this.stillSeconds = 0;
+      this.playAnim('sit', 'sit_idle');
+    } else if (this.rest === 'sleeping') {
+      this.perform('wake', this.restCfg.wakeUpSeconds);
+    } else {
+      this.wakeUp();
+    }
+  }
+
+  /** Where she holds things in her mouth (the football), in world pixels. */
+  get mouthPosition(): { x: number; y: number } {
+    const sitting = this.rest === 'sitting' || this.rest === 'sleeping';
+    return { x: this.x + this.facing * (sitting ? 26 : 38) * this.scaleX, y: this.body.top + (sitting ? 0 : 10) * this.scaleY };
+  }
+
   override applyIntent(intent: CharacterIntent, dtSeconds: number): void {
     const wantsToAct = intent.moveX !== 0 || intent.jumpPressed || intent.sprintHeld || intent.barkPressed;
 
@@ -115,6 +143,17 @@ export class Melody extends Character {
     this.updateAppearance(dtSeconds);
     this.secondsSinceLanding = out.landed ? 0 : this.secondsSinceLanding + dtSeconds;
     if (this.rest === 'busy') return;
+
+    // Staying put: keep sitting (even riding the basket), and nod off after a while.
+    if (this.staying) {
+      this.stillSeconds += dtSeconds;
+      if (this.rest !== 'sleeping' && this.stillSeconds >= this.restCfg.sleepAfterSeconds) {
+        this.rest = 'sleeping';
+        this.playAnim('lie_down', 'sleep');
+      }
+      if (this.rest === 'sleeping') this.emitZzz(dtSeconds);
+      return;
+    }
 
     const loco = pickLocomotionAnim({
       onGround: this.onGround,
@@ -166,6 +205,7 @@ export class Melody extends Character {
 
   override respawn(x: number, y: number): void {
     super.respawn(x, y);
+    this.staying = false;
     this.secondsSinceLanding = Number.POSITIVE_INFINITY;
     this.wakeUp();
   }

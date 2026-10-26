@@ -1,0 +1,138 @@
+[
+  {
+    "file": "public/assets/garden/goal.png",
+    "width": 224,
+    "height": 120,
+    "frames": 1,
+    "frameWidth": 224,
+    "frameHeight": 120,
+    "colours": 47,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "b853b30ab4624fb7c90cb5b707f114dabaced5a8bbf4e4b1cccfd878badc4d2d",
+    "before_sha256": "ad5b8e4a5012ae6fbe964df34ec4c4727eb3b3dc45c5f23251f50d24d11b4673"
+  },
+  {
+    "file": "public/assets/garden/bird-bath.png",
+    "width": 160,
+    "height": 88,
+    "frames": 2,
+    "frameWidth": 80,
+    "frameHeight": 88,
+    "colours": 47,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "9ba966a6568fb88bcdb1022bf1ac20adeb9313406df542a7d8267ab63eef1089",
+    "before_sha256": "0a6fb83493ed27db8b72f27f971b13e3756757723f1baf77a6f542424bb90a02"
+  },
+  {
+    "file": "public/assets/garden/washing-line.png",
+    "width": 1200,
+    "height": 180,
+    "frames": 4,
+    "frameWidth": 300,
+    "frameHeight": 180,
+    "colours": 47,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "2847c3143ceecc5cc8118d5e588c02810c6ede1aee3779e7fa59f98df4e888a1",
+    "before_sha256": "8c237943e2b2412bfbc27b813ecadb0af14608eb25db735b3f5c675f8577d150"
+  },
+  {
+    "file": "public/assets/garden/gate.png",
+    "width": 128,
+    "height": 156,
+    "frames": 2,
+    "frameWidth": 64,
+    "frameHeight": 156,
+    "colours": 48,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "451147fed0fcfdc01bbbf763d4ed24209a26207a40b5a4b14983bf8030beedd3",
+    "before_sha256": "8f60ee4d23f18aec2d6eb33dbe6bcf871a2ecbfb711c348a265b8aaa021b135e"
+  },
+  {
+    "file": "public/assets/garden/bush.png",
+    "width": 128,
+    "height": 80,
+    "frames": 1,
+    "frameWidth": 128,
+    "frameHeight": 80,
+    "colours": 47,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "fd7a60335e09cc601a7e6958a1fa895446b75427f67e9ca6edf65a167ee4250d",
+    "before_sha256": "45257144191f590787c5f85df0e0152f13c858bf13e6b0ca692c64e120d47b62"
+  },
+  {
+    "file": "public/assets/garden/hedge-arch.png",
+    "width": 104,
+    "height": 300,
+    "frames": 1,
+    "frameWidth": 104,
+    "frameHeight": 300,
+    "colours": 48,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "e77b31c7990545f27aedce3857e7c9f217257f0aaa5c210c4e44c84afa5526d6",
+    "before_sha256": "6fcfc7edf4ca9e36988c03decb3939a3fbb8d9da89c1ee8e3826a1547d795997"
+  },
+  {
+    "file": "src/assets/replacements/obstacle-heavyCrate.png",
+    "width": 110,
+    "height": 110,
+    "frames": 1,
+    "frameWidth": 110,
+    "frameHeight": 110,
+    "colours": 48,
+    "budget": 48,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "459f1f88aadf7e4d8742fa6d362c224966852495191b21e95bd37120f13901c3",
+    "before_sha256": "62bf9c156aef1abc5e8f7ea7cb8f5aac7c67eb4efb3fa99dd6fb80a6920ecd86"
+  },
+  {
+    "file": "public/assets/garden/treehouse.png",
+    "width": 440,
+    "height": 560,
+    "frames": 1,
+    "frameWidth": 440,
+    "frameHeight": 560,
+    "colours": 127,
+    "budget": 128,
+    "grid": 2,
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "554476d75e66774d840f10ae37e117f861fcff655aac481b7d275e4ca9f9fc84",
+    "before_sha256": "70363d028dd08de258fee8b78e08516c1df3b7c94a1fac893b889146d3a14500"
+  }
+]

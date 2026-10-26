@@ -10,6 +10,8 @@ export class KeyboardInputSource implements InputSource {
   readonly id = 'keyboard';
   private readonly left: Key[];
   private readonly right: Key[];
+  private readonly up: Key[];
+  private readonly down: Key[];
   private readonly buttons: Record<string, Key[]> = {};
 
   constructor(keyboard: Phaser.Input.Keyboard.KeyboardPlugin, bindings: KeyboardBindings) {
@@ -23,6 +25,8 @@ export class KeyboardInputSource implements InputSource {
 
     this.left = toKeys(bindings.left);
     this.right = toKeys(bindings.right);
+    this.up = toKeys(bindings.up);
+    this.down = toKeys(bindings.down);
     for (const action of BUTTON_ACTIONS) this.buttons[action] = toKeys(bindings.buttons[action]);
   }
 
@@ -33,7 +37,7 @@ export class KeyboardInputSource implements InputSource {
 
     return {
       moveX: (anyDown(this.right) ? 1 : 0) - (anyDown(this.left) ? 1 : 0),
-      moveY: 0,
+      moveY: (anyDown(this.down) ? 1 : 0) - (anyDown(this.up) ? 1 : 0),
       buttons,
     };
   }

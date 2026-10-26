@@ -235,3 +235,172 @@ def contact_sheet(items: Iterable[tuple[str, Image.Image]], path: str, bg=(120, 
         sheet.alpha_composite(im.resize((im.width * scale, im.height * scale), Image.NEAREST), (x, y + 14))
         d.text((x, y), name, fill=(20, 20, 20, 255))
     sheet.save(path)
+
+
+# ---------------------------------------------------------------------------------
+# Painterly helpers (v2): ordered dithering, sphere-shaded leaf clusters
+# ---------------------------------------------------------------------------------
+
+BAYER4 = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]], dtype=np.float32) / 16.0
+
+
+def dither_index(t: np.ndarray, xs: np.ndarray, ys: np.ndarray, n: int, strength: float = 0.9) -> np.ndarray:
+    """Pick ramp indices for brightness t (0..1) with a 4x4 ordered dither between neighbouring colours."""
+    v = t * (n - 1) + (BAYER4[ys % 4, xs % 4] - 0.5) * strength
+    return np.clip(np.round(v), 0, n - 1).astype(int)
+
+
+def canopy(img: Image.Image, puffs: Sequence[tuple[float, float, float]], ramp_: list[Color], seed: int,
+           light=(-0.5, -0.75, 0.45), wrap_w: int | None = None, crease: bool = True, texture: bool = True,
+           lobes=(9, 15), bumpiness: float = 0.1, brightness: float = 0.0) -> Image.Image:
+    """Leafy tree canopy made of round clusters ("puffs"), each lit like a ball from the upper left.
+
+    puffs: (cx, cy, r) - drawn top to bottom, so lower clusters overlap higher ones, with a dark
+    crease where they overlap. ramp_ is darkest first. Returns a new image.
+    """
+    a = np.array(img).copy()
+    H, W = a.shape[:2]
+    rng = np.random.default_rng(seed)
+    L = np.array(light, dtype=np.float32)
+    L /= np.linalg.norm(L)
+    ramp_arr = np.array(ramp_, dtype=np.uint8)
+    n = len(ramp_)
+    yy, xx = np.mgrid[0:H, 0:W]
+    for cx, cy, r in sorted(puffs, key=lambda p: p[1] + p[2] * 0.25):
+        k = int(rng.integers(*lobes))
+        phase = rng.uniform(0, math.tau)
+        amp = r * bumpiness
+        offsets = [0] if wrap_w is None else [-wrap_w, 0, wrap_w]
+        noise_seed = int(rng.integers(0, 1 << 30))
+        for off in offsets:
+            ccx = cx + off
+            x0, x1 = max(0, int(ccx - r * 1.25)), min(W, int(ccx + r * 1.25) + 1)
+            y0, y1 = max(0, int(cy - r * 1.25)), min(H, int(cy + r * 1.25) + 1)
+            if x0 >= x1 or y0 >= y1:
+                continue
+            sx, sy = xx[y0:y1, x0:x1], yy[y0:y1, x0:x1]
+            dx, dy = sx - ccx, sy - cy
+            ang = np.arctan2(dy, dx)
+            # scalloped edge: rounded bumps outward, little notches between them
+            edge = r - amp + amp * np.abs(np.sin(k * 0.5 * ang + phase))
+            dist = np.hypot(dx, dy)
+            inside = dist <= edge
+            nx, ny = dx / edge, dy / edge
+            nz = np.sqrt(np.clip(1 - nx * nx - ny * ny, 0, 1))
+            lum = nx * L[0] + ny * L[1] + nz * L[2]
+            t = np.clip(lum * 0.58 + 0.36 + brightness, 0, 1)
+            # self-shadow near the lower edge
+            t -= np.clip((dist / edge - 0.7) * 1.4, 0, 1) * np.clip(ny + 0.35, 0, 1) * 0.55
+            t += np.random.default_rng(noise_seed).normal(0, 0.025, size=t.shape)
+            idx = dither_index(np.clip(t, 0, 1), sx, sy, n, strength=0.55)
+            sub = a[y0:y1, x0:x1]
+            had = sub[:, :, 3] > 0
+            col = ramp_arr[idx]
+            sub[inside, :3] = col[inside]
+            sub[inside, 3] = 255
+            if crease:
+                ring = inside & (dist > edge - 1.4) & had & (ny > -0.35)
+                sub[ring, :3] = ramp_arr[0]
+    out = Image.fromarray(a)
+    if texture:
+        out = leaf_clumps(out, ramp_, seed + 1)
+    return out
+
+
+def leaf_clumps(img: Image.Image, ramp_: list[Color], seed: int, spacing: float = 4.0) -> Image.Image:
+    """Stamp little clumps of leaves over foliage: bright top-left, the base colour, shadow bottom-right.
+
+    Follows the existing shading (each clump uses the colour it lands on), so it adds leafy
+    texture without changing the lighting.
+    """
+    a = np.array(img).copy()
+    H, W = a.shape[:2]
+    rng = np.random.default_rng(seed)
+    ramp_arr = np.array(ramp_, dtype=np.uint8)
+    lookup = {tuple(int(v) for v in c): i for i, c in enumerate(ramp_)}
+    solid = a[:, :, 3] > 0
+    n = len(ramp_)
+    # (dx, dy, shift): +1 = one step lighter, -1 darker
+    shapes = [
+        [(0, -1, 1), (-1, 0, 1), (0, 0, 0), (1, 0, 0), (0, 1, -1)],
+        [(0, 0, 1), (1, 0, 1), (0, 1, 0), (1, 1, -1)],
+        [(1, -1, 1), (0, 0, 1), (1, 0, 0), (2, 0, -1), (1, 1, -1)],
+        [(-1, -1, 1), (0, -1, 1), (-1, 0, 0), (0, 0, 0), (1, 0, -1), (0, 1, -1)],
+        [(0, 0, 1), (0, 1, -1)],
+    ]
+    ys, xs = np.nonzero(solid)
+    if len(xs) == 0:
+        return img
+    count = int(len(xs) / (spacing * spacing) * 1.6)
+    for i in rng.choice(len(xs), size=min(count, len(xs)), replace=False):
+        cx, cy = int(xs[i]), int(ys[i])
+        b = lookup.get(tuple(int(v) for v in a[cy, cx, :3]))
+        if b is None or b == 0:
+            continue
+        shape = shapes[int(rng.integers(0, len(shapes)))]
+        for dx, dy, shift in shape:
+            px_, py_ = cx + dx, cy + dy
+            if 0 <= px_ < W and 0 <= py_ < H and solid[py_, px_]:
+                a[py_, px_, :3] = ramp_arr[int(np.clip(b + shift, 0, n - 1))]
+    return Image.fromarray(a)
+
+
+def leaf_texture(img: Image.Image, ramp_: list[Color], seed: int, density: float = 0.05) -> Image.Image:
+    """Little leaf shapes over foliage: lighter on the lit side, darker in shade."""
+    a = np.array(img).copy()
+    H, W = a.shape[:2]
+    rng = np.random.default_rng(seed)
+    ramp_arr = np.array(ramp_, dtype=np.int32)
+    lookup = {tuple(c): i for i, c in enumerate(ramp_)}
+    solid = a[:, :, 3] > 0
+    ys, xs = np.nonzero(solid)
+    if len(xs) == 0:
+        return img
+    count = int(len(xs) * density)
+    pick = rng.choice(len(xs), size=count, replace=False) if count < len(xs) else np.arange(len(xs))
+    shapes = [((0, 0), (1, 0)), ((0, 0), (1, 0), (1, -1)), ((0, 0), (0, 1)), ((0, 0), (1, 1)), ((0, 0), (-1, 0), (0, -1))]
+    for i in pick:
+        x, y = int(xs[i]), int(ys[i])
+        base = lookup.get(tuple(a[y, x, :3]))
+        if base is None:
+            continue
+        # leaves catch the light (one step brighter) on mid/light areas, shadow leaves on dark areas
+        step = 1 if base >= len(ramp_) // 2 else -1
+        if rng.random() < 0.3:
+            step = -step
+        j = int(np.clip(base + step, 0, len(ramp_) - 1))
+        for ox, oy in shapes[int(rng.integers(0, len(shapes)))]:
+            px_, py_ = x + ox, y + oy
+            if 0 <= px_ < W and 0 <= py_ < H and solid[py_, px_]:
+                a[py_, px_, :3] = ramp_arr[j]
+    return Image.fromarray(a.astype(np.uint8))
+
+
+def dithered_vgradient(w: int, h: int, stops: Sequence[tuple[float, Color]]) -> Image.Image:
+    """Smooth vertical gradient through colour stops [(0..1, colour)], dithered on the pixel grid."""
+    ys = np.linspace(0, 1, h)
+    cols = np.zeros((h, 3), dtype=np.float32)
+    for k in range(3):
+        cols[:, k] = np.interp(ys, [s for s, _ in stops], [c[k] for _, c in stops])
+    a = np.zeros((h, w, 4), dtype=np.uint8)
+    yy, xx = np.mgrid[0:h, 0:w]
+    d = (BAYER4[yy % 4, xx % 4] - 0.5) * 6  # +-3 levels of dither
+    for k in range(3):
+        a[:, :, k] = np.clip(np.round(cols[yy, k] + d) / 3 * 3, 0, 255).astype(np.uint8)
+    a[:, :, 3] = 255
+    return Image.fromarray(a)
+
+
+def soft_ellipse(w: int, h: int, color: Color, alpha: int, dither: bool = True) -> Image.Image:
+    """A soft-edged ellipse (shadows, glows): alpha falls off towards the edge, dithered."""
+    yy, xx = np.mgrid[0:h, 0:w]
+    nx = (xx + 0.5 - w / 2) / (w / 2)
+    ny = (yy + 0.5 - h / 2) / (h / 2)
+    r = np.sqrt(nx * nx + ny * ny)
+    t = np.clip(1 - r, 0, 1) ** 0.8
+    if dither:
+        t = np.clip(t + (BAYER4[yy % 4, xx % 4] - 0.5) * 0.25, 0, 1)
+    a = np.zeros((h, w, 4), dtype=np.uint8)
+    a[:, :, :3] = color
+    a[:, :, 3] = np.round(t * alpha).astype(np.uint8)
+    return Image.fromarray(a)

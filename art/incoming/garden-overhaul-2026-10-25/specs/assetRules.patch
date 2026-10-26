@@ -1,0 +1,40 @@
+--- a/tools/art/assetRules.ts
++++ b/tools/art/assetRules.ts
+@@ -36,6 +36,22 @@
+ 
+ /** Garden / UI / sprite rules. Most specific first. */
+ export const ASSET_RULES: AssetRule[] = [
++  // Confirmed v2 art direction: per-file palette budgets only; all physical checks retained.
++  { match: 'public/assets/garden/house.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 128 },
++  { match: 'public/assets/garden/treehouse.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 128 },
++  { match: 'public/assets/garden/bg-far.png', role: 'background', alpha: 'cutout', grid: 2, maxColours: 96, tiles: 'x' },
++  { match: 'public/assets/garden/bg-trees.png', role: 'background', alpha: 'cutout', grid: 2, maxColours: 96, tiles: 'x' },
++  { match: 'public/assets/garden/bg-fence.png', role: 'background', alpha: 'cutout', grid: 2, maxColours: 96, tiles: 'x' },
++  { match: 'public/assets/garden/big-tree.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/big-tree-leaves.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/treehouse-leaves.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/bush-berries.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/bush-hydrangea.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/egg-chair.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/trampoline.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/stump.png', role: 'prop', alpha: 'cutout', grid: 2, maxColours: 64 },
++  { match: 'public/assets/garden/tile-stone.png', role: 'tile', alpha: 'opaque', grid: 2, maxColours: 32, tiles: 'xy' },
++  { match: 'public/assets/garden/tile-dirt.png', role: 'tile', alpha: 'opaque', grid: 2, maxColours: 32, tiles: 'xy' },
+   // Sky: a dithered gradient stretched over the whole screen.
+   { match: 'public/assets/garden/bg-sky.png', role: 'background', alpha: 'opaque', grid: 2, maxColours: Infinity },
+   // Scenery layers that scroll behind the garden: repeat sideways forever.
+@@ -99,13 +115,7 @@
+  * Pictures allowed to break particular rules, and why. Keep this list short:
+  * every entry is a picture that doesn't match the rest of the game yet.
+  */
+-export const WAIVERS: Waiver[] = [
+-  {
+-    file: 'public/assets/garden/trampoline.png',
+-    checks: ['grid', 'alpha', 'colours', 'profile'],
+-    reason: "Trevor's own trampoline picture: smooth-painted, not 2x2 pixel art. Kept as it is until it's redrawn (or re-exported) in the house style.",
+-  },
+-];
++export const WAIVERS: Waiver[] = [];
+ 
+ /** Limits that apply to everything. */
+ export const LIMITS = {

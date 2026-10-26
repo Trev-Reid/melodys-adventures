@@ -11,7 +11,7 @@ import { SCENT_TYPES } from '@/config/scents';
 import { DEFAULT_REVEAL_RADIUS } from '@/config/scents';
 import { BARK_TARGET_TYPES, DEFAULT_TREE_HEIGHT } from '@/config/barkTargets';
 import { DECORATION_TYPES } from '@/config/decorations';
-import { LEVEL_THEMES, PLATFORM_STYLES } from '../LevelDefinition';
+import { INTERACTABLE_KINDS, LEVEL_THEMES, PLATFORM_STYLES } from '../LevelDefinition';
 
 /** Grid size of level maps (also Tiled's snap grid). Maps are width x height in these units. */
 export const MAP_TILE = 8;
@@ -24,6 +24,7 @@ export const LAYERS = {
   scentTrails: 'scentTrails',
   pointsOfInterest: 'pointsOfInterest',
   barkTargets: 'barkTargets',
+  interactables: 'interactables',
   decorations: 'decorations',
   markers: 'markers',
 } as const;
@@ -37,6 +38,9 @@ export const BARK_TARGET_CLASSES = Object.keys(BARK_TARGET_TYPES) as (keyof type
 export const REVEALED_BY = ['superSniff', 'event'] as const;
 export const DECORATION_CLASSES = Object.keys(DECORATION_TYPES) as (keyof typeof DECORATION_TYPES)[];
 export const DECORATION_LAYERS = ['back', 'front'] as const;
+export const INTERACTABLE_CLASSES = INTERACTABLE_KINDS;
+/** Interactables drawn as rectangles in Tiled (the rest are points). */
+export const AREA_INTERACTABLES = ['ladder', 'teamArea'] as const;
 export { LEVEL_THEMES, PLATFORM_STYLES };
 
 export const CLASS = {
@@ -62,6 +66,10 @@ export const DEFAULTS = {
   theme: 'playground',
   scale: 1,
   showDistanceMarkers: false,
+  stuck: false,
+  travel: 200,
+  startsOpen: false,
+  startsUp: false,
 } as const;
 
 /** Colours for each class in Tiled, so objects are easy to tell apart. */
@@ -94,4 +102,10 @@ export const CLASS_COLORS: Record<string, string> = {
   bigTree: '#427f2c',
   bush: '#5b9c37',
   fern: '#1f4420',
+  gate: '#8a5a2b',
+  lever: '#d64545',
+  lift: '#c99a52',
+  ladder: '#b88a4a',
+  football: '#f4f4f4',
+  teamArea: '#ffb84a',
 };

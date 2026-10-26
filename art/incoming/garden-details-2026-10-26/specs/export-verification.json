@@ -1,0 +1,42 @@
+[
+  {
+    "file": "public/assets/garden/goal.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/bird-bath.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/washing-line.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/gate.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/bush.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/hedge-arch.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "src/assets/replacements/obstacle-heavyCrate.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  },
+  {
+    "file": "public/assets/garden/treehouse.png",
+    "exact_grid": true,
+    "shared_shipping_asset_unchanged": true
+  }
+]

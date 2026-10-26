@@ -47,7 +47,8 @@ export class DebugScene extends Phaser.Scene {
       `${this.data$.title}   [F3 / \` toggles debug]`,
       ...this.data$.lines(),
       '',
-      '←/→ or A/D move · Space/↑/W jump · Shift sprint · B bark · R respawn · M mute',
+      '←/→ or A/D move · Space/↑/W jump · Shift sprint · B bark · Esc pause · R respawn · M mute',
+      'Controller: D-pad move · B jump · hold Y sprint · A bark · Start pause',
     ]);
   }
 }

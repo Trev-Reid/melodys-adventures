@@ -16,6 +16,7 @@ import {
   LEVEL_THEMES,
   PLATFORM_STYLES,
   DEFAULTS,
+  INTERACTABLE_CLASSES,
   OBSTACLE_CLASSES,
   PLATFORM_CLASSES,
   POI_MARKERS,
@@ -64,7 +65,7 @@ export function tiledProject(): object {
           { name: 'style', type: 'string', propertyType: 'PlatformStyle', value: '' },
         ]),
       ),
-      ...COLLECTIBLE_CLASSES.map((c) => cls(c, hidden)),
+      ...COLLECTIBLE_CLASSES.map((c) => cls(c, [...hidden, { name: 'stuck', type: 'bool', value: DEFAULTS.stuck }])),
       ...OBSTACLE_CLASSES.map((c) => cls(c)),
       cls(CLASS.sign, [{ name: 'text', type: 'string', value: '' }]),
       cls(CLASS.scentTrail, [
@@ -85,6 +86,18 @@ export function tiledProject(): object {
           { name: 'requiresSuperBark', type: 'bool', value: true },
           ...(c === 'ballInTree' ? [{ name: 'height', type: 'int', value: DEFAULTS.treeHeight }] : []),
         ]),
+      ),
+      ...INTERACTABLE_CLASSES.map((c) =>
+        cls(
+          c,
+          c === 'gate' ? [{ name: 'startsOpen', type: 'bool', value: DEFAULTS.startsOpen }]
+          : c === 'lever' ? [{ name: 'target', type: 'string', value: '' }]
+          : c === 'lift' ? [
+              { name: 'travel', type: 'int', value: DEFAULTS.travel },
+              { name: 'startsUp', type: 'bool', value: DEFAULTS.startsUp },
+            ]
+          : [],
+        ),
       ),
       ...DECORATION_CLASSES.map((c) =>
         cls(c, [

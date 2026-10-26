@@ -1,0 +1,38 @@
+[
+  {
+    "shot": "garden-house",
+    "changed_pixels": 488114,
+    "changed_percent": 94.16,
+    "after_sha256": "29f9f25e54ccca0e078abb3c806a4827251b67cab9c94d27c824cb2e2883b5fe"
+  },
+  {
+    "shot": "garden-gate",
+    "changed_pixels": 473052,
+    "changed_percent": 91.25,
+    "after_sha256": "7599fb7142ca14e92ade6fc95930c969d746945f16556489448c7bf3e2fbfdb6"
+  },
+  {
+    "shot": "garden-trampoline",
+    "changed_pixels": 502883,
+    "changed_percent": 97.01,
+    "after_sha256": "46f034be9c45478dc9696d73b273dcba1e3f6658cab955144d25200dbca14288"
+  },
+  {
+    "shot": "garden-crate",
+    "changed_pixels": 490708,
+    "changed_percent": 94.66,
+    "after_sha256": "f56034eb67363fb79f2036f6099433790c8e97e2eabd85ac0f19a961c6b2bb5c"
+  },
+  {
+    "shot": "garden-treehouse",
+    "changed_pixels": 493735,
+    "changed_percent": 95.24,
+    "after_sha256": "7569d732a64a5dbb9d238c22da18037695ed5e4f4e542a9636f7fe452243126e"
+  },
+  {
+    "shot": "garden-goal",
+    "changed_pixels": 481979,
+    "changed_percent": 92.97,
+    "after_sha256": "a2126aa09906c4384ede22bd024574318d8329a69abdcd7d90b9b39c2f6bf96a"
+  }
+]

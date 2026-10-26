@@ -1,0 +1,104 @@
+{
+  "status": "DESIGN STUDIES ONLY \u2014 not complete or installable game sheets",
+  "palette": [
+    "#093b49",
+    "#0c4856",
+    "#102d3c",
+    "#125662",
+    "#145d6a",
+    "#176976",
+    "#1a7480",
+    "#1e1e26",
+    "#227f89",
+    "#274654",
+    "#2a2f3b",
+    "#2a3847",
+    "#2f686c",
+    "#3c9091",
+    "#462116",
+    "#522c1e",
+    "#57453e",
+    "#63311d",
+    "#65675f",
+    "#6c3720",
+    "#753d23",
+    "#824325",
+    "#8c4b2b",
+    "#967f65",
+    "#975d3c",
+    "#a59b81",
+    "#b36c42",
+    "#cf8756",
+    "#dc9a66",
+    "#ecb27c",
+    "#fbcc90"
+  ],
+  "colours": 31,
+  "poses": [
+    {
+      "pose": "standing",
+      "canvas": [
+        64,
+        80
+      ],
+      "bounds": [
+        20,
+        16,
+        44,
+        80
+      ],
+      "feet_on_bottom": true,
+      "grid_exact": true
+    },
+    {
+      "pose": "running",
+      "canvas": [
+        64,
+        80
+      ],
+      "bounds": [
+        8,
+        18,
+        54,
+        80
+      ],
+      "feet_on_bottom": true,
+      "grid_exact": true
+    },
+    {
+      "pose": "climbing",
+      "canvas": [
+        64,
+        80
+      ],
+      "bounds": [
+        16,
+        12,
+        46,
+        80
+      ],
+      "feet_on_bottom": true,
+      "grid_exact": true
+    },
+    {
+      "pose": "carrying",
+      "canvas": [
+        64,
+        80
+      ],
+      "bounds": [
+        18,
+        16,
+        46,
+        80
+      ],
+      "feet_on_bottom": true,
+      "grid_exact": true
+    }
+  ],
+  "ball_preview_offset": [
+    13,
+    -28
+  ],
+  "carry_anchor_status": "existing idle carry anchor used for preview; full-animation hand alignment not yet validated"
+}

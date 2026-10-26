@@ -1,12 +1,14 @@
 import type Phaser from 'phaser';
 import { TEXTURES } from './keys';
 import type { ObstacleKind, ObstacleType } from '@/config/obstacles';
+import { obstacleReplacementKey } from './placeholderSpecs';
 
 /**
  * Generates simple placeholder textures at runtime so the game needs no image
- * files yet. When real artwork arrives, load it in BootScene under the same
- * keys (see assets/keys.ts) and delete the matching function here - nothing
- * else in the game has to change.
+ * files yet. Real art replaces any of them without code changes: save a PNG
+ * named after the key in src/assets/replacements/ (BootScene loads it first,
+ * and the drawing here is then skipped). The sizes real art must be are in
+ * placeholderSpecs.ts - see docs/ART-PIPELINE.md, "Replacing a placeholder".
  */
 export function createPlaceholderTextures(scene: Phaser.Scene): void {
   groundTile(scene);
@@ -21,7 +23,6 @@ export function createPlaceholderTextures(scene: Phaser.Scene): void {
   barkBiscuit(scene);
   ball(scene);
   cat(scene);
-  boy(scene);
   leaf(scene);
   glow(scene);
   debris(scene);
@@ -30,12 +31,20 @@ export function createPlaceholderTextures(scene: Phaser.Scene): void {
   cloud(scene);
 }
 
+/**
+ * Turn a drawing into a texture - unless real art with that key was already
+ * loaded (src/assets/replacements/), in which case the drawing is dropped.
+ */
+function bake(scene: Phaser.Scene, g: Phaser.GameObjects.Graphics, key: string, width: number, height: number): void {
+  if (!scene.textures.exists(key)) g.generateTexture(key, width, height);
+  g.destroy();
+}
+
 function groundTile(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0x7a4e2d).fillRect(0, 0, 32, 32);
   g.fillStyle(0x6a4225).fillRect(4, 16, 6, 4).fillRect(20, 24, 7, 4);
-  g.generateTexture(TEXTURES.groundTile, 32, 32);
-  g.destroy();
+  bake(scene, g, TEXTURES.groundTile, 32, 32);
 }
 
 function grassTop(scene: Phaser.Scene): void {
@@ -43,8 +52,7 @@ function grassTop(scene: Phaser.Scene): void {
   g.fillStyle(0x4caf50).fillRect(0, 0, 32, 9);
   g.fillStyle(0x3d9142).fillRect(0, 7, 32, 3);
   g.fillStyle(0x66bb6a).fillRect(3, 0, 3, 2).fillRect(17, 0, 4, 2);
-  g.generateTexture(TEXTURES.grassTop, 32, 10);
-  g.destroy();
+  bake(scene, g, TEXTURES.grassTop, 32, 10);
 }
 
 function platformTile(scene: Phaser.Scene): void {
@@ -52,8 +60,7 @@ function platformTile(scene: Phaser.Scene): void {
   g.fillStyle(0xc28e56).fillRect(0, 0, 32, 32);
   g.fillStyle(0xa87542).fillRect(0, 0, 1, 32).fillRect(0, 11, 32, 1).fillRect(0, 22, 32, 1);
   g.fillStyle(0xdcae78).fillRect(0, 0, 32, 3);
-  g.generateTexture(TEXTURES.platformTile, 32, 32);
-  g.destroy();
+  bake(scene, g, TEXTURES.platformTile, 32, 32);
 }
 
 function sausage(scene: Phaser.Scene): void {
@@ -63,29 +70,25 @@ function sausage(scene: Phaser.Scene): void {
   g.fillStyle(0xb5462f).fillRoundedRect(3, 1, 24, 14, 7);
   g.fillStyle(0xd9674b).fillRoundedRect(6, 3, 17, 4, 2); // shine
   g.fillStyle(0x8f3522).fillRect(9, 11, 3, 1.5).fillRect(16, 11, 3, 1.5); // grill marks
-  g.generateTexture(TEXTURES.sausage, 30, 16);
-  g.destroy();
+  bake(scene, g, TEXTURES.sausage, 30, 16);
 }
 
 function confetti(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0xffffff).fillRect(0, 0, 8, 5);
-  g.generateTexture(TEXTURES.confetti, 8, 5);
-  g.destroy();
+  bake(scene, g, TEXTURES.confetti, 8, 5);
 }
 
 function hill(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0x9ccc65).fillEllipse(200, 200, 400, 300);
-  g.generateTexture(TEXTURES.hill, 400, 200);
-  g.destroy();
+  bake(scene, g, TEXTURES.hill, 400, 200);
 }
 
 function cloud(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0xffffff, 0.9).fillCircle(30, 30, 20).fillCircle(55, 22, 24).fillCircle(80, 32, 18).fillRect(30, 30, 50, 20);
-  g.generateTexture(TEXTURES.cloud, 110, 56);
-  g.destroy();
+  bake(scene, g, TEXTURES.cloud, 110, 56);
 }
 
 function superSausage(scene: Phaser.Scene): void {
@@ -96,28 +99,25 @@ function superSausage(scene: Phaser.Scene): void {
   g.fillStyle(0xffb347).fillRoundedRect(8, 4, 24, 6, 3);
   g.fillStyle(0xfff3b0).fillRect(11, 5, 6, 2);
   g.fillStyle(0xb8341a).fillRect(12, 14, 4, 2).fillRect(20, 14, 4, 2).fillRect(28, 14, 4, 2);
-  g.generateTexture(TEXTURES.superSausage, 42, 22);
-  g.destroy();
+  bake(scene, g, TEXTURES.superSausage, 42, 22);
 }
 
 function glow(scene: Phaser.Scene): void {
   // Soft round glow made of stacked translucent circles (tinted when used).
   const g = scene.make.graphics({}, false);
   for (let r = 32; r > 4; r -= 4) g.fillStyle(0xffffff, 0.09).fillCircle(32, 32, r);
-  g.generateTexture(TEXTURES.glow, 64, 64);
-  g.destroy();
+  bake(scene, g, TEXTURES.glow, 64, 64);
 }
 
 function debris(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0xffffff).fillRect(0, 0, 6, 4);
-  g.generateTexture(TEXTURES.debris, 6, 4);
-  g.destroy();
+  bake(scene, g, TEXTURES.debris, 6, 4);
 }
 
 /** Draws (once) and returns the texture key for an obstacle type at its size. */
 export function ensureObstacleTexture(scene: Phaser.Scene, kind: ObstacleKind, type: ObstacleType): string {
-  const key = `obstacle-${kind}`;
+  const key = obstacleReplacementKey(kind);
   if (scene.textures.exists(key)) return key;
   const { width: w, height: h } = type;
   const g = scene.make.graphics({}, false);
@@ -171,8 +171,7 @@ export function ensureObstacleTexture(scene: Phaser.Scene, kind: ObstacleKind, t
     g.fillStyle(0x9e9480).fillRect(0, 34, w, 4).fillRect(0, h - 38, w, 4);
     g.lineStyle(2, 0x6b624f).strokeRect(1, 8, w - 2, h - 9);
   }
-  g.generateTexture(key, w, h);
-  g.destroy();
+  bake(scene, g, key, w, h);
   return key;
 }
 
@@ -184,8 +183,7 @@ function sniffTreat(scene: Phaser.Scene): void {
   g.fillStyle(0xe8c9ff).fillCircle(6, 7, 3.5).fillCircle(6, 15, 3.5).fillCircle(30, 7, 3.5).fillCircle(30, 15, 3.5);
   g.fillStyle(0xe8c9ff).fillRect(6, 7, 24, 8);
   g.fillStyle(0xb98cff).fillRect(12, 9, 3, 2).fillRect(18, 11, 3, 2).fillRect(23, 9, 3, 2);
-  g.generateTexture(TEXTURES.sniffTreat, 36, 22);
-  g.destroy();
+  bake(scene, g, TEXTURES.sniffTreat, 36, 22);
 }
 
 function squirrelToy(scene: Phaser.Scene): void {
@@ -208,8 +206,7 @@ function squirrelToy(scene: Phaser.Scene): void {
   g.fillStyle(0x3b2412).fillCircle(35.5, 15, 1.4);
   // stitched-on patch - it's a well-loved toy
   g.lineStyle(1, 0xfff1d0).strokeRect(19, 22, 4, 4);
-  g.generateTexture(TEXTURES.squirrelToy, 40, 36);
-  g.destroy();
+  bake(scene, g, TEXTURES.squirrelToy, 40, 36);
 }
 
 function scentIcons(scene: Phaser.Scene): void {
@@ -218,20 +215,17 @@ function scentIcons(scene: Phaser.Scene): void {
   g.fillStyle(0x6b4520).fillEllipse(8, 5, 14, 7);
   g.fillStyle(0xffa24c).fillEllipse(8, 11, 10, 12);
   g.fillStyle(0x6b4520).fillRect(7, 0, 2, 3);
-  g.generateTexture(TEXTURES.scentSquirrel, 16, 18);
-  g.destroy();
+  bake(scene, g, TEXTURES.scentSquirrel, 16, 18);
   // Mini sausage
   g = scene.make.graphics({}, false);
   g.fillStyle(0xff5f6d).fillRoundedRect(1, 3, 16, 9, 4);
   g.fillStyle(0xffb3b8).fillRect(4, 5, 8, 2);
-  g.generateTexture(TEXTURES.scentSausage, 18, 15);
-  g.destroy();
+  bake(scene, g, TEXTURES.scentSausage, 18, 15);
   // Paw = cat
   g = scene.make.graphics({}, false);
   g.fillStyle(0xb58cff).fillEllipse(8, 11, 9, 7);
   g.fillCircle(3, 5, 2.2).fillCircle(7, 3, 2.2).fillCircle(11, 3, 2.2).fillCircle(14, 6, 2.2);
-  g.generateTexture(TEXTURES.scentCat, 17, 16);
-  g.destroy();
+  bake(scene, g, TEXTURES.scentCat, 17, 16);
 }
 
 function pawPrints(scene: Phaser.Scene): void {
@@ -242,8 +236,7 @@ function pawPrints(scene: Phaser.Scene): void {
     g.fillCircle(x - 4, y, 1.6).fillCircle(x - 1.5, y - 2, 1.6).fillCircle(x + 1.5, y - 2, 1.6).fillCircle(x + 4, y, 1.6);
   };
   paw(8, 12); paw(22, 6); paw(36, 12); paw(50, 6);
-  g.generateTexture(TEXTURES.pawPrints, 58, 20);
-  g.destroy();
+  bake(scene, g, TEXTURES.pawPrints, 58, 20);
 }
 
 function barkBiscuit(scene: Phaser.Scene): void {
@@ -254,8 +247,7 @@ function barkBiscuit(scene: Phaser.Scene): void {
   g.lineStyle(2, 0x2b8fd6).beginPath().arc(9, 14, 4, -0.9, 0.9).strokePath();
   g.beginPath().arc(9, 14, 8, -0.8, 0.8).strokePath();
   g.fillStyle(0x2b8fd6).fillCircle(8, 14, 2);
-  g.generateTexture(TEXTURES.barkBiscuit, 28, 28);
-  g.destroy();
+  bake(scene, g, TEXTURES.barkBiscuit, 28, 28);
 }
 
 function ball(scene: Phaser.Scene): void {
@@ -265,8 +257,7 @@ function ball(scene: Phaser.Scene): void {
   g.fillStyle(0xd4ec3a).fillCircle(11, 11, 9.5);
   g.lineStyle(2, 0xffffff).beginPath().arc(2, 11, 8, -1.1, 1.1).strokePath();
   g.beginPath().arc(20, 11, 8, Math.PI - 1.1, Math.PI + 1.1).strokePath();
-  g.generateTexture(TEXTURES.ball, 22, 22);
-  g.destroy();
+  bake(scene, g, TEXTURES.ball, 22, 22);
 }
 
 function cat(scene: Phaser.Scene): void {
@@ -288,50 +279,12 @@ function cat(scene: Phaser.Scene): void {
   g.fillStyle(0x111111).fillRect(10.5, 13, 1.2, 4).fillRect(18.5, 13, 1.2, 4);
   g.fillStyle(0xd46a7a).fillTriangle(14, 20, 18, 20, 16, 22);
   g.fillStyle(dark).fillRect(24, 26, 3, 8).fillRect(32, 24, 3, 9); // stripes
-  g.generateTexture(TEXTURES.cat, 52, 48);
-  g.destroy();
+  bake(scene, g, TEXTURES.cat, 52, 48);
 }
 
 function leaf(scene: Phaser.Scene): void {
   const g = scene.make.graphics({}, false);
   g.fillStyle(0xffffff).fillEllipse(5, 3, 10, 5);
-  g.generateTexture(TEXTURES.leaf, 10, 6);
-  g.destroy();
+  bake(scene, g, TEXTURES.leaf, 10, 6);
 }
 
-function boy(scene: Phaser.Scene): void {
-  // Melody's boy, side-on facing right: standing, and mid-stride (for walking).
-  const draw = (key: string, stride: boolean) => {
-    const g = scene.make.graphics({}, false);
-    const skin = 0xf2c7a5;
-    const jeans = 0x3d5a99;
-    const shoe = 0x2b2b2b;
-    // Legs (back leg darker so the stride reads).
-    if (stride) {
-      g.fillStyle(0x2f477a).fillTriangle(15, 38, 21, 38, 9, 60);
-      g.fillStyle(0x2f477a).fillRect(7, 56, 7, 4);
-      g.fillStyle(jeans).fillTriangle(16, 38, 22, 38, 27, 60);
-      g.fillStyle(shoe).fillRect(5, 59, 10, 5).fillRect(24, 59, 11, 5);
-    } else {
-      g.fillStyle(jeans).fillRect(13, 38, 11, 22);
-      g.fillStyle(0x2f477a).fillRect(18, 38, 1, 22);
-      g.fillStyle(shoe).fillRect(12, 59, 15, 5);
-    }
-    // T-shirt and arm.
-    g.fillStyle(0xd94a3d).fillRoundedRect(11, 20, 15, 20, 4);
-    g.fillStyle(0xb53a2f).fillRect(11, 36, 15, 3);
-    g.fillStyle(skin).fillRoundedRect(stride ? 21 : 17, 24, 5, 13, 2);
-    // Head, hair, eye, smile.
-    g.fillStyle(skin).fillCircle(19, 11, 9);
-    g.fillStyle(skin).fillRect(17, 17, 5, 4); // neck
-    g.fillStyle(0x6b3f1f).fillEllipse(17, 5, 18, 9).fillRect(9, 4, 6, 9);
-    g.fillStyle(0x6b3f1f).fillTriangle(22, 2, 29, 6, 22, 7);
-    g.fillStyle(0x222222).fillCircle(23, 11, 1.4);
-    g.lineStyle(1.2, 0x8a4a3a).beginPath().arc(23, 14, 3, 0.2, 1.4).strokePath();
-    g.fillStyle(0xe8a98c).fillCircle(14, 12, 2.2); // ear
-    g.generateTexture(key, 36, 64);
-    g.destroy();
-  };
-  draw(TEXTURES.boy, false);
-  draw(TEXTURES.boyStep, true);
-}
