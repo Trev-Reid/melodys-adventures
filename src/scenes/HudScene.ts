@@ -26,13 +26,13 @@ export interface HudSceneData {
 
 /** The power-up badges, top right, left to right. */
 const BADGES: { image: UiImage; label: string; effect?: EffectType; color: number }[] = [
-  { image: 'badge-sprint', label: 'Super\nSprint', color: 0x43b6ff },
-  { image: 'badge-strength', label: 'Super\nStrength', effect: 'SUPER_STRENGTH', color: 0xff8a43 },
-  { image: 'badge-sniff', label: 'Super\nSniff', effect: 'SUPER_SNIFF', color: 0xc86aff },
-  { image: 'badge-bark', label: 'Super\nBark', effect: 'SUPER_BARK', color: 0x43e0ff },
+  { image: 'badge-sprint', label: 'Sprint', color: 0xe0c68e },
+  { image: 'badge-strength', label: 'Strength', effect: 'SUPER_STRENGTH', color: 0xff5a36 },
+  { image: 'badge-sniff', label: 'Sniff', effect: 'SUPER_SNIFF', color: 0xb98cff },
+  { image: 'badge-bark', label: 'Bark', effect: 'SUPER_BARK', color: 0x4fc3f7 },
 ];
-const BADGE_SIZE = 56;
-const BADGE_GAP = 74;
+const BADGE_SIZE = 60;
+const BADGE_GAP = 84;
 
 interface BadgeView {
   icon: Phaser.GameObjects.Image;
@@ -85,15 +85,23 @@ export class HudScene extends Phaser.Scene {
     this.timer = this.add.text(left + 2, 88, '', { ...TEXT_STYLE, fontSize: '16px', strokeThickness: 4 }).setOrigin(0, 0);
 
     // Top right: power-up badges.
+    // Opaque forest backing keeps names readable over both sky and foliage.
+    const panelLeft = right - 336;
+    const panel = this.add.graphics();
+    panel.fillStyle(0xe0c68e).fillRect(panelLeft, 8, 344, 122);
+    panel.fillStyle(0x142c29).fillRect(panelLeft + 2, 10, 340, 118);
+    this.add.text(panelLeft + 172, 12, 'SUPER POWERS', {
+      ...TEXT_STYLE, fontSize: '16px', color: '#e0c68e', stroke: '#142c29', strokeThickness: 0,
+    }).setOrigin(0.5, 0);
     this.rings = this.add.graphics();
     this.badges = BADGES.map((b, i) => {
-      const x = right - BADGE_SIZE / 2 - (BADGES.length - 1 - i) * BADGE_GAP;
-      const icon = this.add.image(x, 12 + BADGE_SIZE / 2, uiKey(b.image)).setDisplaySize(BADGE_SIZE, BADGE_SIZE);
+      const x = right - 34 - (BADGES.length - 1 - i) * BADGE_GAP;
+      const icon = this.add.image(x, 66, uiKey(b.image));
       const label = this.add
-        .text(x, 12 + BADGE_SIZE + 4, b.label, { ...TEXT_STYLE, fontSize: '13px', strokeThickness: 3, align: 'center' })
+        .text(x, 104, b.label, { ...TEXT_STYLE, fontSize: '16px', color: '#e0c68e', stroke: '#142c29', strokeThickness: 0, align: 'center' })
         .setOrigin(0.5, 0);
       const seconds = this.add
-        .text(x + BADGE_SIZE / 2 - 2, 10 + BADGE_SIZE, '', { ...TEXT_STYLE, fontSize: '15px', strokeThickness: 4 })
+        .text(x + BADGE_SIZE / 2 - 2, 94, '', { ...TEXT_STYLE, fontSize: '16px', color: '#f3e6c8', stroke: '#142c29', strokeThickness: 4 })
         .setOrigin(1, 1);
       return { icon, label, seconds, active: true };
     });
@@ -107,7 +115,7 @@ export class HudScene extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, stopListening);
 
     this.comboLabel = this.add
-      .text(right - (BADGES.length * BADGE_GAP) / 2 + 10, 12 + BADGE_SIZE + 40, '', { ...TEXT_STYLE, fontSize: '16px', color: '#ffd23f', strokeThickness: 4 })
+      .text(panelLeft + 172, 134, '', { ...TEXT_STYLE, fontSize: '16px', color: '#e0c68e', stroke: '#142c29', strokeThickness: 4 })
       .setOrigin(0.5, 0);
     this.muteLabel = this.add
       .text(right, DISPLAY.height - 12, 'sound off (M)', { ...TEXT_STYLE, fontSize: '14px', strokeThickness: 3 })
@@ -157,10 +165,10 @@ export class HudScene extends Phaser.Scene {
 
       if (active !== view.active) {
         view.active = active;
-        view.icon.setAlpha(active ? 1 : 0.8);
+        view.icon.setAlpha(1);
         if (active) view.icon.clearTint();
-        else view.icon.setTint(0x8a8a8a);
-        view.label.setAlpha(active ? 1 : 0.7);
+        else view.icon.setTint(0xc4cbbb);
+        view.label.setColor(active ? '#f3e6c8' : '#e0c68e');
         if (active) this.tweens.add({ targets: view.icon, scale: view.icon.scale * 1.25, duration: 120, yoyo: true });
       }
       view.seconds.setText(effect ? `${Math.ceil(effect.remaining)}` : '');
@@ -170,8 +178,8 @@ export class HudScene extends Phaser.Scene {
         const x = view.icon.x;
         const y = view.icon.y;
         const r = BADGE_SIZE / 2 + 5;
-        g.lineStyle(5, 0x000000, 0.45).strokeCircle(x, y, r);
-        g.lineStyle(4, warning ? 0xffffff : b.color, 1);
+        g.lineStyle(6, 0x29463c, 1).strokeCircle(x, y, r);
+        g.lineStyle(4, warning ? 0xf3e6c8 : b.color, 1);
         g.beginPath();
         g.arc(x, y, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(0.001, fraction), false);
         g.strokePath();
